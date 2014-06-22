@@ -30,7 +30,7 @@ namespace DrOpen.DrTestVar.Item
     /// <summary>
     /// stored variable item
     /// </summary>
-    internal struct DrVarItem
+    internal struct DrVarItem 
     {
         /// <summary>
         /// Initializes a new instance of the variable item
@@ -39,36 +39,31 @@ namespace DrOpen.DrTestVar.Item
         /// <param name="endIndex">end index of substitution symbol</param>
         /// <param name="name">name of substitution without substitution symbols</param>
         /// <param name="fullName">name of substitution with substitution symbols</param>
-        public DrVarItem(int startIndex,
-                        int endIndex,
-                        string name,
-                        string fullName)
+        internal DrVarItem(int startIndex,
+                           int endIndex,
+                           string name,
+                           string fullName): this()
         {
             StartIndex = startIndex;
             EndIndex = endIndex;
             Name = name;
             FullName = fullName;
         }
-
         /// <summary>
         /// Gets/sets the start index of substitution symbol
         /// </summary>
-        public int StartIndex;
-
+        internal int StartIndex { private set; get; }
         /// <summary>
         /// Gets/sets the end index of substitution symbol
         /// </summary>
-        public int EndIndex;
-
+        public int EndIndex { private set; get; }
         /// <summary>
         /// Gets/sets the name of substitution without substitution symbols
         /// </summary>
-        public string Name;
-
+        public string Name { private set; get; }
         /// <summary>
         /// Gets/sets the name of substitution with substitution symbols
         /// </summary>
-        public string FullName;
-
+        public string FullName { private set; get; }
     }
 }

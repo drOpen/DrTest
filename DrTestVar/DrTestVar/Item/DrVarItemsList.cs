@@ -1,5 +1,5 @@
 ﻿/*
-  DrVarItemsList.cs -- list of variable items for 'DrTestVar' general purpose Builder variables 1.0.0, June 22, 2014
+  DrVarItemsList.cs -- list of variables for 'DrTestVar' general purpose Builder variables 1.0.0, June 22, 2014
   
   Copyright (c) 2013-2014 Kudryashov Andrey aka Dr
  
@@ -32,18 +32,22 @@ using System.Collections.Generic;
 namespace DrOpen.DrTestVar.Item
 {
     /// <summary>
-    /// list of variable items
+    /// list of variables
     /// </summary>
-    internal class DrVarItemsList: IEnumerable<DrVarItem>
+    internal class DrVarItemsList : IEnumerable<DrVarItem>
     {
-
+        /// <summary>
+        /// Initializes a new instance of the list of variables
+        /// </summary>
         internal DrVarItemsList(string value)
         {
-            varItems= new List<DrVarItem>();
-            Analyze(value);
+            varItems = new List<DrVarItem>();
+            Parse(value);
         }
-
-        private List<DrVarItem> varItems; 
+        /// <summary>
+        /// list of variables
+        /// </summary>
+        private List<DrVarItem> varItems;
 
         #region GetVarSymbol
         public string VarSymbol
@@ -51,94 +55,98 @@ namespace DrOpen.DrTestVar.Item
             get { return varSymbol.ToString(); }
         }
 
-        public string EscapedVarSymbol
+        public string EscapeVarSymbol
         {
-            get { return escapedVarSymbol; }
+            get { return escapeVarSymbol; }
         }
 
         public bool AreThereVars
         {
-            get { return varItems.Count!=0;}
+            get { return varItems.Count != 0; }
         }
 
         #endregion GetVarSymbol
         #region static
         /// <summary>
-        /// Обозначение переменной, %
+        /// symbol of variable, %
         /// </summary>
         static public readonly char varSymbol = '%';
         /// <summary>
-        /// Экранипрвание символа переменной, %%
+        /// escape symbol of variable, %%
         /// </summary>
-        static public readonly string escapedVarSymbol = "%%";
+        static public readonly string escapeVarSymbol = "%%";
 
 
 
         #endregion static
 
-
-        public int OpenedTagCounter { get; private set; }
-        public int ClosedTagCounter { get; private set; }
-        public int EscapedTagCounter { get; private set; }
         /// <summary>
-        /// Анализирует строку на вхождения в нее переменных
-        /// Возращает список подстановок, в противном случае возращает пустой список
+        /// Stored the number of characters beginning variables
         /// </summary>
-        /// <param name="value">Строка для анализа</param>
-        /// <returns>Возращает список подстановок, в противном случае возращает пустой список</returns>
-        internal void Analyze(string value)
+        public int OpenedVarCounter { get; private set; }
+        /// <summary>
+        /// Stored the number of characters closure variables
+        /// </summary>
+        public int ClosedVarCounter { get; private set; }
+        /// <summary>
+        /// Stored the number of characters the escape of variables
+        /// </summary>
+        public int EscapeVarSymbolCounter { get; private set; }
+        /// <summary>
+        /// Parses the string for the presence of variables and makes list of variables.
+        /// </summary>
+        /// <param name="value">string to parse</param>
+        internal void Parse(string value)
         {
 
-            if (value.Contains(varSymbol.ToString())) // если нет вхождения символа переменной, сразу выходим возращая null
+            if (value.Contains(varSymbol.ToString())) //Exit if the string does not contain a variable indicating symbol.
             {
 
-                int iPosition = 0;
+                int iCurrentPosition = 0;
+                
+                int opennedVarFlag = 0; // Stored number of not closed characters of variables
+                bool isPreviosVarEscaped = false;
+                bool isPreviosCharVar = false; // Stored status about previous character of variable
+                bool isVarNameStarted = false; // Keeps the status of that now analyzes the variable name
 
-                int openTagFlag = 0;
-                bool isPreviosTagEscaped = false;
-                bool isPreviosCharTag = false;
-                bool isTagNameStarted = false;
+                string varName = String.Empty;
 
-                string TagValue = "";
-
-                foreach (char ch in value) // бежим по символам стринги
+                foreach (char ch in value) // enumerating all characters in the string
                 {
-                    iPosition++; // считаем позицию символа
+                    iCurrentPosition++; // current position
                     if (ch == varSymbol)
                     {
-                        if (isTagNameStarted)
+                        if (isVarNameStarted)
                         {
-                            int StartIndex = iPosition - TagValue.Length - 2; // начала тега с символом начала тега
-                            int EndIndex = iPosition; // конец тега с окончаниятега
-                            varItems.Add(new DrVarItem(StartIndex, EndIndex, TagValue, varSymbol + TagValue + varSymbol)); // так как закончилось имя тега, добавляем его в очередь
-                            TagValue = ""; // сбрасываем имя тега
-                            ClosedTagCounter++; // увеличиваем счетчик закрытия тега, по нему проверяем, что мы нашли и добавили имя тега в очередь
+                            varItems.Add(new DrVarItem(iCurrentPosition - varName.Length - 2, iCurrentPosition, varName, varSymbol + varName + varSymbol)); //add new variable item to list
+                            varName = String.Empty; // clear name of variable
+                            ClosedVarCounter++; // Increase the number of characters closure variables
                         }
                         else
                         {
-                            if ((isPreviosCharTag) && (!isPreviosTagEscaped))
+                            if ((isPreviosCharVar) && (!isPreviosVarEscaped))
                             {
-                                EscapedTagCounter++; // считаем количество escaped
-                                isPreviosTagEscaped = true;
+                                EscapeVarSymbolCounter++; // Increase the number of characters escape variables
+                                isPreviosVarEscaped = true;
                             }
                             else
-                                isPreviosTagEscaped = false;
-                            OpenedTagCounter++; // увеличиваем счетчик открытия тега
-                            openTagFlag++; // увеличиваем флаг открытия тега
-                            isPreviosCharTag = true; //запоминаем, что символ был тегом
+                                isPreviosVarEscaped = false;
+                            OpenedVarCounter++; // Increase the number of characters beginning variables 
+                            opennedVarFlag++; // Increase the number of not closed characters of variables
+                            isPreviosCharVar = true; // Follow up about previous character of variable
                         }
-                        isTagNameStarted = false; // сбрасываем флаг записи имя тега
+                        isVarNameStarted = false; // Clears the status of that now analyzes the variable name
                     }
                     else
                     {
-                        // выставляем флаг, что пишется имя тега
-                        if ((isPreviosCharTag) && (openTagFlag % 2 != 0)) isTagNameStarted = true;  //если предыдущий символ tag и если их число было не четным
-                        if (isTagNameStarted) TagValue += ch.ToString(); //пишем имя тега
-                        openTagFlag = 0;
-                        isPreviosCharTag = false; //запоминаем, что символ не был тегом
+                        // Sets the status of that now analyzes the variable name
+                        if ((isPreviosCharVar) && (opennedVarFlag % 2 != 0)) isVarNameStarted = true;  // if the previous character is starting variable and if the number was not even
+                        if (isVarNameStarted) varName += ch.ToString(); // build name of variable
+                        opennedVarFlag = 0;
+                        isPreviosCharVar = false; // Clears status about previous character of variable
                     }
                 }
-                if (OpenedTagCounter != (ClosedTagCounter + EscapedTagCounter * 2)) throw new FormatException(string.Format(Res.Msg.CANNOT_BUILD_VAR_NOT_CLOSED_SYMBOL,value, varSymbol));
+                if (OpenedVarCounter != (ClosedVarCounter + EscapeVarSymbolCounter * 2)) throw new FormatException(string.Format(Res.Msg.CANNOT_BUILD_VAR_NOT_CLOSED_SYMBOL, value, varSymbol));
             }
         }
 
@@ -149,12 +157,12 @@ namespace DrOpen.DrTestVar.Item
         /// <returns>IEnumerator&lt;DrVarItem&gt;</returns>
         public IEnumerator<DrVarItem> GetEnumerator()
         {
-                        foreach (var item in varItems)
+            foreach (var item in varItems)
             {
                 yield return item;
             }
         }
-                        /// <summary>
+        /// <summary>
         /// Returns an enumerator that iterates through the DrVarItemsList (IEnumerator&lt;DrVarItem&gt;).
         /// </summary>
         /// <returns>IEnumerator&lt;DrVarItem&gt;</returns>
