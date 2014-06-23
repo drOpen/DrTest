@@ -52,12 +52,12 @@ namespace DrOpen.DrTestVar.Item
         #region GetVarSymbol
         public string VarSymbol
         {
-            get { return varSymbol.ToString(); }
+            get { return DrTestVarConst.varSymbol.ToString(); }
         }
 
         public string EscapeVarSymbol
         {
-            get { return escapeVarSymbol; }
+            get { return DrTestVarConst.escapeVarSymbol; }
         }
 
         public bool AreThereVars
@@ -66,19 +66,7 @@ namespace DrOpen.DrTestVar.Item
         }
 
         #endregion GetVarSymbol
-        #region static
-        /// <summary>
-        /// symbol of variable, %
-        /// </summary>
-        static public readonly char varSymbol = '%';
-        /// <summary>
-        /// escape symbol of variable, %%
-        /// </summary>
-        static public readonly string escapeVarSymbol = "%%";
 
-
-
-        #endregion static
 
         /// <summary>
         /// Stored the number of characters beginning variables
@@ -99,7 +87,7 @@ namespace DrOpen.DrTestVar.Item
         internal void Parse(string value)
         {
 
-            if (value.Contains(varSymbol.ToString())) //Exit if the string does not contain a variable indicating symbol.
+            if (value.Contains(DrTestVarConst.varSymbol.ToString())) //Exit if the string does not contain a variable indicating symbol.
             {
 
                 int iCurrentPosition = 0;
@@ -114,11 +102,11 @@ namespace DrOpen.DrTestVar.Item
                 foreach (char ch in value) // enumerating all characters in the string
                 {
                     iCurrentPosition++; // current position
-                    if (ch == varSymbol)
+                    if (ch == DrTestVarConst.varSymbol)
                     {
                         if (isVarNameStarted)
                         {
-                            varItems.Add(new DrVarItem(iCurrentPosition - varName.Length - 2, iCurrentPosition, varName, varSymbol + varName + varSymbol)); //add new variable item to list
+                            varItems.Add(new DrVarItem(iCurrentPosition - varName.Length - 2, iCurrentPosition, varName, DrTestVarConst.varSymbol + varName + DrTestVarConst.varSymbol)); //add new variable item to list
                             varName = String.Empty; // clear name of variable
                             ClosedVarCounter++; // Increase the number of characters closure variables
                         }
@@ -146,7 +134,7 @@ namespace DrOpen.DrTestVar.Item
                         isPreviosCharVar = false; // Clears status about previous character of variable
                     }
                 }
-                if (OpenedVarCounter != (ClosedVarCounter + EscapeVarSymbolCounter * 2)) throw new FormatException(string.Format(Res.Msg.CANNOT_BUILD_VAR_NOT_CLOSED_SYMBOL, value, varSymbol));
+                if (OpenedVarCounter != (ClosedVarCounter + EscapeVarSymbolCounter * 2)) throw new FormatException(string.Format(Res.Msg.CANNOT_BUILD_VAR_NOT_CLOSED_SYMBOL, value, DrTestVarConst.varSymbol));
             }
         }
 

@@ -38,6 +38,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DrTestVarConst.cs" />
     <Compile Include="Item\DrVarItem.cs" />
     <Compile Include="Item\DrVarItemsList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
