@@ -55,6 +55,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DrTestVar.xml" />
     <Content Include="License.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -64,6 +65,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Msg.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DrData.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

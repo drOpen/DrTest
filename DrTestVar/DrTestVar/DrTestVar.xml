@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  DrTestVar.xml - XML serialization of DrTestVar as an object DrData 1.0.0, June 22, 2014 
+ 
+  Copyright (c) 2013-2014 Kudryashov Andrey aka Dr
+ 
+  This software is provided 'as-is', without any express or implied
+  warranty. In no event will the authors be held liable for any damages
+  arising from the use of this software.
+
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
+
+      1. The origin of this software must not be misrepresented; you must not
+      claim that you wrote the original software. If you use this software
+      in a product, an acknowledgment in the product documentation would be
+      appreciated but is not required.
+
+      2. Altered source versions must be plainly marked as such, and must not be
+      misrepresented as being the original software.
+
+      3. This notice may not be removed or altered from any source distribution.
+
+      Kudryashov Andrey <kudryashov.andrey at gmail.com>
+-->
+<DDNode Name="Vars" Type="DrTestBuilderVariables" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="DrData.xsd">
+  <!--The variable name cannot contain '/' character and not having a name equal to one '.' or two '..' points.-->
+  <DDAttributesCollection >
+    <Attribute Name="Properties" >
+      <DDValue Type="System.String">./Properties</DDValue>
+    </Attribute>
+    <Attribute Name="Vars">
+      <DDValue Type="System.String">./Vars</DDValue>
+    </Attribute>
+    <Attribute Name="History">
+      <DDValue Type="System.String">./Properties/History</DDValue>
+    </Attribute>
+    <Attribute Name="Statistics">
+      <DDValue Type="System.String">./Statistics</DDValue>
+    </Attribute>
+    <Attribute Name="Variables">
+      <DDValue Type="System.String">./Variables</DDValue>
+    </Attribute>
+    <Attribute Name="Actions">
+      <DDValue Type="System.String">./Actions</DDValue>
+    </Attribute>
+  </DDAttributesCollection>
+  <DDNode Name="Properties" Type="DrTestProperties">
+    <DDAttributesCollection>
+      <Attribute Name="Id">
+        <DDValue Type="System.String">Id</DDValue>
+      </Attribute>
+      <Attribute Name="ParentId">
+        <DDValue Type="System.String">ParentId</DDValue>
+      </Attribute>
+      <Attribute Name="Name">
+        <DDValue Type="System.String">Name of Test</DDValue>
+      </Attribute>
+      <Attribute Name="Description">
+        <DDValue Type="System.String">Description</DDValue>
+      </Attribute>
+      <Attribute Name="GUID">
+        <DDValue Type="System.String">GUID</DDValue>
+      </Attribute>
+      <Attribute Name="Status">
+        <DDValue Type="System.String">Skipped</DDValue>
+      </Attribute>
+      <Attribute Name="SessionID">
+        <DDValue Type="System.String">GUID</DDValue>
+      </Attribute>
+      <Attribute Name="Author">
+        <DDValue Type="System.String">UserName</DDValue>
+      </Attribute>
+      <Attribute Name="ErrorHandling">
+        <DDValue Type="System.String">Ignore</DDValue>
+        <!--Stop + ToDo: Continue-->
+      </Attribute>
+    </DDAttributesCollection>
+    <DDNode Name="Tags" Type="DrTestTags">
+      <DDAttributesCollection>
+        <Attribute Name="Features">
+          <DDValue Type="System.String[]">
+            <Value>FeatureA</Value>
+            <Value>FeatureB</Value>
+          </DDValue>
+        </Attribute>
+        <Attribute Name="Categories">
+          <DDValue Type="System.String[]">
+            <Value>Category1</Value>
+            <Value>Category2</Value>
+          </DDValue>
+        </Attribute>
+      </DDAttributesCollection>
+    </DDNode>
+    <DDNode Name="History" Type="DrTestHistory">
+      <DDAttributesCollection/>
+      <DDNode Name="ChangeSet" Type="DrTestChangeSet">
+        <DDAttributesCollection>
+          <Attribute Name="UserName">
+            <DDValue Type="System.String">Piter</DDValue>
+          </Attribute>
+          <Attribute Name="Date">
+            <DDValue Type="System.DateTime" Size="8">2013-06-17T15:25:01.0000000+04:00</DDValue>
+          </Attribute>
+          <Attribute Name="Comments">
+            <DDValue Type="System.String">Creation</DDValue>
+          </Attribute>
+        </DDAttributesCollection>
+      </DDNode>
+      <DDNode Name="ChangeSet" Type="DrTestChangeSet">
+        <DDAttributesCollection>
+          <Attribute Name="UserName">
+            <DDValue Type="System.String">Piter</DDValue>
+          </Attribute>
+          <Attribute Name="Date">
+            <DDValue Type="System.DateTime" Size="8">2013-06-18T15:25:01.0000000+04:00</DDValue>
+          </Attribute>
+          <Attribute Name="Comments">
+            <DDValue Type="System.String">Add registry action</DDValue>
+          </Attribute>
+        </DDAttributesCollection>
+      </DDNode>
+    </DDNode>
+  </DDNode>
+  <DDNode Name="Vars" Type="DrTestBuilderVariables" />
+  <DDNode Name="BeforeConstructionVariables" Type="DrTestActions">
+    <DDAttributesCollection/>
+    <DDNode Name="GUID" Type="DrTestAction">
+      <DDAttributesCollection>
+        <Attribute Name="Properties" >
+          <DDValue Type="System.String">./Properties</DDValue>
+        </Attribute>
+        <Attribute Name="Tags" >
+          <DDValue Type="System.String">./Properties/Tags</DDValue>
+        </Attribute>
+        <Attribute Name="Statistics">
+          <DDValue Type="System.String">./Statistics</DDValue>
+        </Attribute>
+        <Attribute Name="Actions">
+          <DDValue Type="System.String">./Arguments</DDValue>
+        </Attribute>
+      </DDAttributesCollection>
+      <DDNode Name="Poperties" Type="DrTestActionProperties">
+        <DDAttributesCollection>
+          <Attribute Name="Library">
+            <DDValue Type="System.String">library.dll</DDValue>
+          </Attribute>
+          <Attribute Name="Class">
+            <DDValue Type="System.String">Class.Full.Name</DDValue>
+          </Attribute>
+          <Attribute Name="Method">
+            <DDValue Type="System.String">Test</DDValue>
+          </Attribute>
+          <Attribute Name="Id">
+            <DDValue Type="System.String">Id</DDValue>
+          </Attribute>
+          <Attribute Name="Name">
+            <DDValue Type="System.String">Action Name</DDValue>
+          </Attribute>
+          <Attribute Name="Description">
+            <DDValue Type="System.String">Description</DDValue>
+          </Attribute>
+          <Attribute Name="Status">
+            <DDValue Type="System.String">Skipped</DDValue>
+          </Attribute>
+          <Attribute Name="ErrorHandling">
+            <DDValue Type="System.String">Ignore</DDValue>
+            <!--Stop + ToDo: Continue-->
+          </Attribute>
+        </DDAttributesCollection>
+        <DDNode Name="Tags" Type="DrTestTags">
+          <DDAttributesCollection>
+            <Attribute Name="Features"/>
+            <Attribute Name="Categories">
+              <DDValue Type="System.String[]">
+                <Value>Category1</Value>
+              </DDValue>
+            </Attribute>
+          </DDAttributesCollection>
+        </DDNode>
+      </DDNode>
+      <DDNode Name="Statistics" Type="DrTestActionStatistics">
+        <DDAttributesCollection>
+          <Attribute Name="StartDate">
+            <DDValue Type="System.DateTime">0</DDValue>
+          </Attribute>
+          <Attribute Name="EndDate">
+            <DDValue Type="System.DateTime">0</DDValue>
+          </Attribute>
+          <Attribute Name="Total">
+            <DDValue Type="System.Int32">0</DDValue>
+          </Attribute>
+          <Attribute Name="Passed">
+            <DDValue Type="System.Int32">0</DDValue>
+          </Attribute>
+          <Attribute Name="Failed">
+            <DDValue Type="System.Int32">0</DDValue>
+          </Attribute>
+          <Attribute Name="Skipped">
+            <DDValue Type="System.Int32">0</DDValue>
+          </Attribute>
+          <Attribute Name="Disabled">
+            <DDValue Type="System.Int32">0</DDValue>
+          </Attribute>
+        </DDAttributesCollection>
+      </DDNode>
+      <DDNode Name="Arguments" Type="DrTestActionArgument">
+        <DDAttributesCollection>
+          <Attribute Name="Arg1">
+            <DDValue Type="System.String">The First Argument</DDValue>
+          </Attribute>
+          <Attribute Name="Arg2">
+            <DDValue Type="System.Boolean">true</DDValue>
+          </Attribute>
+        </DDAttributesCollection>
+      </DDNode>
+    </DDNode>
+    <DDNode Name="GUID" Type="DrTestAction">
+      <DDAttributesCollection>
+        <Attribute Name="Properties" >
+          <DDValue Type="System.String">./Properties</DDValue>
+        </Attribute>
+        <Attribute Name="Tags" >
+          <DDValue Type="System.String">./Properties/Tags</DDValue>
+        </Attribute>
+        <Attribute Name="Statistics">
+          <DDValue Type="System.String">./Statistics</DDValue>
+        </Attribute>
+        <Attribute Name="Actions">
+          <DDValue Type="System.String">./Arguments</DDValue>
+        </Attribute>
+      </DDAttributesCollection>
+      <DDNode Name="Poperties" Type="DrTestActionProperties">
+        <DDAttributesCollection>
+          <Attribute Name="Library">
+            <DDValue Type="System.String">library.dll</DDValue>
+          </Attribute>
+          <Attribute Name="Class">
+            <DDValue Type="System.String">Class.Full.Name</DDValue>
+          </Attribute>
+          <Attribute Name="Method">
+            <DDValue Type="System.String">Test</DDValue>
+          </Attribute>
+          <Attribute Name="Id">
+            <DDValue Type="System.String">Id</DDValue>
+          </Attribute>
+          <Attribute Name="Name">
+            <DDValue Type="System.String">Action Name</DDValue>
+          </Attribute>
+          <Attribute Name="Description">
+            <DDValue Type="System.String">Description</DDValue>
+          </Attribute>
+          <Attribute Name="Status">
+            <DDValue Type="System.String">Skipped</DDValue>
+          </Attribute>
+          <Attribute Name="ErrorHandling">
+            <DDValue Type="System.String">Ignore</DDValue>
+            <!--Stop + ToDo: Continue-->
+          </Attribute>
+        </DDAttributesCollection>
+        <DDNode Name="Tags" Type="DrTestTags">
+          <DDAttributesCollection>
+            <Attribute Name="Features"/>
+            <Attribute Name="Categories">
+              <DDValue Type="System.String[]">
+                <Value>Category2</Value>
+              </DDValue>
+            </Attribute>
+          </DDAttributesCollection>
+        </DDNode>
+      </DDNode>
+      <DDNode Name="Statistics" Type="DrTestActionStatistics">
+        <DDAttributesCollection>
+          <Attribute Name="StartDate">
+            <DDValue Type="System.DateTime">0</DDValue>
+          </Attribute>
+          <Attribute Name="EndDate">
+            <DDValue Type="System.DateTime">0</DDValue>
+          </Attribute>
+          <Attribute Name="Total">
+            <DDValue Type="System.Int32">0</DDValue>
+          </Attribute>
+          <Attribute Name="Passed">
+            <DDValue Type="System.Int32">0</DDValue>
+          </Attribute>
+          <Attribute Name="Failed">
+            <DDValue Type="System.Int32">0</DDValue>
+          </Attribute>
+          <Attribute Name="Skipped">
+            <DDValue Type="System.Int32">0</DDValue>
+          </Attribute>
+          <Attribute Name="Disabled">
+            <DDValue Type="System.Int32">0</DDValue>
+          </Attribute>
+        </DDAttributesCollection>
+      </DDNode>
+      <DDNode Name="Arguments" Type="DrTestActionArgument">
+        <DDAttributesCollection>
+          <Attribute Name="Arg1">
+            <DDValue Type="System.String">The First Argument</DDValue>
+          </Attribute>
+          <Attribute Name="Arg2">
+            <DDValue Type="System.Boolean">true</DDValue>
+          </Attribute>
+        </DDAttributesCollection>
+      </DDNode>
+    </DDNode>
+  </DDNode>
+</DDNode>
