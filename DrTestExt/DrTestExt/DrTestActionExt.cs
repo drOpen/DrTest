@@ -38,6 +38,72 @@ namespace DrTestExt
     /// </summary>
     public static class DrTestActionExt
     {
+
+        #region GetStubActionResultNode
+
+
+
+
+
+        public static DDType GetTypeActionStatus()
+        {
+            return new DDType(SchemaDrTestAction.TYPE_ACTION);
+        }
+
+        public static void IsThisNodeTypeActionOtherwiseThrow(this DDType t)
+        {
+            t.ValidateExpectedNodeType(SchemaDrTestAction.TYPE_ACTION);
+        }
+
+        public static DDNode GetStubActionResultNode()
+        {
+            var n = new DDNode(SchemaDrTestAction.NODE_ACTION_NAME, GetTypeActionStatus());
+
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, 0);
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_START_TIME, DateTime.Now);
+
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_END_TIME, null);
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_DESCRIPTION, String.Empty);
+
+            return n;
+
+        }
+
+
+        public static void SetActionResultNodeEndTime(this DDNode n)
+        {
+            n.Type.IsThisNodeTypeActionOtherwiseThrow();
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_END_TIME, DateTime.Now, ResolveConflict.OVERWRITE);
+        }
+
+
+        public static DDNode SetActionResultStatusOK(this DDNode n)
+        {
+            n.Type.IsThisNodeTypeActionOtherwiseThrow();
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, 1, ResolveConflict.OVERWRITE);
+            return n;
+        }
+
+
+        public static DDNode SetActionResultStatusFailed(this DDNode n)
+        {
+            n.Type.IsThisNodeTypeActionOtherwiseThrow();
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, 2, ResolveConflict.OVERWRITE);
+            return n;
+        }
+
+        public static DDNode SetActionResultStatusFailed(this DDNode n, Exception e)
+        {
+            n.Type.IsThisNodeTypeActionOtherwiseThrow();
+            n.Add(e);
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, 2, ResolveConflict.OVERWRITE);
+            return n;
+        }
+
+
+        #endregion GetStubActionResultNode
+
+
         #region ContainsAttributesOtherwiseThrow
         /// <summary>
         /// Determines whether the Attribute Collection contains an elements with the specified names and will be throw new <exception cref="ContainsAttributesException"/> if one of these attributes was not found
@@ -62,7 +128,7 @@ namespace DrTestExt
         /// </summary>
         /// <param name="attr">collection of DDValue that can be accessed by name.</param>
         /// <param name="names">list of names of mandatory attributes</param>
-        private static void containsAttributesOtherwiseThrow(this DDAttributesCollection attr, IEnumerable <string> names)
+        private static void containsAttributesOtherwiseThrow(this DDAttributesCollection attr, IEnumerable<string> names)
         {
             var nel = new List<string>();
             foreach (var name in names)

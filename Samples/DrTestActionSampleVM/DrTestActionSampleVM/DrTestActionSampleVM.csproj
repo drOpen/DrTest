@@ -65,7 +65,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Msg.resx</DependentUpon>
     </Compile>
-    <Compile Include="SchemaDrVM.cs" />
+    <Compile Include="Schema\SchemaDrVM.cs" />
     <Compile Include="WrapperDrVM.cs" />
     <Compile Include="FacadeDrVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

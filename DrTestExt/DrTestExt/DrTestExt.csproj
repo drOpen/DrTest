@@ -52,6 +52,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Msg.resx</DependentUpon>
     </Compile>
+    <Compile Include="Schema\DrTestAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

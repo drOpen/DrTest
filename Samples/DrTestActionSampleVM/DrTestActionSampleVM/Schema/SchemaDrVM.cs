@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DrTestActionSampleVM.DrAction.DrTest
 {
-    public class SchemaDrVM
+    public class SchemaDrTestActionVM
     {
 
         public const string ATTRIBUTE_NAME_SERVER_NAME = "ServerName";

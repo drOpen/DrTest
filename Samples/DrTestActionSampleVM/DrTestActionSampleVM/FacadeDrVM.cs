@@ -10,15 +10,42 @@ namespace DrTestActionSampleVM.DrAction.DrTest
     public class FacadeDrVM
     {
 
-        public DDNode VMPowerOn(DDNode n)
+        public DDNode VMPowerOn(DDNode nIn)
         {
-            n.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrVM.ATTRIBUTE_NAME_SERVER_NAME, SchemaDrVM.ATTRIBUTE_NAME_USER_NAME, SchemaDrVM.ATTRIBUTE_NAME_USER_PWD, SchemaDrVM.ATTRIBUTE_NAME_VM_NAME);
-            var vm = new WrapperDrVM(n.Attributes[SchemaDrVM.ATTRIBUTE_NAME_SERVER_NAME]);
-            vm.LogIn(n.Attributes[SchemaDrVM.ATTRIBUTE_NAME_USER_NAME], n.Attributes[SchemaDrVM.ATTRIBUTE_NAME_USER_PWD]);
-            vm.PowerOnVM(n.Attributes[SchemaDrVM.ATTRIBUTE_NAME_VM_NAME]);
-            vm.Logout();
-            return new DDNode();
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+            //bool appositionResult;
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME, 
+                                                                SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME, 
+                                                                SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD, 
+                                                                SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME);
 
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+
+                var expected = nIn.Attributes.GetValue(SchemaDrTestAction.ATTR_STATUS_EXPECTED_VALUE, true);
+                try
+                {
+                    vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                    vm.Logout();
+                    vm.PowerOnVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME]);
+                    vm.Logout();
+                    //appositionResult = (expected == true);
+                }
+                catch (Exception e)
+                { 
+
+                }
+                return nOut.SetActionResultStatusOK();
+            }
+            catch( Exception e)
+            {
+                return nOut.SetActionResultStatusFailed(e);
+            }
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
         }
 
     }

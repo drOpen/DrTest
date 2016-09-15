@@ -61,9 +61,16 @@ namespace DrTestActionSampleVM.DrAction.DrTest
 
         protected internal void PowerOnVM(string vmName)
         {
-            var vm = GetVirtualMachine(vmName);
-            if (vm == null) throw new VMDoesntExistExeption(vmName);
-            vm.PowerOnVM_Task(null);
+            try
+            {
+                var vm = GetVirtualMachine(vmName);
+                if (vm == null) throw new VMDoesntExistExeption(vmName);
+                vm.PowerOnVM_Task(null);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Cannot start vm.", e);
+            }
         }
 
         protected VirtualMachine GetVirtualMachine(string vmName)
@@ -71,7 +78,7 @@ namespace DrTestActionSampleVM.DrAction.DrTest
             return FindEntityViewByName<VirtualMachine>(vmName);
         }
 
-        private T FindEntityViewByName<T>(string name) where T : EntityViewBase
+        protected T FindEntityViewByName<T>(string name) where T : EntityViewBase
         {
             NameValueCollection filter = new NameValueCollection();
             filter.Add("name", '^' + name + '$');
