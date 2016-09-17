@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DrTestActionSampleVM.DrAction.DrTest.Res {
+namespace DrTest.DrAction.DrTestActionSampleVM.Res {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace DrTestActionSampleVM.DrAction.DrTest.Res {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DrTestActionSampleVM.DrAction.DrTest.Res.Msg", typeof(Msg).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DrTest.DrAction.DrTestActionSampleVM.Res.Msg", typeof(Msg).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,65 @@ namespace DrTestActionSampleVM.DrAction.DrTest.Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot &apos;{0}&apos; the virtual machine &apos;{1}&apos;..
+        /// </summary>
+        internal static string VM_CANNOT_CHANGE_POWER_STATUS {
+            get {
+                return ResourceManager.GetString("VM_CANNOT_CHANGE_POWER_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The virtual machine &apos;{0}&apos; could not be found..
         /// </summary>
         internal static string VM_DOESNT_EXIST {
             get {
                 return ResourceManager.GetString("VM_DOESNT_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to power off.
+        /// </summary>
+        internal static string VM_POWER_STATUS_OFF {
+            get {
+                return ResourceManager.GetString("VM_POWER_STATUS_OFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to power on.
+        /// </summary>
+        internal static string VM_POWER_STATUS_ON {
+            get {
+                return ResourceManager.GetString("VM_POWER_STATUS_ON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to reset.
+        /// </summary>
+        internal static string VM_POWER_STATUS_RESET {
+            get {
+                return ResourceManager.GetString("VM_POWER_STATUS_RESET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to suspend.
+        /// </summary>
+        internal static string VM_POWER_STATUS_SUSPEND {
+            get {
+                return ResourceManager.GetString("VM_POWER_STATUS_SUSPEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully &apos;{0}&apos; the virtual machine &apos;{1}&apos;..
+        /// </summary>
+        internal static string VM_SUCCESS_CHANGE_POWER_STATUS {
+            get {
+                return ResourceManager.GetString("VM_SUCCESS_CHANGE_POWER_STATUS", resourceCulture);
             }
         }
     }

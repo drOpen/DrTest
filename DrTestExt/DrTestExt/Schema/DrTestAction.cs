@@ -16,7 +16,6 @@ namespace DrTestExt
         public const string ATTR_STATUS_START_TIME = "StartTime";
         public const string ATTR_STATUS_END_TIME = "EndTime";
         public const string ATTR_STATUS_DESCRIPTION = "Description";
-        public const string ATTR_STATUS_EXPECTED_VALUE = "ExpectedValue";
         //public const string ATTR_STATUS_
 
     }

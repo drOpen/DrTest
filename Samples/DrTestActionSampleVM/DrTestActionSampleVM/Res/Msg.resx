@@ -117,7 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="VM_CANNOT_CHANGE_POWER_STATUS" xml:space="preserve">
+    <value>Cannot '{0}' the virtual machine '{1}'.</value>
+  </data>
   <data name="VM_DOESNT_EXIST" xml:space="preserve">
     <value>The virtual machine '{0}' could not be found.</value>
+  </data>
+  <data name="VM_POWER_STATUS_OFF" xml:space="preserve">
+    <value>power off</value>
+  </data>
+  <data name="VM_POWER_STATUS_ON" xml:space="preserve">
+    <value>power on</value>
+  </data>
+  <data name="VM_POWER_STATUS_RESET" xml:space="preserve">
+    <value>reset</value>
+  </data>
+  <data name="VM_POWER_STATUS_SUSPEND" xml:space="preserve">
+    <value>suspend</value>
+  </data>
+  <data name="VM_SUCCESS_CHANGE_POWER_STATUS" xml:space="preserve">
+    <value>Successfully '{0}' the virtual machine '{1}'.</value>
   </data>
 </root>

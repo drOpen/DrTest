@@ -29,7 +29,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using DrOpen.DrCommon.DrData;
-using DrTestExt.DrTestExceptions;
+using DrOpen.DrCommon.DrData.Exceptions;
+using DrTestExt.Schema;
 
 namespace DrTestExt
 {
@@ -41,84 +42,140 @@ namespace DrTestExt
 
         #region GetStubActionResultNode
 
-
-
-
-
+        /// <summary>
+        /// returns node type for DrTestAction
+        /// </summary>
+        /// <returns></returns>
         public static DDType GetTypeActionStatus()
         {
             return new DDType(SchemaDrTestAction.TYPE_ACTION);
         }
-
+        /// <summary>
+        /// verifies type of node. If have not equals DrTestActionType will throw '<typeparamref name="ValidateExpectedNodeType"/>'
+        /// </summary>
+        /// <param name="t">type of node for verification</param>
+        /// <exception cref="ValidateExpectedNodeType"/>
         public static void IsThisNodeTypeActionOtherwiseThrow(this DDType t)
         {
             t.ValidateExpectedNodeType(SchemaDrTestAction.TYPE_ACTION);
         }
-
+        /// <summary>
+        /// returns out node for DrTestAction. 
+        /// </summary>
+        /// <returns></returns>
         public static DDNode GetStubActionResultNode()
         {
             var n = new DDNode(SchemaDrTestAction.NODE_ACTION_NAME, GetTypeActionStatus());
-
-            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, 0);
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, (int)SchemaDrTest.DrTestExecStatus.EXEC_STATUS_IN_PROGRESS);
             n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_START_TIME, DateTime.Now);
-
             n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_END_TIME, null);
             n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_DESCRIPTION, String.Empty);
-
             return n;
-
         }
+        #endregion GetStubActionResultNode
 
-
+        #region SetActionStatus
+        /// <summary>
+        /// Sets value of attribute EndTime for DrTestAction node.
+        /// </summary>
+        /// <param name="n">node for out from action. Type of this node must be equls DrTestActionType otherwise sub will throw '<typeparamref name="ValidateExpectedNodeType"/>'</param>
+        /// <exception cref="ValidateExpectedNodeType"/>
         public static void SetActionResultNodeEndTime(this DDNode n)
         {
             n.Type.IsThisNodeTypeActionOtherwiseThrow();
             n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_END_TIME, DateTime.Now, ResolveConflict.OVERWRITE);
         }
 
-
+        /// <summary>
+        /// Sets OK value of attribute ExecutionStatus for DrTestAction node.
+        /// </summary>
+        /// <param name="n">node for out from action. Type of this node must be equls DrTestActionType otherwise sub will throw '<typeparamref name="ValidateExpectedNodeType"/>'</param>
+        /// <returns>returns specified node</returns>
+        /// <exception cref="ValidateExpectedNodeType"/>
         public static DDNode SetActionResultStatusOK(this DDNode n)
         {
             n.Type.IsThisNodeTypeActionOtherwiseThrow();
-            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, 1, ResolveConflict.OVERWRITE);
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, (int)SchemaDrTest.DrTestExecStatus.EXEC_STATUS_OK, ResolveConflict.OVERWRITE);
             return n;
         }
-
-
+        /// <summary>
+        /// Sets OK value of attribute ExecutionStatus and specified description for DrTestAction node.
+        /// </summary>
+        /// <param name="n">node for out from action. Type of this node must be equls DrTestActionType otherwise sub will throw '<typeparamref name="ValidateExpectedNodeType"/>'</param>
+        /// <param name="description">add specified </param>
+        /// <returns>description of describes action result</returns>
+        /// <exception cref="ValidateExpectedNodeType"/>
+        public static DDNode SetActionResultStatusOK(this DDNode n, string description)
+        {
+            SetActionResultStatusOK(n);
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_DESCRIPTION, description, ResolveConflict.OVERWRITE);
+            return n;
+        }
+        /// <summary>
+        /// Sets Failed value of attribute ExecutionStatus for DrTestAction node.
+        /// </summary>
+        /// <param name="n">node for out from action. Type of this node must be equls DrTestActionType otherwise sub will throw '<typeparamref name="ValidateExpectedNodeType"/>'</param>
+        /// <returns>returns specified node</returns>
+        /// <exception cref="ValidateExpectedNodeType"/>
         public static DDNode SetActionResultStatusFailed(this DDNode n)
         {
             n.Type.IsThisNodeTypeActionOtherwiseThrow();
-            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, 2, ResolveConflict.OVERWRITE);
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, (int)SchemaDrTest.DrTestExecStatus.EXEC_STATUS_FAILED, ResolveConflict.OVERWRITE);
             return n;
         }
-
+        /// <summary>
+        /// Sets Failed value of attribute ExecutionStatus and specified description for DrTestAction node.
+        /// </summary>
+        /// <param name="n">node for out from action. Type of this node must be equls DrTestActionType otherwise sub will throw '<typeparamref name="ValidateExpectedNodeType"/>'</param>
+        /// <param name="description">add specified </param>
+        /// <returns>returns specified node</returns>
+        /// <exception cref="ValidateExpectedNodeType"/>
+        public static DDNode SetActionResultStatusFailed(this DDNode n, string description)
+        {
+            SetActionResultStatusFailed(n);
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_DESCRIPTION, description, ResolveConflict.OVERWRITE);
+            return n;
+        }
+        /// <summary>
+        /// Sets Failed value of attribute ExecutionStatus and adds specified exception to DrTestAction node
+        /// </summary>
+        /// <param name="n">node for out from action. Type of this node must be equls DrTestActionType otherwise sub will throw '<typeparamref name="ValidateExpectedNodeType"/>'</param>
+        /// <param name="e">Exception describes issues</param>
+        /// <returns>returns specified node</returns>
+        /// <exception cref="ValidateExpectedNodeType"/>
         public static DDNode SetActionResultStatusFailed(this DDNode n, Exception e)
         {
             n.Type.IsThisNodeTypeActionOtherwiseThrow();
             n.Add(e);
-            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, 2, ResolveConflict.OVERWRITE);
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, (int)SchemaDrTest.DrTestExecStatus.EXEC_STATUS_FAILED, ResolveConflict.OVERWRITE);
             return n;
         }
+        /// <summary>
+        /// Sets Failed value of attribute ExecutionStatus and specified description for DrTestAction node. Also, adds specified exception too.
+        /// </summary>
+        /// <param name="n">node for out from action. Type of this node must be equls DrTestActionType otherwise sub will throw '<typeparamref name="ValidateExpectedNodeType"/>'</param>
+        /// <param name="e">Exception describes issues</param>
+        /// <param name="description">add specified</param>
+        /// <returns>returns specified node</returns>
+        /// <exception cref="ValidateExpectedNodeType"/>
+        public static DDNode SetActionResultStatusFailed(this DDNode n, string description, Exception e)
+        {
+            SetActionResultStatusFailed(n, e);
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_DESCRIPTION,  description, ResolveConflict.OVERWRITE);
+            return n;
+        }
+        #endregion SetActionStatus
 
-
-        #endregion GetStubActionResultNode
 
 
         #region ContainsAttributesOtherwiseThrow
+
         /// <summary>
         /// Determines whether the Attribute Collection contains an elements with the specified names and will be throw new <exception cref="ContainsAttributesException"/> if one of these attributes was not found
         /// </summary>
         /// <param name="attr">collection of DDValue that can be accessed by name.</param>
         /// <param name="names">list of names of mandatory attributes</param>
-        public static void ContainsAttributesOtherwiseThrow(this DDAttributesCollection attr, params Enum[] names)
-        {
-            ContainsAttributesOtherwiseThrow(attr, names);
-        }
-        /// <summary>
-        /// Determines whether the Attribute Collection contains an elements with the specified names and will be throw new <exception cref="ContainsAttributesException"/> if one of these attributes was not found
-        /// </summary>
-        /// <param name="attr">collection of DDValue that can be accessed by name.</param>
-        /// <param name="names">list of names of mandatory attributes</param>
+        /// <exception cref="DDMissingSomeOfAttributesException"/>
         public static void ContainsAttributesOtherwiseThrow(this DDAttributesCollection attr, params string[] names)
         {
             containsAttributesOtherwiseThrow(attr, names);
@@ -128,6 +185,7 @@ namespace DrTestExt
         /// </summary>
         /// <param name="attr">collection of DDValue that can be accessed by name.</param>
         /// <param name="names">list of names of mandatory attributes</param>
+        /// <exception cref="DDMissingSomeOfAttributesException"/>
         private static void containsAttributesOtherwiseThrow(this DDAttributesCollection attr, IEnumerable<string> names)
         {
             var nel = new List<string>();
@@ -135,7 +193,7 @@ namespace DrTestExt
             {
                 if (!attr.Contains(name)) nel.Add(name);
             }
-            if (nel.Count > 0) throw new ContainsAttributesException(nel);
+            if (nel.Count > 0) throw new DDMissingSomeOfAttributesException(nel.ToArray());
         }
         #endregion ContainsAttributesOtherwiseThrow
     }

@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UTest", "UTest", "{D5CC00FF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTestDrTestActionSampleVM", "UTest\UTestDrTestActionSampleVM\UTestDrTestActionSampleVM.csproj", "{7DDB6352-D468-4D61-B183-8173F1C1142A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrData", "..\..\..\DrCommon\DrData\DrData\DrData.csproj", "{C984C775-1807-4157-BA4B-5D5FCCCE577B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7DDB6352-D468-4D61-B183-8173F1C1142A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DDB6352-D468-4D61-B183-8173F1C1142A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DDB6352-D468-4D61-B183-8173F1C1142A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C984C775-1807-4157-BA4B-5D5FCCCE577B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C984C775-1807-4157-BA4B-5D5FCCCE577B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C984C775-1807-4157-BA4B-5D5FCCCE577B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C984C775-1807-4157-BA4B-5D5FCCCE577B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
