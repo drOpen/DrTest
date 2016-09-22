@@ -12,7 +12,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
     {
 
         private delegate void vmDelegatePowerAction(string vmName);
-        
+
         private enum vmPowerAction
         {
             VM_POWER_ON,
@@ -67,7 +67,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             }
             catch (Exception e) // should be set Failed status because it's global exception of this action
             {
-                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_CANNOT_CHANGE_POWER_STATUS, Msg.VM_POWER_STATUS_ON, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME]), e); 
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_CANNOT_CHANGE_POWER_STATUS, Msg.VM_POWER_STATUS_ON, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME]), e);
             }
             finally
             {

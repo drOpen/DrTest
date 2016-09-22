@@ -66,7 +66,7 @@ namespace DrTestExt
         public static DDNode GetStubActionResultNode()
         {
             var n = new DDNode(SchemaDrTestAction.NODE_ACTION_NAME, GetTypeActionStatus());
-            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, (int)SchemaDrTest.DrTestExecStatus.EXEC_STATUS_IN_PROGRESS);
+            n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_EXECUTE_STATUS, (int)SchemaDrTest.DrTestExecStatus.EXEC_STATUS_STARTED);
             n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_START_TIME, DateTime.Now);
             n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_END_TIME, null);
             n.Attributes.Add(SchemaDrTestAction.ATTR_STATUS_DESCRIPTION, String.Empty);
