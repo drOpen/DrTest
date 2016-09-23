@@ -1,0 +1,9 @@
+c:\users\administrator\documents\visual studio 2015\Projects\ModifyRegistryBlock\ModifyRegistryBlock\bin\Debug\ModifyRegistryBlock.pdb
+c:\users\administrator\documents\visual studio 2015\Projects\ModifyRegistryBlock\ModifyRegistryBlock\obj\Debug\ModifyRegistryBlock.csprojResolveAssemblyReference.cache
+c:\users\administrator\documents\visual studio 2015\Projects\ModifyRegistryBlock\ModifyRegistryBlock\obj\Debug\ModifyRegistryBlock.pdb
+c:\users\administrator\documents\visual studio 2015\Projects\ModifyRegistryBlock\ModifyRegistryBlock\bin\Debug\DrData.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\ModifyRegistryBlock\obj\Debug\ModifyRegistryBlock.Res.Msg.resources
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\ModifyRegistryBlock\obj\Debug\ModifyRegistryBlock.csproj.GenerateResource.Cache
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\ModifyRegistryBlock\bin\Debug\DrTestExt.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\ModifyRegistryBlock\bin\Debug\ModifyRegistryBlock.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\ModifyRegistryBlock\obj\Debug\ModifyRegistryBlock.dll

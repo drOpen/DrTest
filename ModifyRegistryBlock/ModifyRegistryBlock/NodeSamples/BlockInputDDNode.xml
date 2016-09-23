@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DDNode Name="Root" IsRoot="true" Type="DrTest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="DrData.xsd">
+  <DDNode Name="InputParameters">
+    <DDAttributesCollection>
+      <Attribute Name="KeyPath">
+        <DDValue Type="System.String">path to key</DDValue>
+      </Attribute>
+      <Attribute Name="Name">
+        <DDValue Type="System.String">name of new attribute</DDValue>
+      </Attribute>
+      <Attribute Name="Value">
+        <DDValue Type="System.String">value of new attribute</DDValue>
+      </Attribute>
+    </DDAttributesCollection>
+  </DDNode>
+  <DDNode Name="ExpectedValue">
+    <DDAttributesCollection>
+      <Attribute Name="Success">
+        <DDValue Type="System.Boolean">true</DDValue>
+      </Attribute>
+    </DDAttributesCollection>
+  </DDNode>
+</DDNode>

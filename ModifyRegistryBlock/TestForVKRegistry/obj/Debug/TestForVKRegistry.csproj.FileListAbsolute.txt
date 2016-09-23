@@ -1,0 +1,9 @@
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\TestForVKRegistry\bin\Debug\TestForVKRegistry.exe
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\TestForVKRegistry\bin\Debug\TestForVKRegistry.pdb
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\TestForVKRegistry\bin\Debug\DrData.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\TestForVKRegistry\bin\Debug\ModifyRegistryBlock.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\TestForVKRegistry\bin\Debug\DrTestExt.dll
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\TestForVKRegistry\bin\Debug\ModifyRegistryBlock.pdb
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\TestForVKRegistry\obj\Debug\TestForVKRegistry.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\TestForVKRegistry\obj\Debug\TestForVKRegistry.exe
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ModifyRegistryBlock\TestForVKRegistry\obj\Debug\TestForVKRegistry.pdb
