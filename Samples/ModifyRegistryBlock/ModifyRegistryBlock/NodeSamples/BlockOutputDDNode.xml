@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DDNode Name="Root" IsRoot="true" Type="DrTest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="DrData.xsd">
+  <DDAttributesCollection>
+    <Attribute Name="ReachedExpectedResult">
+      <DDValue Type="System.Boolean">True</DDValue>
+    </Attribute>
+  </DDAttributesCollection>
+  <DDNode Name="GuidHere" Type="Exception">
+    <!--Here goes exception nodes and attributes-->
+  </DDNode>
+</DDNode>
