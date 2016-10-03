@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using VMware.Vim;
+using DrTest.DrAction.DrTestActionSampleVM;
 using DrTest.DrAction.DrTestActionSampleVM.Res;
 
 namespace DrTest.DrAction.DrTestActionSampleVM
@@ -15,12 +16,61 @@ namespace DrTest.DrAction.DrTestActionSampleVM
     internal class WrapperDrVM
     {
         /// <summary>
+        /// binds vm power actions with power description and corresponding function 
+        /// </summary>
+        internal struct WrpVMPower
+        {
+            public WrpVMPower(string description, WrpVMPowerActionDelegate action)
+                : this()
+            {
+                Description = description;
+                Action = action;
+            }
+            /// <summary>
+            /// delegate to corresponding power action function
+            /// </summary>
+            public WrpVMPowerActionDelegate Action { get; private set; }
+            /// <summary>
+            /// description of power action
+            /// </summary>
+            public string Description { get; private set; }
+        }
+        /// <summary>
+        /// delegate to corresponding power action function
+        /// </summary>
+        /// <param name="name">virtual machine name</param>
+        internal protected delegate void WrpVMPowerActionDelegate(string name);
+        /// <summary>
+        /// dictionary contains binds vm power actions with power description and corresponding function 
+        /// </summary>
+        internal protected Dictionary<vmPowerAction, WrpVMPower> dVMPowerAction;    
+        /// <summary>
         /// creats instans for specified VMware server
         /// </summary>
         /// <param name="serverUrl">vmware server. Example: <example>https://127.0.0.1/sdk</example></param>
         protected internal WrapperDrVM(string serverUrl)
         {
             this.ServerUrl = serverUrl;
+
+            var vmPADescription = GetVMPowerActionDescription();
+            dVMPowerAction = new Dictionary<vmPowerAction, WrpVMPower>()
+            {
+                {vmPowerAction.VM_POWER_ON, new WrpVMPower(vmPADescription[vmPowerAction.VM_POWER_ON], PowerOnVM)},
+                {vmPowerAction.VM_POWER_OFF, new WrpVMPower( vmPADescription[vmPowerAction.VM_POWER_OFF], PowerOffVM)},
+                {vmPowerAction.VM_POWER_RESET, new WrpVMPower(vmPADescription[vmPowerAction.VM_POWER_RESET],ResetVM)},
+                {vmPowerAction.VM_POWER_SUSPEND, new WrpVMPower(vmPADescription[vmPowerAction.VM_POWER_SUSPEND], SuspendVM)}
+            };
+        }
+
+        /// <summary>
+        /// Power actions supported by virtual machine
+        /// </summary>
+        internal enum vmPowerAction
+        {
+            VM_POWER_ON,
+            VM_POWER_OFF,
+            VM_POWER_RESET,
+            VM_POWER_SUSPEND
         }
 
         /// <summary>
@@ -88,55 +138,28 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         /// </summary>
         /// <param name="vmName">virtual machine name</param>
         /// <exception cref="VMCannotChangePowerStatusException"/>
-        
-        protected internal void PowerOnVM(string vmName)
+
+        protected virtual internal void PowerOnVM(string vmName)
         {
-            try
-            {
-                var vm = GetVirtualMachine(vmName);
-                if (vm == null) throw new VMDoesntExistExeption(vmName);
-                vm.PowerOnVM_Task(null);
-            }
-            catch (Exception e)
-            {
-                throw new VMCannotChangePowerStatusException(vmName, Msg.VM_POWER_STATUS_ON, e);
-            }
+            VMChangePowerState(vmName, vmPowerAction.VM_POWER_ON);
         }
         /// <summary>
         /// Powers off this virtual machine.
         /// </summary>
         /// <param name="vmName">virtual machine name</param>
         /// <exception cref="VMCannotChangePowerStatusException"/>
-        protected internal void PowerOffVM(string vmName)
+        protected virtual internal void PowerOffVM(string vmName)
         {
-            try
-            {
-                var vm = GetVirtualMachine(vmName);
-                if (vm == null) throw new VMDoesntExistExeption(vmName);
-                vm.PowerOffVM_Task();
-            }
-            catch (Exception e)
-            {
-                throw new VMCannotChangePowerStatusException(vmName, Msg.VM_POWER_STATUS_OFF, e);
-            }
+            VMChangePowerState(vmName, vmPowerAction.VM_POWER_OFF);
         }
         /// <summary>
         /// Suspends execution in this virtual machine.
         /// </summary>
         /// <param name="vmName">virtual machine name</param>
         /// <exception cref="VMCannotChangePowerStatusException"/>
-        protected internal void SuspendVM(string vmName)
+        protected virtual internal void SuspendVM(string vmName)
         {
-            try
-            {
-                var vm = GetVirtualMachine(vmName);
-                if (vm == null) throw new VMDoesntExistExeption(vmName);
-                vm.SuspendVM_Task();
-            }
-            catch (Exception e)
-            {
-                throw new VMCannotChangePowerStatusException(vmName, Msg.VM_POWER_STATUS_SUSPEND, e);
-            }
+            VMChangePowerState(vmName, vmPowerAction.VM_POWER_SUSPEND);
         }
         /// <summary>
         /// Resets power on this virtual machine. If the current state is poweredOn, then this method first performs powerOff(hard). Once the power state is poweredOff, then this method performs powerOn(option).
@@ -144,25 +167,54 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         /// </summary>
         /// <param name="vmName">virtual machine name</param>
         /// <exception cref="VMCannotChangePowerStatusException"/>
-        protected internal void ResetVM(string vmName)
+        protected virtual internal void ResetVM(string vmName)
+        {
+            VMChangePowerState(vmName, vmPowerAction.VM_POWER_RESET);
+        }
+        /// <summary>
+        /// Changes power status of virtual michine
+        /// </summary>
+        /// <param name="vmName">virtual machine name</param>
+        /// <param name="vmPA">power actions</param>
+        /// <exception cref="VMCannotChangePowerStatusException"/>
+        /// <exception cref="VMForbiddenPowerAction"/>
+        protected virtual internal void VMChangePowerState(string vmName, vmPowerAction vmPA)
         {
             try
             {
                 var vm = GetVirtualMachine(vmName);
                 if (vm == null) throw new VMDoesntExistExeption(vmName);
-                vm.ResetVM_Task();
+                switch (vmPA)
+                {
+                    case vmPowerAction.VM_POWER_RESET:
+                        vm.ResetVM_Task();
+                        break;
+                    case vmPowerAction.VM_POWER_ON:
+                        vm.PowerOnVM_Task();
+                        break;
+                    case vmPowerAction.VM_POWER_SUSPEND:
+                        vm.SuspendVM_Task();
+                        break;
+                    case vmPowerAction.VM_POWER_OFF:
+                        vm.PowerOffVM_Task();
+                        break;
+                    default:
+                        throw new VMForbiddenPowerAction(vmPA.ToString());
+                }
             }
             catch (Exception e)
             {
-                throw new VMCannotChangePowerStatusException(vmName, Msg.VM_POWER_STATUS_RESET, e);
+                throw new VMCannotChangePowerStatusException(vmName, dVMPowerAction[vmPA].Description, e);
             }
         }
+
+
         /// <summary>
         /// returns virtual machine by name
         /// </summary>
         /// <param name="vmName"></param>
         /// <returns></returns>
-        protected VirtualMachine GetVirtualMachine(string vmName)
+        protected virtual VirtualMachine GetVirtualMachine(string vmName)
         {
             return FindEntityViewByName<VirtualMachine>(vmName);
         }
@@ -172,7 +224,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         /// <typeparam name="T">type of entity</typeparam>
         /// <param name="name">object name for search</param>
         /// <returns></returns>
-        protected T FindEntityViewByName<T>(string name) where T : EntityViewBase
+        protected virtual T FindEntityViewByName<T>(string name) where T : EntityViewBase
         {
             NameValueCollection filter = new NameValueCollection();
             filter.Add("name", '^' + name + '$');
@@ -180,6 +232,25 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         }
 
         #endregion VM Action
+
+        #region static
+        /// <summary>
+        /// returns dictionary with binds power action with corresponding description
+        /// </summary>
+        /// <returns></returns>
+        internal static Dictionary<vmPowerAction, string> GetVMPowerActionDescription()
+        {
+            return
+                new Dictionary<vmPowerAction, string> 
+                {
+                    {vmPowerAction.VM_POWER_ON, Msg.VM_POWER_STATUS_ON},
+                    {vmPowerAction.VM_POWER_OFF, Msg.VM_POWER_STATUS_OFF},
+                    {vmPowerAction.VM_POWER_RESET, Msg.VM_POWER_STATUS_RESET},
+                    {vmPowerAction.VM_POWER_SUSPEND, Msg.VM_POWER_STATUS_SUSPEND}
+                };
+        }
+        #endregion static
+
 
         ~WrapperDrVM()
         {

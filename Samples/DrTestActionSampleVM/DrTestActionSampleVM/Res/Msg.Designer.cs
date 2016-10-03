@@ -115,6 +115,15 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The unknown vm power action &apos;{0}&apos; is forbidden..
+        /// </summary>
+        internal static string VM_POWER_UNKNOW_ACTION {
+            get {
+                return ResourceManager.GetString("VM_POWER_UNKNOW_ACTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successfully &apos;{0}&apos; the virtual machine &apos;{1}&apos;..
         /// </summary>
         internal static string VM_SUCCESS_CHANGE_POWER_STATUS {

@@ -135,6 +135,9 @@
   <data name="VM_POWER_STATUS_SUSPEND" xml:space="preserve">
     <value>suspend</value>
   </data>
+  <data name="VM_POWER_UNKNOW_ACTION" xml:space="preserve">
+    <value>The unknown vm power action '{0}' is forbidden.</value>
+  </data>
   <data name="VM_SUCCESS_CHANGE_POWER_STATUS" xml:space="preserve">
     <value>Successfully '{0}' the virtual machine '{1}'.</value>
   </data>
