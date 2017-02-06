@@ -134,6 +134,335 @@ namespace DrTest.DrAction.DrTestActionSampleVM
                 nOut.SetActionResultNodeEndTime(); // sets EndTime attribute at the end
             }
         }
+
+
+        /// <summary>
+        /// Clone excesting VM.
+        /// </summary>
+        /// <param name="nIn">Action node contains the mandatory attributes:
+        /// <list type="bullet">
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NEW_NAME_VM_NAME</value></description></item>
+        /// </list> 
+        /// </param>
+        /// <returns>Action result</returns>
+        public DDNode VMCloneVM(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                    SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                    SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                    SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME,
+                                                                    SchemaDrTestActionVM.ATTRIBUTE_NEW_NAME_VM_NAME,
+                                                                    SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME,
+                                                                    SchemaDrTestActionVM.ATTRIBUTE_VM_SNAPSHOT_NAME);
+
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.CloneVM((nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME]), nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NEW_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_SNAPSHOT_NAME]);
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.VM_CLONE_VM_SUCCES, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NEW_NAME_VM_NAME]));
+            }
+                catch (Exception e) 
+            {
+    
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_CLONE_VM_FAILED, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NEW_NAME_VM_NAME], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime(); 
+            }
+        }
+
+
+
+
+        /// <summary>
+        /// Check Started Application
+        /// </summary>
+        /// <param name="nIn"></param>
+        /// <returns></returns>
+        public DDNode VMCheckProcess(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+
+
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_LOGIN_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_LOGIN_PWD,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION);
+
+                string retry = "20";
+                string timeout = "30";
+                if (nIn.Contains(SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_RETRY)) retry = nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_RETRY];
+                if (nIn.Contains(SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_TIMEOUT)) timeout = nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_TIMEOUT];
+
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.CheckVMState(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_LOGIN_NAME],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_LOGIN_PWD],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION],
+                                retry,
+                                timeout);
+
+
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.VM_CHECK_PROCESS_SUCCESS, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME]));
+
+            }
+            catch (Exception e)
+            {
+
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_CHECK_PROCESS_FAILED, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
+
+
+
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nIn"></param>
+        /// <returns></returns>
+        public DDNode CreateVirtualSwitch(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_SWITCH_PORT_NUM,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME);
+
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.CreateVirtualSwitch(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_PORT_NUM]);
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.CREATE_VIRTUAL_SWITCH_SUCCESS, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME]));
+            }
+            catch (Exception e)
+            {
+
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.CREATE_VIRTUAL_SWITCH_FAILED, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nIn"></param>
+        /// <returns></returns>
+        public DDNode RemoveVirtualSwitch(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_SWITCH_PORT_NUM,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME);
+
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.RemoveVirtualSwitch(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME]);
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.REMOVE_VIRTUAL_SWITCH_SUCCESS, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME]));
+            }
+            catch (Exception e)
+            {
+
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.REMOVE_VIRTUAL_SWITCH_FAILED, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nIn"></param>
+        /// <returns></returns>
+        public DDNode CreatePortGrp(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME);
+
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.CreatePortGrp(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME]);
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.CREATE_PORT_GROUP_SUCCESS, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME]));
+            }
+            catch (Exception e)
+            {
+
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.CREATE_PORT_GROUP_FAILED, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nIn"></param>
+        /// <returns></returns>
+        public DDNode RemovePortGrp(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME);
+
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.RemovePortGrp(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME]);
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.REMOVE_PORT_GROUP_SUCCESS, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME]));
+            }
+            catch (Exception e)
+            {
+
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.REMOVE_PORT_GROUP_FAILED, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nIn"></param>
+        /// <returns></returns>
+        public DDNode VMChangeNicPortGrp(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME);
+
+
+          
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.ChangeNicPortGroup(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME]);
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.VM_NIC_CHANGE_SUCCESS, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME]));
+            }
+            catch (Exception e)
+            {
+
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_NIC_CHANGE_FAILED, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nIn"></param>
+        /// <returns></returns>
+        public DDNode VMDestroyVM(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME);
+
+
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.RemoveVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME]);
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.VM_REMOVE_VM_SUCCESS, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME]));
+            }
+            catch (Exception e)
+            {
+
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_REMOVE_VM_FAILED, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
+        }
+
+
+
+
+
+
         #endregion VMPowerAction
     }
 }
