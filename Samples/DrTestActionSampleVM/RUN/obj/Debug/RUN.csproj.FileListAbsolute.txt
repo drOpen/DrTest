@@ -1,0 +1,15 @@
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\obj\Debug\RUN.csprojResolveAssemblyReference.cache
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\bin\Debug\RUN.exe.config
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\bin\Debug\RUN.exe
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\bin\Debug\RUN.pdb
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\bin\Debug\DrData.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\bin\Debug\DrTestActionSampleVM.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\bin\Debug\DrTestExt.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\bin\Debug\VMware.Vim.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\bin\Debug\VimService25.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\bin\Debug\VimService40.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\bin\Debug\DrTestExt.pdb
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\bin\Debug\DrTestActionSampleVM.pdb
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\bin\Debug\VimService25.XmlSerializers.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\obj\Debug\RUN.exe
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\RUN\obj\Debug\RUN.pdb

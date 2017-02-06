@@ -1,0 +1,14 @@
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\obj\Debug\UTestDrTestActionSampleVM.csprojResolveAssemblyReference.cache
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\bin\Debug\UTestDrTestActionSampleVM.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\bin\Debug\UTestDrTestActionSampleVM.pdb
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\bin\Debug\DrData.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\bin\Debug\DrTestActionSampleVM.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\bin\Debug\DrTestExt.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\bin\Debug\DrTestActionSampleVM.pdb
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\obj\Debug\UTestDrTestActionSampleVM.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\obj\Debug\UTestDrTestActionSampleVM.pdb
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\bin\Debug\VMware.Vim.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\bin\Debug\VimService25.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\bin\Debug\VimService40.dll
+F:\DR\DrTest-master(3)\DrTest-master\Samples\DrTestActionSampleVM\UTest\UTestDrTestActionSampleVM\bin\Debug\VimService25.XmlSerializers.dll
