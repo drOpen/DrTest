@@ -1,0 +1,3 @@
+E:\GIT\DrTest\DrTestExt\DrTestExt\obj\Debug\DrTestExt.csprojResolveAssemblyReference.cache
+E:\GIT\DrTest\DrTestExt\DrTestExt\obj\Debug\DrTestExt.Res.Msg.resources
+E:\GIT\DrTest\DrTestExt\DrTestExt\obj\Debug\DrTestExt.csproj.GenerateResource.Cache
