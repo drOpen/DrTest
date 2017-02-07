@@ -31,29 +31,51 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DrData">
-      <HintPath>..\..\..\..\DrCommon\DrData\DrData\bin\Debug\DrData.dll</HintPath>
+      <HintPath>F:\DR\DrTest-master(3)\DrTest-master\DrTestExt\DrTestExt\bin\Debug\DrData.dll</HintPath>
     </Reference>
-    <Reference Include="DrTestExt, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DrTestExt">
+      <HintPath>F:\DR\DrTest-master(3)\DrTest-master\DrTestExt\DrTestExt\bin\Debug\DrTestExt.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Services3, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DrTestExt\DrTestExt\bin\Debug\DrTestExt.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Microsoft WSE\v3.0\Microsoft.Web.Services3.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="VimService25">
-      <HintPath>..\..\..\..\..\bin\vim\VimService25.dll</HintPath>
+    <Reference Include="System">
+      <Private>True</Private>
     </Reference>
-    <Reference Include="VimService25.XmlSerializers">
-      <HintPath>..\..\..\..\..\bin\vim\VimService25.XmlSerializers.dll</HintPath>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="VimService25, Version=2.5.0.0, Culture=neutral, PublicKeyToken=10980b081e887e9f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\VimService25\2.5.0.0__10980b081e887e9f\VimService25.dll</HintPath>
+    </Reference>
+    <Reference Include="VimService25.XmlSerializers, Version=2.5.0.0, Culture=neutral, PublicKeyToken=10980b081e887e9f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\VimService25.XmlSerializers\2.5.0.0__10980b081e887e9f\VimService25.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="VimService40">
       <HintPath>..\..\..\..\..\bin\vim\VimService40.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="VMware.Vim">
       <HintPath>..\..\..\..\..\bin\vim\VMware.Vim.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
