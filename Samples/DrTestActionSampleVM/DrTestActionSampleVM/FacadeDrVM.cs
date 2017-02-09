@@ -187,7 +187,17 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         /// <summary>
         /// Check Started Application
         /// </summary>
-        /// <param name="nIn"></param>
+        /// <param name="nIn">Action node contains the mandatory attributes:
+        /// <list type="bullet">
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_NAME</value></description></item>
+        /// </list> 
+        /// </param>
         /// <returns></returns>
         public DDNode VMCheckProcess(DDNode nIn)
         {
@@ -199,7 +209,8 @@ namespace DrTest.DrAction.DrTestActionSampleVM
                                                                      SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
                                                                      SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME,
                                                                      SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD,
-                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_NAME);
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME);
 
                 int retry = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_RETRY, SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_RETRY_VALUE);
                 int timeOut = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_TIMEOUT, SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_TIMEOUT_VALUE);
@@ -233,10 +244,81 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         }
 
 
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="nIn"></param>
+        /// <param name="nIn">Action node contains the mandatory attributes:
+        /// <list type="bullet">
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_PATH</value></description></item>
+        /// </list> 
+        /// </param>
+        /// <returns></returns>
+        public DDNode VMStartProcess(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_PATH,
+                                                                              SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME);
+
+                int retry = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_RETRY, SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_RETRY_VALUE);
+                int timeOut = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_TIMEOUT, SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_TIMEOUT_VALUE);
+                string arguments = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_PATH, SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_ARGUMENTS_VALUE);
+
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.StartVMApplication(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_PATH],        
+                                retry,
+                                timeOut,
+                                arguments);
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.VM_START_PROCESS_SUCCES, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_PATH], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME]));
+
+            }
+            catch (Exception e)
+            {
+
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_START_PROCESS_FAILED, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_PATH], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
+
+
+
+        }
+
+
+        /// <summary>
+        /// Function to create Virtual Switch on host
+        /// </summary>
+        /// <param name="nIn">Action node contains the mandatory attributes:
+        /// <list type="bullet">
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_SWITCH_PORT_NUM</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME</value></description></item>
+        /// </list> 
+        /// </param>
         /// <returns></returns>
         public DDNode CreateVirtualSwitchOnHost(DDNode nIn)
         {
@@ -270,9 +352,18 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         }
 
         /// <summary>
-        /// 
+        /// Remove Virtual switch on host
         /// </summary>
-        /// <param name="nIn"></param>
+        /// <param name="nIn">Action node contains the mandatory attributes:
+        /// <list type="bullet">
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_SWITCH_PORT_NUM</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME</value></description></item>
+        /// </list> 
+        /// </param>
         /// <returns></returns>
         public DDNode RemoveVirtualSwitchOnHost(DDNode nIn)
         {
@@ -307,9 +398,18 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
 
         /// <summary>
-        /// 
+        /// Port group wich will be used on switch
         /// </summary>
-        /// <param name="nIn"></param>
+        /// <param name="nIn">Action node contains the mandatory attributes:
+        /// <list type="bullet">
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME</value></description></item>
+        /// </list> 
+        /// </param>
         /// <returns></returns>
         public DDNode CreatePortGrpOnSwitch(DDNode nIn)
         {
@@ -343,9 +443,18 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         }
 
         /// <summary>
-        /// 
+        /// Remove port group on switch
         /// </summary>
-        /// <param name="nIn"></param>
+        /// <param name="nIn">Action node contains the mandatory attributes:
+        /// <list type="bullet">
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_SWITCH_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME</value></description></item>
+        /// </list> 
+        /// </param>
         /// <returns></returns>
         public DDNode RemovePortGrpOnSwitch(DDNode nIn)
         {
@@ -380,9 +489,17 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
 
         /// <summary>
-        /// 
+        /// Function to change Network adapters portgroup
         /// </summary>
-        /// <param name="nIn"></param>
+        /// <param name="nIn">Action node contains the mandatory attributes:
+        /// <list type="bullet">
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME</value></description></item>
+        /// </list> 
+        /// </param>
         /// <returns></returns>
         public DDNode ChangeVMNicPortGrp(DDNode nIn)
         {
@@ -394,13 +511,14 @@ namespace DrTest.DrAction.DrTestActionSampleVM
                                                                       SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
                                                                       SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
                                                                       SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME,
-                                                                      SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME);
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME,
+                                                                                                                                            SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME);
 
 
           
                 var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
                 vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
-                vm.ChangeVMNicPortGroup(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME]);
+                vm.ChangeVMNicPortGroup(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME]);
                 vm.Logout();
                 return nOut.SetActionResultStatusOK(string.Format(Msg.VM_NIC_CHANGE_SUCCESS, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME]));
             }
@@ -419,9 +537,17 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
 
         /// <summary>
-        /// 
+        /// VM delete from inventory
         /// </summary>
-        /// <param name="nIn"></param>
+        /// <param name="nIn">Action node contains the mandatory attributes:
+        /// <list type="bullet">
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME</value></description></item>
+        /// </list> 
+        /// </param>
         /// <returns></returns>
         public DDNode VMDestroyVM(DDNode nIn)
         {

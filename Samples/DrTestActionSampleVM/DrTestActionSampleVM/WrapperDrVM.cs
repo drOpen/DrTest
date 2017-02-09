@@ -472,10 +472,13 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         /// </summary>
         /// <param name="vmName">Virtual machine Name</param>
         /// <param name="portGroup">Port Group Name</param>
-        internal virtual void ChangeVMNicPortGroup(string vmName, string portGroup)
+        internal virtual void ChangeVMNicPortGroup(string vmName, string portGroup, string hostName)
         {
             var vm = GetVirtualMachine(vmName);
             if (vm == null) throw new VMDoesntExistExeption(vmName);
+            var host = GetHostSystem(hostName);
+            if (host == null) throw new HostDoesntExistExeption(hostName);
+            if (!CheckerDoesHostIncludeVM(vm, host)) throw new HostDoesNotContainVM(vmName, hostName);
             VirtualMachineConfigSpec vmConfigSpec = new VirtualMachineConfigSpec();
             VirtualDeviceConfigSpec[] nicSpec = ChangeAllNetworkAdaptersInVMConfig(vm, portGroup);
             vmConfigSpec.DeviceChange = nicSpec;
@@ -561,6 +564,49 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             }
             throw new ApplicationDoNotFoundOnVM(applicationName, vmName, attempts, attemptsTimeOut);
         }
+
+
+
+        /// <summary>
+        /// Function to start Application on VM
+        /// </summary>
+        /// <param name="vmName">Virtual machine Name</param>
+        /// <param name="guesLogin">Guest Login</param>
+        /// <param name="guestPwd">Guest password</param>
+        /// <param name="applicationPath">Path to applicqations you want to start</param>
+        /// <param name="attempts">retry to find VM tool</param>
+        /// <param name="attemptsTimeOut">Attempts timeout</param>
+        /// <param name="arguments">Agruments to start with Application</param>
+        internal virtual void StartVMApplication(string vmName, string guesLogin, string guestPwd, string applicationPath, int attempts, int attemptsTimeOut, string arguments)
+        {
+            VirtualMachine vm = null;
+            for (int j = 0; j <= attempts; j++)
+            {
+                vm = GetVirtualMachine(vmName);
+                if (vm == null) throw new VMDoesntExistExeption(vmName);
+                if (Convert.ToString(vm.Guest.ToolsStatus.Value) == SchemaEPGuestStates.VM_TOOL_STATE_OK) break;
+                Thread.Sleep((attemptsTimeOut * 1000));
+            }
+            if (Convert.ToString(vm.Guest.ToolsStatus.Value) == SchemaEPGuestStates.VM_TOOL_STATE_NOT_STARTED) throw new CannotConnectToAgent(vmName, attempts, attemptsTimeOut);
+            NamePasswordAuthentication auth = new NamePasswordAuthentication();
+            auth.Username = guesLogin;
+            auth.Password = guestPwd;
+            auth.InteractiveSession = false;
+
+            GuestProgramSpec progSpec = new GuestProgramSpec();
+            progSpec.ProgramPath = applicationPath;
+            progSpec.Arguments = arguments;
+
+            vm = GetVirtualMachine(vmName);
+            if (vm == null) throw new VMDoesntExistExeption(vmName);
+            var GuestProcessManager = new VMware.Vim.GuestProcessManager(vm.Client, new VMware.Vim.ManagedObjectReference("GuestProcessManager-guestOperationsProcessManager"));
+            GuestProcessManager.StartProgramInGuest(vm.MoRef, auth, progSpec);
+        }
+
+
+
+
+
 
         /// <summary>
         /// Function to delete Virtual machine

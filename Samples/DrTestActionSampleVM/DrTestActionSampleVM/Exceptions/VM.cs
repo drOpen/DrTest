@@ -233,7 +233,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Exceptions
         /// <param name="retry"></param>
         /// <param name="timeout"></param>
 
-        public ApplicationDoNotFoundOnVM(string application, string VMname, int retry, int timeout) : base(VMname, string.Format(Res.Msg.APPLICATION_DO_NOT_STATED, application, VMname, retry, timeout)) { }
+        public ApplicationDoNotFoundOnVM(string application, string VMname, int retry, int timeout) : base(VMname, string.Format(Res.Msg.APPLICATION_DO_NOT_FOUND_ON_VM, application, VMname, retry, timeout)) { }
         /// <summary>
         /// Initializes a new instance of the ApplicationDoNotFoundOnVM class with the default error message and a reference to the inner exception that is the cause of this exception.
         /// </summary>
@@ -242,7 +242,6 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Exceptions
         /// <param name="retry"></param>
         /// <param name="timeout"></param>
         /// <param name="innerException"></param>
-        public ApplicationDoNotFoundOnVM(string application, string VMname, int retry, int timeout, Exception innerException) : base(VMname, string.Format(Res.Msg.APPLICATION_DO_NOT_STATED, application, VMname, retry, timeout), innerException) { }
+        public ApplicationDoNotFoundOnVM(string application, string VMname, int retry, int timeout, Exception innerException) : base(VMname, string.Format(Res.Msg.APPLICATION_DO_NOT_FOUND_ON_VM, application, VMname, retry, timeout), innerException) { }
     }
-
 }

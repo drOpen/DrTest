@@ -32,34 +32,37 @@
   <ItemGroup>
     <Reference Include="DrData">
       <HintPath>F:\DR\DrTest-master(3)\DrTest-master\DrTestExt\DrTestExt\bin\Debug\DrData.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DrTestExt">
       <HintPath>F:\DR\DrTest-master(3)\DrTest-master\DrTestExt\DrTestExt\bin\Debug\DrTestExt.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Services3, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Microsoft WSE\v3.0\Microsoft.Web.Services3.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Core">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.Services">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml.Linq">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Data">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VimService25, Version=2.5.0.0, Culture=neutral, PublicKeyToken=10980b081e887e9f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -63,9 +63,18 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         /// <summary>
         ///   Looks up a localized string similar to Cannot find Application &apos;{0}&apos; on VM &apos;{1}&apos; with retryes &apos;{2}&apos; and timeout &apos;{3}&apos;..
         /// </summary>
-        internal static string APPLICATION_DO_NOT_STATED {
+        internal static string APPLICATION_DO_NOT_FOUND_ON_VM {
             get {
-                return ResourceManager.GetString("APPLICATION_DO_NOT_STATED", resourceCulture);
+                return ResourceManager.GetString("APPLICATION_DO_NOT_FOUND_ON_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find Application path &apos;{0}&apos; on VM &apos;{1}&apos;..
+        /// </summary>
+        internal static string APPLICATION_PATH_DO_NOT_FOUND_ON_VM {
+            get {
+                return ResourceManager.GetString("APPLICATION_PATH_DO_NOT_FOUND_ON_VM", resourceCulture);
             }
         }
         
@@ -327,6 +336,24 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         internal static string VM_REMOVE_VM_SUCCESS {
             get {
                 return ResourceManager.GetString("VM_REMOVE_VM_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed Start Application with Application Path &apos;{0} on &apos;Virtual Machine &apos;{1}&apos;.  Error: &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_START_PROCESS_FAILED {
+            get {
+                return ResourceManager.GetString("VM_START_PROCESS_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully Started Application with Application Path &apos;{0} on &apos;Virtual Machine &apos;{1}&apos;..
+        /// </summary>
+        internal static string VM_START_PROCESS_SUCCES {
+            get {
+                return ResourceManager.GetString("VM_START_PROCESS_SUCCES", resourceCulture);
             }
         }
         

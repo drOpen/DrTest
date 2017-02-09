@@ -52,6 +52,13 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
         public const string ATTRIBUTE_VM_ATTEMPTS_TIMEOUT = "TimeOutOfAttemps";
         public const int ATTRIBUTE_VM_ATTEMPTS_TIMEOUT_VALUE = 20;
+
+        public const string ATTRIBUTE_VM_APPLICATION_PATH = "AppliactionPATH";
+        public const string ATTRIBUTE_VM_APPLICATION_ARGUMENTS = "Arguments";
+        public const string ATTRIBUTE_VM_APPLICATION_ARGUMENTS_VALUE = "";
+
+
+
     }
 
     public class SchemaEPGuestStates
@@ -59,6 +66,9 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         public const string VM_TOOL_STATE_OK = "toolsOk";
         public const string VM_TOOL_STATE_NOT_STARTED = "toolsNotRunning";
     }
+
+
+
 
 
 }

@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="APPLICATION_DO_NOT_STATED" xml:space="preserve">
+  <data name="APPLICATION_DO_NOT_FOUND_ON_VM" xml:space="preserve">
     <value>Cannot find Application '{0}' on VM '{1}' with retryes '{2}' and timeout '{3}'.</value>
+  </data>
+  <data name="APPLICATION_PATH_DO_NOT_FOUND_ON_VM" xml:space="preserve">
+    <value>Cannot find Application path '{0}' on VM '{1}'.</value>
   </data>
   <data name="CANNOT_CONNECT_TO_AGENT" xml:space="preserve">
     <value>Cannot connect to agent on VM '{0}'. Try to do it with retryes '{1}' and timeout '{2}'.</value>
@@ -206,6 +209,12 @@
   </data>
   <data name="VM_REMOVE_VM_SUCCESS" xml:space="preserve">
     <value>Successfully Clone Virtual Machine '{0}'.</value>
+  </data>
+  <data name="VM_START_PROCESS_FAILED" xml:space="preserve">
+    <value>Failed Start Application with Application Path '{0} on 'Virtual Machine '{1}'.  Error: '{2}'.</value>
+  </data>
+  <data name="VM_START_PROCESS_SUCCES" xml:space="preserve">
+    <value>Successfully Started Application with Application Path '{0} on 'Virtual Machine '{1}'.</value>
   </data>
   <data name="VM_SUCCESS_CHANGE_POWER_STATUS" xml:space="preserve">
     <value>Successfully '{0}' the virtual machine '{1}'.</value>
