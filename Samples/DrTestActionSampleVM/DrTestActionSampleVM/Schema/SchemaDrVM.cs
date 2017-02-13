@@ -56,9 +56,8 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         public const string ATTRIBUTE_VM_APPLICATION_PATH = "AppliactionPATH";
         public const string ATTRIBUTE_VM_APPLICATION_ARGUMENTS = "Arguments";
         public const string ATTRIBUTE_VM_APPLICATION_ARGUMENTS_VALUE = "";
-
-
-
+        public const string ATTRIBUTE_VM_COPY_FILE_SOURCE = "SourceFilePath";
+        public const string ATTRIBUTE_VM_COPY_FILE_DESTINATION = "DestinationFilePath";
     }
 
     public class SchemaEPGuestStates

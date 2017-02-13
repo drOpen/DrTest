@@ -246,7 +246,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
 
         /// <summary>
-        /// 
+        /// Function to start required procces on requiered VM
         /// </summary>
         /// <param name="nIn">Action node contains the mandatory attributes:
         /// <list type="bullet">
@@ -300,10 +300,71 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             {
                 nOut.SetActionResultNodeEndTime();
             }
-
-
-
         }
+
+
+
+        /// <summary>
+        /// Funbction to copy file from source to destination on required VM
+        /// </summary>
+        /// <param name="nIn">Action node contains the mandatory attributes:
+        /// <list type="bullet">
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_COPY_FILE_SOURCE</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_COPY_FILE_DESTINATION</value></description></item>
+        /// </list> 
+        /// </param>
+        /// <returns></returns>
+        public DDNode VMCopyFile(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_COPY_FILE_SOURCE,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_COPY_FILE_DESTINATION,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME);
+
+
+
+                int retry = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_RETRY, SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_RETRY_VALUE);
+                int timeOut = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_TIMEOUT, SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_TIMEOUT_VALUE);
+
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.CopyFileToGuestVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_COPY_FILE_SOURCE],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_COPY_FILE_DESTINATION],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME],
+                                retry,
+                                timeOut);
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.VM_COPY_FILE_SUCCES, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_COPY_FILE_SOURCE], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_COPY_FILE_DESTINATION], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME]));
+
+            }
+            catch (Exception e)
+            {
+
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_COPY_FILE_FAILED, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_COPY_FILE_SOURCE], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_COPY_FILE_DESTINATION], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
+        }
+
 
 
         /// <summary>
@@ -579,6 +640,9 @@ namespace DrTest.DrAction.DrTestActionSampleVM
                 nOut.SetActionResultNodeEndTime();
             }
         }
+
+
+
 
 
 

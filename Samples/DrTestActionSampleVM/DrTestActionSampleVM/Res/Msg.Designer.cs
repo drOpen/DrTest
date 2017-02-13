@@ -250,6 +250,24 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to copy file &apos;{0}&apos; to destination &apos;{1}&apos; on VM &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_COPY_FILE_FAILED {
+            get {
+                return ResourceManager.GetString("VM_COPY_FILE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully copy file &apos;{0}&apos; to destination &apos;{1}&apos; on VM &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_COPY_FILE_SUCCES {
+            get {
+                return ResourceManager.GetString("VM_COPY_FILE_SUCCES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The virtual machine &apos;{0}&apos; could not be found..
         /// </summary>
         internal static string VM_DOESNT_EXIST {

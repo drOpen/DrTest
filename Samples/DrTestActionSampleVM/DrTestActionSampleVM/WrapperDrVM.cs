@@ -35,6 +35,7 @@ using VMware.Vim;
 using DrTest.DrAction.DrTestActionSampleVM;
 using DrTest.DrAction.DrTestActionSampleVM.Res;
 using System.Threading;
+using System.IO;
 
 namespace DrTest.DrAction.DrTestActionSampleVM
 {
@@ -526,12 +527,12 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         /// Function for Checking state of started virtual machine. Will wait for a while. until tool and required application is started.
         /// </summary>
         /// <param name="vmName">Virtual Machine Name</param>
-        /// <param name="guesLogin">Guest Login / credentials</param>
+        /// <param name="guestLogin">Guest Login / credentials</param>
         /// <param name="guestPwd">Guest Password / credentials</param>
         /// <param name="applicationName">Applection "EXPLORER>EXE" or something else</param> 
         /// <param name="attempts">Count of retry</param>
         /// <param name="attemptsTimeOut">Time out in Second. To wait between attempts </param>
-        internal virtual void CheckVMState(string vmName, string guesLogin, string guestPwd, string applicationName, int attempts, int attemptsTimeOut)
+        internal virtual void CheckVMState(string vmName, string guestLogin, string guestPwd, string applicationName, int attempts, int attemptsTimeOut)
         {
             VirtualMachine vm = null;
             for (int j = 0; j <= attempts; j++)
@@ -543,7 +544,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             }
             if (Convert.ToString(vm.Guest.ToolsStatus.Value) == SchemaEPGuestStates.VM_TOOL_STATE_NOT_STARTED) throw new CannotConnectToAgent(vmName, attempts, attemptsTimeOut);
             NamePasswordAuthentication auth = new NamePasswordAuthentication();
-            auth.Username = guesLogin;
+            auth.Username = guestLogin;
             auth.Password = guestPwd;
             auth.InteractiveSession = false;
          
@@ -571,13 +572,13 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         /// Function to start Application on VM
         /// </summary>
         /// <param name="vmName">Virtual machine Name</param>
-        /// <param name="guesLogin">Guest Login</param>
+        /// <param name="guestLogin">Guest Login</param>
         /// <param name="guestPwd">Guest password</param>
         /// <param name="applicationPath">Path to applicqations you want to start</param>
         /// <param name="attempts">retry to find VM tool</param>
         /// <param name="attemptsTimeOut">Attempts timeout</param>
         /// <param name="arguments">Agruments to start with Application</param>
-        internal virtual void StartVMApplication(string vmName, string guesLogin, string guestPwd, string applicationPath, int attempts, int attemptsTimeOut, string arguments)
+        internal virtual void StartVMApplication(string vmName, string guestLogin, string guestPwd, string applicationPath, int attempts, int attemptsTimeOut, string arguments)
         {
             VirtualMachine vm = null;
             for (int j = 0; j <= attempts; j++)
@@ -589,7 +590,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             }
             if (Convert.ToString(vm.Guest.ToolsStatus.Value) == SchemaEPGuestStates.VM_TOOL_STATE_NOT_STARTED) throw new CannotConnectToAgent(vmName, attempts, attemptsTimeOut);
             NamePasswordAuthentication auth = new NamePasswordAuthentication();
-            auth.Username = guesLogin;
+            auth.Username = guestLogin;
             auth.Password = guestPwd;
             auth.InteractiveSession = false;
 
@@ -604,9 +605,55 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         }
 
 
+        /// <summary>
+        /// Function to copy file to destination on VM.
+        /// </summary>
+        /// <param name="vmName">Virtual machine Name</param>
+        /// <param name="guestLogin">Guest Login</param>
+        /// <param name="guestPwd">Guest password</param>
+        /// <param name="pathToFileOnHost">Path to Sourcce file</param>
+        /// <param name="pathToFileOnVM">Path to Destination file on VM, will be copy to</param>
+        /// <param name="attempts">retry to find VM tool</param>
+        /// <param name="attemptsTimeOut">Attempts timeout</param>
+        /// <param name="hostName">Host where running switch</param>
+        internal virtual void CopyFileToGuestVM(string vmName, string guestLogin, string guestPwd, string pathToFileOnHost, string pathToFileOnVM, string hostName, int attempts, int attemptsTimeOut)
+        {
+            VirtualMachine vm = null;
+            for (int j = 0; j <= attempts; j++)
+            {
+                vm = GetVirtualMachine(vmName);
+                if (vm == null) throw new VMDoesntExistExeption(vmName);
+                if (Convert.ToString(vm.Guest.ToolsStatus.Value) == SchemaEPGuestStates.VM_TOOL_STATE_OK) break;
+                Thread.Sleep((attemptsTimeOut * 1000));
+            }
+            if (Convert.ToString(vm.Guest.ToolsStatus.Value) == SchemaEPGuestStates.VM_TOOL_STATE_NOT_STARTED) throw new CannotConnectToAgent(vmName, attempts, attemptsTimeOut);
+
+            ManagedObjectReference MoRefFileManager = new ManagedObjectReference("guestOperationsFileManager");
+            GuestFileManager VMFileManager = new GuestFileManager(vClient, MoRefFileManager);
+            ManagedObjectReference MoRefAuthManager = new ManagedObjectReference("guestOperationsAuthManager");
+            GuestAuthManager VMAuthManager = new GuestAuthManager(vClient, MoRefAuthManager);
+
+            NamePasswordAuthentication auth = new NamePasswordAuthentication();
+            auth.Username = guestLogin;
+            auth.Password = guestPwd;
+            auth.InteractiveSession = false;
+
+            System.IO.FileInfo FileToTransfer = new System.IO.FileInfo(pathToFileOnHost);
+            GuestFileAttributes GFA = new GuestFileAttributes()
+            {
+                AccessTime = FileToTransfer.LastAccessTimeUtc,
+                ModificationTime = FileToTransfer.LastWriteTimeUtc
+            };
+
+                string TransferOutput = VMFileManager.InitiateFileTransferToGuest(vm.MoRef, auth, pathToFileOnVM, GFA, FileToTransfer.Length, false);
 
 
+            using (var web = new System.Net.WebClient())
+            {
+                web.UploadFile(TransferOutput.Replace("*", hostName), "PUT", pathToFileOnHost);
+            }
 
+        }
 
         /// <summary>
         /// Function to delete Virtual machine

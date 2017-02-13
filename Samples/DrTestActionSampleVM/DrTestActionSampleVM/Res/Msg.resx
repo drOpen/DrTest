@@ -180,6 +180,12 @@
   <data name="VM_CLONE_VM_SUCCES" xml:space="preserve">
     <value>Successfully Clone Virtual Machine '{0}' with new name '{1}'.</value>
   </data>
+  <data name="VM_COPY_FILE_FAILED" xml:space="preserve">
+    <value>Failed to copy file '{0}' to destination '{1}' on VM '{2}'.</value>
+  </data>
+  <data name="VM_COPY_FILE_SUCCES" xml:space="preserve">
+    <value>Successfully copy file '{0}' to destination '{1}' on VM '{2}'.</value>
+  </data>
   <data name="VM_DOESNT_EXIST" xml:space="preserve">
     <value>The virtual machine '{0}' could not be found.</value>
   </data>

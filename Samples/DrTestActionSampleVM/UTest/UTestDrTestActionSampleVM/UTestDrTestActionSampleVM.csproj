@@ -36,14 +36,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DrData">
-      <HintPath>..\..\..\..\..\..\..\DrData.dll</HintPath>
+      <HintPath>D:\sample\DrCommon\DrData\DrData\bin\Debug\DrData.dll</HintPath>
     </Reference>
     <Reference Include="DrTestActionSampleVM, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\DrTestActionSampleVM\bin\Debug\DrTestActionSampleVM.dll</HintPath>
     </Reference>
     <Reference Include="DrTestExt">
-      <HintPath>..\..\..\..\..\..\..\DrTestExt.dll</HintPath>
+      <HintPath>F:\DR\DrTest-master(3)\DrTest-master\DrTestExt\DrTestExt\bin\Debug\DrTestExt.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
