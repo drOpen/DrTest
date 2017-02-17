@@ -154,6 +154,42 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Exceptions
     }
 
 
+
+    /// </summary>
+    public class ResourcePoolDoesntExistExeption : VMException
+    {
+        /// <summary>
+        /// Initializes a new instance of the HostDoesntExistExeption class with the default error message.
+        /// </summary>
+        /// <param name="name"></param>
+        public ResourcePoolDoesntExistExeption(string name) : base(name, string.Format(Res.Msg.RESOURCE_POOL_DOESNT_EXIST, name)) { }
+        /// <summary>
+        /// Initializes a new instance of the HostDoesntExistExeption class with the default error message and a reference to the inner exception that is the cause of this exception.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="innerException"></param>
+        public ResourcePoolDoesntExistExeption(string name, Exception innerException) : base(name, string.Format(Res.Msg.RESOURCE_POOL_DOESNT_EXIST, name), innerException) { }
+    }
+
+
+
+    /// </summary>
+    public class ResourcePoolDoesNotContainVMExeption : VMException
+    {
+        /// <summary>
+        /// Initializes a new instance of the HostDoesntExistExeption class with the default error message.
+        /// </summary>
+        /// <param name="name"></param>
+        public ResourcePoolDoesNotContainVMExeption(string RPName,string vmName) : base(RPName, string.Format(Res.Msg.RESOUREC_POOL_DOES_NOT_CONTAIN_VM, RPName, vmName)) { }
+        /// <summary>
+        /// Initializes a new instance of the HostDoesntExistExeption class with the default error message and a reference to the inner exception that is the cause of this exception.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="innerException"></param>
+        public ResourcePoolDoesNotContainVMExeption(string RPName, string vmName, Exception innerException) : base(RPName, string.Format(Res.Msg.RESOUREC_POOL_DOES_NOT_CONTAIN_VM, RPName, vmName), innerException) { }
+    }
+
+
     /// <summary>
     /// Exception - describes exception when the specified virtual machine does not have required snapshot.
     /// </summary>

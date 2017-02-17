@@ -37,7 +37,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         public const string ATTRIBUTE_NAME_USER_NAME = "UserName";
         public const string ATTRIBUTE_NAME_USER_PWD = "Pwd";
         public const string ATTRIBUTE_NAME_VM_NAME = "VMName";
-        public const string ATTRIBUTE_NEW_NAME_VM_NAME = "NewVMName";
+        public const string ATTRIBUTE_OLD_NAME_VM_NAME = "OldVMName";
         public const string ATTRIBUTE_SWITCH_NAME = "SwitchName";
         public const string ATTRIBUTE_HOST_NAME = "HostName";
         public const string ATTRIBUTE_SWITCH_PORT_NUM = "NumberOfPorts";
@@ -48,16 +48,22 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         public const string ATTRIBUTE_VM_GUEST_LOGIN_PWD = "Password";
         public const string ATTRIBUTE_VM_APPLICATION_NAME = "Application";
         public const string ATTRIBUTE_VM_ATTEMPTS_RETRY = "Attemps";
-        public const int ATTRIBUTE_VM_ATTEMPTS_RETRY_VALUE = 3;
+        public const int ATTRIBUTE_VM_ATTEMPTS_RETRY_VALUE = 10;
 
         public const string ATTRIBUTE_VM_ATTEMPTS_TIMEOUT = "TimeOutOfAttemps";
-        public const int ATTRIBUTE_VM_ATTEMPTS_TIMEOUT_VALUE = 20;
+        public const int ATTRIBUTE_VM_ATTEMPTS_TIMEOUT_VALUE = 60;
 
         public const string ATTRIBUTE_VM_APPLICATION_PATH = "AppliactionPATH";
         public const string ATTRIBUTE_VM_APPLICATION_ARGUMENTS = "Arguments";
         public const string ATTRIBUTE_VM_APPLICATION_ARGUMENTS_VALUE = "";
         public const string ATTRIBUTE_VM_COPY_FILE_SOURCE = "SourceFilePath";
         public const string ATTRIBUTE_VM_COPY_FILE_DESTINATION = "DestinationFilePath";
+
+
+        public const string ATTRIBUTE_RESOURCE_POOL_SOURCE = "ResorcePoolSource";
+
+        public const string ATTRIBUTE_NEW_RESOURCE_POOL_NAME = "ResorcePoolName";
+
     }
 
     public class SchemaEPGuestStates

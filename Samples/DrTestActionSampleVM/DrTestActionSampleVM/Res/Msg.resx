@@ -153,6 +153,12 @@
   <data name="REMOVE_VIRTUAL_SWITCH_SUCCESS" xml:space="preserve">
     <value>Successfully remove switch '{0}' on host '{1}'.</value>
   </data>
+  <data name="RESOURCE_POOL_DOESNT_EXIST" xml:space="preserve">
+    <value>Resource poll '{0}' could not be found.</value>
+  </data>
+  <data name="RESOUREC_POOL_DOES_NOT_CONTAIN_VM" xml:space="preserve">
+    <value>Resource pool '{0}' and host '{1}' have different parent.</value>
+  </data>
   <data name="SNAPSHOT_DOES_NOT_EXIST" xml:space="preserve">
     <value>Clonning VM '{0}' does not have Snapshot with name '{1}'.</value>
   </data>
@@ -189,6 +195,12 @@
   <data name="VM_DOESNT_EXIST" xml:space="preserve">
     <value>The virtual machine '{0}' could not be found.</value>
   </data>
+  <data name="VM_DOES_NOT_CONTAIN_VM" xml:space="preserve">
+    <value>Resource pool '{0}' does not contain vm '{1}'</value>
+  </data>
+  <data name="VM_FILED_CREAT_RESOURCE_POOL" xml:space="preserve">
+    <value>Failed when creating resource poll '{0}'  in existing resource pool '{1}'.  Error: '{2}'.</value>
+  </data>
   <data name="VM_NIC_CHANGE_FAILED" xml:space="preserve">
     <value>Failed to change NicPortGroup on Virtual Machine '{0}' to  '{1}'.</value>
   </data>
@@ -224,5 +236,8 @@
   </data>
   <data name="VM_SUCCESS_CHANGE_POWER_STATUS" xml:space="preserve">
     <value>Successfully '{0}' the virtual machine '{1}'.</value>
+  </data>
+  <data name="VM_SUCCESS_CREAT_RESOURCE_POOL" xml:space="preserve">
+    <value>Successfully create resource pool '{0}' in existing resource pool '{1}'.</value>
   </data>
 </root>

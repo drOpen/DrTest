@@ -169,6 +169,24 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resource poll &apos;{0}&apos; could not be found..
+        /// </summary>
+        internal static string RESOURCE_POOL_DOESNT_EXIST {
+            get {
+                return ResourceManager.GetString("RESOURCE_POOL_DOESNT_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resource pool &apos;{0}&apos; and host &apos;{1}&apos; have different parent..
+        /// </summary>
+        internal static string RESOUREC_POOL_DOES_NOT_CONTAIN_VM {
+            get {
+                return ResourceManager.GetString("RESOUREC_POOL_DOES_NOT_CONTAIN_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clonning VM &apos;{0}&apos; does not have Snapshot with name &apos;{1}&apos;..
         /// </summary>
         internal static string SNAPSHOT_DOES_NOT_EXIST {
@@ -268,11 +286,29 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resource pool &apos;{0}&apos; does not contain vm &apos;{1}&apos;.
+        /// </summary>
+        internal static string VM_DOES_NOT_CONTAIN_VM {
+            get {
+                return ResourceManager.GetString("VM_DOES_NOT_CONTAIN_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The virtual machine &apos;{0}&apos; could not be found..
         /// </summary>
         internal static string VM_DOESNT_EXIST {
             get {
                 return ResourceManager.GetString("VM_DOESNT_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed when creating resource poll &apos;{0}&apos;  in existing resource pool &apos;{1}&apos;.  Error: &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_FILED_CREAT_RESOURCE_POOL {
+            get {
+                return ResourceManager.GetString("VM_FILED_CREAT_RESOURCE_POOL", resourceCulture);
             }
         }
         
@@ -381,6 +417,15 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         internal static string VM_SUCCESS_CHANGE_POWER_STATUS {
             get {
                 return ResourceManager.GetString("VM_SUCCESS_CHANGE_POWER_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully create resource pool &apos;{0}&apos; in existing resource pool &apos;{1}&apos;..
+        /// </summary>
+        internal static string VM_SUCCESS_CREAT_RESOURCE_POOL {
+            get {
+                return ResourceManager.GetString("VM_SUCCESS_CREAT_RESOURCE_POOL", resourceCulture);
             }
         }
     }

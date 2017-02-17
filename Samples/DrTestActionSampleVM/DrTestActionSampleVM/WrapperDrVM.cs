@@ -333,14 +333,14 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         /// <summary>
         /// Function of Clonning Virtual Machine
         /// </summary>
-        /// <param name="VMName">Target VM Name</param>
+        /// <param name="oldVMName">old VM Name</param>
         /// <param name="newVMName">New VM Name</param>
         /// <param name="hostName">Host on which old VM running</param>
         /// <param name="targetSnapshot">Snapshot from which will be create Clone VM</param>
-        internal virtual void CloneVM(string VMName, string newVMName, string hostName, string targetSnapshot)
+        internal virtual void CloneVM(string oldVMName, string newVMName, string hostName, string targetSnapshot, string resourcePool)
         {
-            var vm = GetVirtualMachine(VMName);
-            if (vm == null) throw new VMDoesntExistExeption(VMName);
+            var vm = GetVirtualMachine(oldVMName);
+            if (vm == null) throw new VMDoesntExistExeption(oldVMName);
             ManagedObjectReference location = new ManagedObjectReference();
             location.Type = vm.Parent.Type;
             location.Value = vm.Parent.Value;
@@ -349,8 +349,8 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             if (host == null) throw new HostDoesntExistExeption(hostName);
 
 
-            if (!CheckerDoesHostIncludeVM(vm, host)) throw new HostDoesNotContainVM(VMName, hostName);
-            if (vm.Snapshot == null) throw new VMSnapshotDoesntExistExeption(targetSnapshot,VMName);
+            if (!CheckerDoesHostIncludeVM(vm, host)) throw new HostDoesNotContainVM(oldVMName, hostName);
+            if (vm.Snapshot == null) throw new VMSnapshotDoesntExistExeption(targetSnapshot,oldVMName);
             VirtualMachineSnapshotTree[] rootSnapshotList = vm.Snapshot.RootSnapshotList;
 
             ManagedObjectReference snapshot = FindAllVMSnapshotsByName(rootSnapshotList, targetSnapshot, vm);
@@ -358,6 +358,11 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
             VirtualMachineRelocateSpec relocSpec = new VirtualMachineRelocateSpec();
             relocSpec.DiskMoveType = VirtualMachineRelocateDiskMoveOptions.createNewChildDiskBacking.ToString();
+
+            var resorcePoolMO = GetRP(resourcePool);
+            if (resorcePoolMO == null) throw new ResourcePoolDoesntExistExeption(resourcePool);
+  //          if (resorcePoolMO.Parent == vm.ResourcePool) throw new ResourcePoolDoesNotContainVMExeption(resourcePool, oldVMName);
+            relocSpec.Pool = resorcePoolMO.MoRef;
 
             VirtualMachineCloneSpec cloneSpec = new VirtualMachineCloneSpec();
             cloneSpec.PowerOn = false;
@@ -377,7 +382,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         /// <param name="hostName">Host on which will be create switch </param>
         /// <param name="switchName">Switch name</param>
         /// <param name="portNum">Number of ports on Switch</param>
-        internal virtual void CreateVirtualSwitch(string hostName, string switchName, string portNum)
+        internal virtual void CreateVirtualSwitch(string hostName, string switchName, int portNum)
         {
             var host = GetHostSystem(hostName);
             if (host == null) throw new HostDoesntExistExeption(hostName);
@@ -390,7 +395,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
             HostNetworkSystem _switch = new HostNetworkSystem(vClient, dcmor);
             HostVirtualSwitchSpec spec = new HostVirtualSwitchSpec();
-            spec.NumPorts = Convert.ToInt32(portNum);
+            spec.NumPorts = portNum;
             _switch.AddVirtualSwitch(switchName, spec);
         }
 
@@ -558,7 +563,11 @@ namespace DrTest.DrAction.DrTestActionSampleVM
                 var processInfo = GuestProcessManager.ListProcessesInGuest(vm.MoRef, auth, pids);
                     foreach (var uno in processInfo)
                     {
-                    if ((uno.Name.ToUpper()) == (applicationName.ToUpper())) count++; break;
+                       if (uno.Name.ToUpper() == applicationName.ToUpper())
+                        {
+                          count++;
+                          break;
+                        }
                     }
                 if (count == 3) return;
                 Thread.Sleep((attemptsTimeOut * 1000));
@@ -604,6 +613,44 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             GuestProcessManager.StartProgramInGuest(vm.MoRef, auth, progSpec);
         }
 
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resPoolSource">Source resource pool name</param>
+        /// <param name="resPoolName"></param>
+        /// <param name="hostName">Host name of server</param>
+        internal virtual void HostCreateResourcePool(string resPoolSource, string resPoolName, string hostName)
+        {
+            var resorcePool = GetRP(resPoolSource);
+            if (resorcePool == null) throw new ResourcePoolDoesntExistExeption(resPoolSource);
+            //   var vm = GetVirtualMachine(VMname);
+            //   if (vm == null) throw new VMDoesntExistExeption(VMname);
+            //   if (resorcePool.MoRef != vm.ResourcePool) throw new ResourcePoolDoesNotContainVMExeption(resPoolSource, VMname);
+
+            var host = GetHostSystem(hostName);
+            if (host == null) throw new HostDoesntExistExeption(hostName);
+            if (host.Parent == resorcePool.Owner) throw new ResourcePoolDoesNotContainVMExeption(resPoolSource, hostName); // I am not shoure in this line
+
+
+            ResourceConfigSpec resourceSpec = new ResourceConfigSpec();
+            resourceSpec.CpuAllocation = resorcePool.Config.CpuAllocation;
+            resourceSpec.MemoryAllocation = resorcePool.Config.MemoryAllocation;
+            ResourcePool nold = new ResourcePool(vClient, resorcePool.MoRef);
+            nold.CreateResourcePool(resPoolName, resourceSpec);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vmName"></param>
+        /// <returns></returns>
+        protected virtual ResourcePool GetRP(string vmName)
+        {
+            return FindEntityViewByName<ResourcePool>(vmName);
+        }
 
         /// <summary>
         /// Function to copy file to destination on VM.

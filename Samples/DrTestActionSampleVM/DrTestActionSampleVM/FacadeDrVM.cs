@@ -159,20 +159,21 @@ namespace DrTest.DrAction.DrTestActionSampleVM
                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME,
-                                                                    SchemaDrTestActionVM.ATTRIBUTE_NEW_NAME_VM_NAME,
+                                                                    SchemaDrTestActionVM.ATTRIBUTE_OLD_NAME_VM_NAME,
                                                                     SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME,
-                                                                    SchemaDrTestActionVM.ATTRIBUTE_VM_SNAPSHOT_NAME);
+                                                                    SchemaDrTestActionVM.ATTRIBUTE_VM_SNAPSHOT_NAME,
+                                                                    SchemaDrTestActionVM.ATTRIBUTE_NEW_RESOURCE_POOL_NAME);
 
                 var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
                 vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
-                vm.CloneVM((nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME]), nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NEW_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_SNAPSHOT_NAME]);
+                vm.CloneVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_OLD_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_SNAPSHOT_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NEW_RESOURCE_POOL_NAME]);
                 vm.Logout();
-                return nOut.SetActionResultStatusOK(string.Format(Msg.VM_CLONE_VM_SUCCES, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NEW_NAME_VM_NAME]));
+                return nOut.SetActionResultStatusOK(string.Format(Msg.VM_CLONE_VM_SUCCES, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_OLD_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME]));
             }
                 catch (Exception e) 
             {
     
-                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_CLONE_VM_FAILED, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NEW_NAME_VM_NAME], e.Message));
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_CLONE_VM_FAILED, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_OLD_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], e.Message));
             }
 
             finally
@@ -238,9 +239,47 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             {
                 nOut.SetActionResultNodeEndTime();
             }
+        }
 
 
 
+
+   /// <summary>
+   /// 
+   /// </summary>
+   /// <param name="nIn"></param>
+   /// <returns></returns>
+        public DDNode HostCreateResourcePool(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_NEW_RESOURCE_POOL_NAME,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_RESOURCE_POOL_SOURCE,
+                                                                       SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME);
+
+
+
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.HostCreateResourcePool(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_RESOURCE_POOL_SOURCE], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NEW_RESOURCE_POOL_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME]);
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.VM_SUCCESS_CREAT_RESOURCE_POOL, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NEW_RESOURCE_POOL_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_RESOURCE_POOL_SOURCE]));
+
+            }
+            catch (Exception e)
+            {
+
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_FILED_CREAT_RESOURCE_POOL, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NEW_RESOURCE_POOL_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_RESOURCE_POOL_SOURCE], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
         }
 
 
@@ -271,7 +310,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
                                                                      SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME,
                                                                      SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD,
                                                                      SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_PATH,
-                                                                              SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME);
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME);
 
                 int retry = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_RETRY, SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_RETRY_VALUE);
                 int timeOut = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_TIMEOUT, SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_TIMEOUT_VALUE);
@@ -332,7 +371,8 @@ namespace DrTest.DrAction.DrTestActionSampleVM
                                                                      SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD,
                                                                      SchemaDrTestActionVM.ATTRIBUTE_VM_COPY_FILE_SOURCE,
                                                                      SchemaDrTestActionVM.ATTRIBUTE_VM_COPY_FILE_DESTINATION,
-                                                                     SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME);
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME);
 
 
 
@@ -573,7 +613,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
                                                                       SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
                                                                       SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME,
                                                                       SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME,
-                                                                                                                                            SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME);
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME);
 
 
           
