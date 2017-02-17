@@ -61,8 +61,11 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
 
         public const string ATTRIBUTE_RESOURCE_POOL_SOURCE = "ResorcePoolSource";
+        public const string ATTRIBUTE_RESOURCE_POOL_NAME = "ResorcePoolName";
 
-        public const string ATTRIBUTE_NEW_RESOURCE_POOL_NAME = "ResorcePoolName";
+        public const string ATTRIBUTE_RESOURCE_POOL_NAME_VALUE = "";
+
+
 
     }
 

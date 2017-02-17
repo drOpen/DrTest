@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using static RUN.Schema.SchemaEPVM;
 
 namespace DrTest.DrAction.DrTestActionSampleVM
@@ -24,12 +23,11 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             //var Inviroment = new DDNode();
 
 
-            //var SQLNode = Inviroment.Add("vSwitchConfiguration");
-            //SQLNode.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME, "https://172.28.2.101/sdk");
-            //SQLNode.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME, "root");
-            //SQLNode.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD, "Qwerty`123");
-            //SQLNode.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_RESOURCE_POOL_SOURCE, "Panarin");
-            //SQLNode.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_NEW_RESOURCE_POOL_NAME, "NewPool");
+            ////var SQLNode = Inviroment.Add("vSwitchConfiguration");
+            ////SQLNode.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME, "https://172.28.2.101/sdk");
+            ////SQLNode.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME, "root");
+            ////SQLNode.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD, "Qwerty`123");
+            ////SQLNode.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_RESOURCE_POOL_SOURCE, "Panarin");
 
 
             //var VMs = Inviroment.Add("VmCollection");
@@ -45,10 +43,10 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_VM_SNAPSHOT_NAME, "2");
             //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME, "Administrator");
             //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD, "Qwerty123");
-            //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_NEW_RESOURCE_POOL_NAME, "NewPool");
+            //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_RESOURCE_POOL_NAME, "NewPool");
 
 
-            //ConfigurationInviroment(Inviroment);
+      //      ConfigurationInviroment(Inviroment);
 
         }
 
@@ -63,7 +61,6 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             {
                 vm.CreateVirtualSwitchOnHost(vSwitchConfiguration);
                 vm.CreatePortGrpOnSwitch(vSwitchConfiguration);
-                vm.HostCreateResourcePool(vSwitchConfiguration);
             }
 
             var VmCollection = nIn.Values.FirstOrDefault(t => t.Name.Equals("VmCollection"));
@@ -72,7 +69,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             {
                 foreach (var VM in VmCollection.Values)
                 {
-                    vm.VMCloneVM(VM);
+                   vm.VMCloneVM(VM);
                     vm.ChangeVMNicPortGrp(VM);
                     vm.VMPowerOn(VM);
                     vm.VMCheckProcess(VM);

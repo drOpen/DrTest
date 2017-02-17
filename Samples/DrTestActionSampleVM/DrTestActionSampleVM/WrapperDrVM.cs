@@ -359,10 +359,21 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             VirtualMachineRelocateSpec relocSpec = new VirtualMachineRelocateSpec();
             relocSpec.DiskMoveType = VirtualMachineRelocateDiskMoveOptions.createNewChildDiskBacking.ToString();
 
-            var resorcePoolMO = GetRP(resourcePool);
-            if (resorcePoolMO == null) throw new ResourcePoolDoesntExistExeption(resourcePool);
-  //          if (resorcePoolMO.Parent == vm.ResourcePool) throw new ResourcePoolDoesNotContainVMExeption(resourcePool, oldVMName);
-            relocSpec.Pool = resorcePoolMO.MoRef;
+            vm = GetVirtualMachine(oldVMName);
+            if (vm == null) throw new VMDoesntExistExeption(oldVMName);
+            ResourcePool nold = new ResourcePool(vClient, vm.ResourcePool);
+        
+            if (resourcePool == "")
+            {
+                relocSpec.Pool = nold.MoRef;
+            }
+            else
+            {
+                HelperResourcePoolCreater(nold, resourcePool);
+                var resorcePoolMO = GetRP(resourcePool);
+                if (resorcePoolMO == null) throw new ResourcePoolDoesntExistExeption(resourcePool);
+                relocSpec.Pool = resorcePoolMO.MoRef;
+            }
 
             VirtualMachineCloneSpec cloneSpec = new VirtualMachineCloneSpec();
             cloneSpec.PowerOn = false;
@@ -375,6 +386,40 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
             vm.CloneVM(location, newVMName, cloneSpec);
         }
+
+        /// <summary>
+        /// Function helper to create new resource poll in Existing
+        /// </summary>
+        /// <param name="nold">Source Resorce Pool</param>
+        /// <param name="resourcePool">New Resource Pool Will be create in Source</param>
+        private void HelperResourcePoolCreater(ResourcePool nold, string resourcePool)
+        {
+            ResourceConfigSpec resourceSpec = new ResourceConfigSpec();
+            var resorcePoolMO = GetRP(resourcePool);
+            if (resorcePoolMO == null)
+            {
+                SharesInfo sharesInfo = new SharesInfo();
+                sharesInfo.Level = SharesLevel.normal;
+                sharesInfo.Shares = 0;
+
+                ResourceAllocationInfo cpu = new ResourceAllocationInfo();
+                cpu.Limit = -1;
+                cpu.Shares = sharesInfo;
+                cpu.Reservation = 0;
+                cpu.ExpandableReservation = true;
+
+                ResourceAllocationInfo mem = new ResourceAllocationInfo();
+                mem.Limit = -1;
+                mem.Shares = sharesInfo;
+                mem.Reservation = 0;
+                mem.ExpandableReservation = true;
+
+                resourceSpec.CpuAllocation = cpu;
+                resourceSpec.MemoryAllocation = mem;
+                nold.CreateResourcePool(resourcePool, resourceSpec);
+            }
+        }
+
 
         /// <summary>
         /// Function to create virtual switch.
