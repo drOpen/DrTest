@@ -304,6 +304,24 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to download file with path &apos;{0}&apos; from VM &apos;{1}&apos;. Error: &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_DOWNLOAD_FILE_FAIL {
+            get {
+                return ResourceManager.GetString("VM_DOWNLOAD_FILE_FAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully download file with path &apos;{0}&apos; from VM &apos;{1}&apos;..
+        /// </summary>
+        internal static string VM_DOWNLOAD_FILE_SUCCESS {
+            get {
+                return ResourceManager.GetString("VM_DOWNLOAD_FILE_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed when creating resource poll &apos;{0}&apos;  in existing resource pool &apos;{1}&apos;.  Error: &apos;{2}&apos;..
         /// </summary>
         internal static string VM_FILED_CREAT_RESOURCE_POOL {

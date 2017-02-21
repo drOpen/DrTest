@@ -747,6 +747,60 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
         }
 
+
+        /// <summary>
+        /// Function for Download file from VM mashine
+        /// </summary>
+        /// <param name="vmName">vm name</param>
+        /// <param name="guestLogin">Guest login</param>
+        /// <param name="guestPwd"><Guest PWD/param>
+        /// <param name="guestFilePath">File path on VM</param>
+        /// <param name="attempts">retrys to get the file and connect to vm tool</param>
+        /// <param name="attemptsTimeOut">timeouts for the retrys</param>
+        /// <param name="hostFilePath">Path where file will be copyed on host</param>
+        internal virtual void CopyFileFromGuestVM(string vmName, string guestLogin, string guestPwd, string guestFilePath, int attempts, int attemptsTimeOut, string hostFilePath)
+        {
+            VirtualMachine vm = null;
+            for (int j = 0; j <= attempts; j++)
+            {
+                vm = GetVirtualMachine(vmName);
+                if (vm == null) throw new VMDoesntExistExeption(vmName);
+                if (Convert.ToString(vm.Guest.ToolsStatus.Value) == SchemaEPGuestStates.VM_TOOL_STATE_OK) break;
+                Thread.Sleep((attemptsTimeOut * 1000));
+            }
+            if (Convert.ToString(vm.Guest.ToolsStatus.Value) == SchemaEPGuestStates.VM_TOOL_STATE_NOT_STARTED) throw new CannotConnectToAgent(vmName, attempts, attemptsTimeOut);
+
+            ManagedObjectReference MoRefFileManager = new ManagedObjectReference("guestOperationsFileManager");
+            GuestFileManager VMFileManager = new GuestFileManager(vClient, MoRefFileManager);
+            ManagedObjectReference MoRefAuthManager = new ManagedObjectReference("guestOperationsAuthManager");
+            GuestAuthManager VMAuthManager = new GuestAuthManager(vClient, MoRefAuthManager);
+
+            NamePasswordAuthentication auth = new NamePasswordAuthentication();
+            auth.Username = guestLogin;
+            auth.Password = guestPwd;
+            auth.InteractiveSession = false;
+            for (int j = 0; j <= attempts; j++)
+            {
+                try
+                {
+                    var TransferOutput = VMFileManager.InitiateFileTransferFromGuest(vm.MoRef, auth, guestFilePath);
+                    using (var web = new System.Net.WebClient())
+                    {
+                        web.DownloadFile(TransferOutput.Url, hostFilePath);
+                        break;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Thread.Sleep((attemptsTimeOut * 1000));
+                    if (attempts == j + 1) throw new Exception($"Cannot get file with path {guestFilePath} Error: {e.Message}");
+
+                }
+            }
+}
+
+
         /// <summary>
         /// Function to delete Virtual machine
         /// </summary>

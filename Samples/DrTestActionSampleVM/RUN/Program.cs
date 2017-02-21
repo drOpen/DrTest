@@ -20,7 +20,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         static void Main(string[] args)
         {
 
-            //var Inviroment = new DDNode();
+            var Inviroment = new DDNode();
 
 
             ////var SQLNode = Inviroment.Add("vSwitchConfiguration");
@@ -36,7 +36,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME, "root");
             //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD, "Qwerty`123");
             //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_OLD_NAME_VM_NAME, "Java Time");
-            //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME, "SomeGuid - 1111111112223333");
+            //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME, "New");
             //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME, "NewPortGroup");
             //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME, "172.28.2.105");
             //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_NAME, "LSASS.EXE");
@@ -44,9 +44,11 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME, "Administrator");
             //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD, "Qwerty123");
             //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_RESOURCE_POOL_NAME, "NewPool");
+            //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_VM_DOWNLOAD_FILE_SOURCE, "c:\\111\\1.txt");
+            //VM1.Attributes.Add(SchemaDrTestActionVM.ATTRIBUTE_HOST_DOWNLOAD_FILE_PATH, "c:\\111\\2323.txt");
 
 
-      //      ConfigurationInviroment(Inviroment);
+            //     ConfigurationInviroment(Inviroment);
 
         }
 
@@ -69,7 +71,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             {
                 foreach (var VM in VmCollection.Values)
                 {
-                   vm.VMCloneVM(VM);
+                    vm.VMCloneVM(VM);
                     vm.ChangeVMNicPortGrp(VM);
                     vm.VMPowerOn(VM);
                     vm.VMCheckProcess(VM);

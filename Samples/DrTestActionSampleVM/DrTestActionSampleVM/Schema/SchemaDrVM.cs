@@ -56,8 +56,11 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         public const string ATTRIBUTE_VM_APPLICATION_PATH = "AppliactionPATH";
         public const string ATTRIBUTE_VM_APPLICATION_ARGUMENTS = "Arguments";
         public const string ATTRIBUTE_VM_APPLICATION_ARGUMENTS_VALUE = "";
-        public const string ATTRIBUTE_VM_COPY_FILE_SOURCE = "SourceFilePath";
+        public const string ATTRIBUTE_VM_COPY_FILE_SOURCE = "UploadSourceFilePath";
         public const string ATTRIBUTE_VM_COPY_FILE_DESTINATION = "DestinationFilePath";
+
+        public const string ATTRIBUTE_VM_DOWNLOAD_FILE_SOURCE = "DonwloadSourceFilePath";
+        public const string ATTRIBUTE_HOST_DOWNLOAD_FILE_PATH = "DonwloadDestinationFilePath";
 
 
         public const string ATTRIBUTE_RESOURCE_POOL_SOURCE = "ResorcePoolSource";

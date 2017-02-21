@@ -198,6 +198,12 @@
   <data name="VM_DOES_NOT_CONTAIN_VM" xml:space="preserve">
     <value>Resource pool '{0}' does not contain vm '{1}'</value>
   </data>
+  <data name="VM_DOWNLOAD_FILE_FAIL" xml:space="preserve">
+    <value>Failed to download file with path '{0}' from VM '{1}'. Error: '{2}'.</value>
+  </data>
+  <data name="VM_DOWNLOAD_FILE_SUCCESS" xml:space="preserve">
+    <value>Successfully download file with path '{0}' from VM '{1}'.</value>
+  </data>
   <data name="VM_FILED_CREAT_RESOURCE_POOL" xml:space="preserve">
     <value>Failed when creating resource poll '{0}'  in existing resource pool '{1}'.  Error: '{2}'.</value>
   </data>

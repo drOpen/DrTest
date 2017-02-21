@@ -280,4 +280,5 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Exceptions
         /// <param name="innerException"></param>
         public ApplicationDoNotFoundOnVM(string application, string VMname, int retry, int timeout, Exception innerException) : base(VMname, string.Format(Res.Msg.APPLICATION_DO_NOT_FOUND_ON_VM, application, VMname, retry, timeout), innerException) { }
     }
+
 }

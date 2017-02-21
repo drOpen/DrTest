@@ -413,6 +413,74 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
 
 
+
+        /// <summary>
+        /// Function to download file from vm using vm tool
+        /// </summary>
+        /// <param name="nIn">Action node contains the mandatory attributes:
+        /// <list type="bullet">
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_HOST_DOWNLOAD_FILE_PATH</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_DOWNLOAD_FILE_SOURCE</value></description></item>
+        /// </list> 
+        /// </param>
+        /// <returns></returns>
+        public DDNode VMDownloadFile(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_VM_DOWNLOAD_FILE_SOURCE,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME,
+                                                                     SchemaDrTestActionVM.ATTRIBUTE_HOST_DOWNLOAD_FILE_PATH
+                                                                     );
+
+
+
+                int retry = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_RETRY, SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_RETRY_VALUE);
+                int timeOut = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_TIMEOUT, SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_TIMEOUT_VALUE);
+
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.CopyFileFromGuestVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_NAME],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_GUEST_LOGIN_PWD],
+                                nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_DOWNLOAD_FILE_SOURCE],
+                                retry,
+                                timeOut,
+                               nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_DOWNLOAD_FILE_PATH]);
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.VM_DOWNLOAD_FILE_SUCCESS, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_DOWNLOAD_FILE_SOURCE], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME]));
+
+            }
+            catch (Exception e)
+            {
+
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_DOWNLOAD_FILE_FAIL, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_DOWNLOAD_FILE_SOURCE], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
+        }
+
+
+
+
+
+
+
         /// <summary>
         /// Function to create Virtual Switch on host
         /// </summary>
