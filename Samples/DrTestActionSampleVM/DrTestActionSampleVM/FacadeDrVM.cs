@@ -320,7 +320,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
                 int retry = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_RETRY, SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_RETRY_VALUE);
                 int timeOut = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_TIMEOUT, SchemaDrTestActionVM.ATTRIBUTE_VM_ATTEMPTS_TIMEOUT_VALUE);
-                string arguments = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_PATH, SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_ARGUMENTS_VALUE);
+                string arguments = nIn.Attributes.GetValue(SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_ARGUMENTS, SchemaDrTestActionVM.ATTRIBUTE_VM_APPLICATION_ARGUMENTS_VALUE);
 
                 var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
                 vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);

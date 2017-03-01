@@ -72,6 +72,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
                 foreach (var VM in VmCollection.Values)
                 {
                     vm.VMCloneVM(VM);
+                    vm.ChangeSomeCustomAction(VM);
                     vm.ChangeVMNicPortGrp(VM);
                     vm.VMPowerOn(VM);
                     vm.VMCheckProcess(VM);
