@@ -66,6 +66,9 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         public const string ATTRIBUTE_VM_CUSTOM_ACTION_VALUE = "CustomActionValue";
 
 
+        public const string ATTRIBUTE_VM_ADAPTER_NAME = "AdapterName";
+
+
 
 
         public const string ATTRIBUTE_RESOURCE_POOL_SOURCE = "ResorcePoolSource";

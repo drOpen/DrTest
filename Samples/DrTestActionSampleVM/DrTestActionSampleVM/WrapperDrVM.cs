@@ -555,7 +555,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         /// </summary>
         /// <param name="vmName">Virtual machine Name</param>
         /// <param name="portGroup">Port Group Name</param>
-        internal virtual void ChangeVMNicPortGroup(string vmName, string portGroup, string hostName)
+        internal virtual void ChangeVMNicPortGroup(string vmName, string portGroup, string hostName, string VmAdapterName)
         {
             var vm = GetVirtualMachine(vmName);
             if (vm == null) throw new VMDoesntExistExeption(vmName);
@@ -563,7 +563,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             if (host == null) throw new HostDoesntExistExeption(hostName);
             if (!CheckerDoesHostIncludeVM(vm, host)) throw new HostDoesNotContainVM(vmName, hostName);
             VirtualMachineConfigSpec vmConfigSpec = new VirtualMachineConfigSpec();
-            VirtualDeviceConfigSpec[] nicSpec = ChangeAllNetworkAdaptersInVMConfig(vm, portGroup);
+            VirtualDeviceConfigSpec[] nicSpec = ChangeAllNetworkAdaptersInVMConfig(vm, portGroup, VmAdapterName);
             vmConfigSpec.DeviceChange = nicSpec;
             vm.ReconfigVM(vmConfigSpec);
         }
@@ -574,7 +574,7 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         /// <param name="vm">Virtual Machine Name</param>
         /// <param name="portGroup">Port Group Name</param>
         /// <returns></returns>
-        private static VirtualDeviceConfigSpec[] ChangeAllNetworkAdaptersInVMConfig(VirtualMachine vm, string portGroup)
+        private static VirtualDeviceConfigSpec[] ChangeAllNetworkAdaptersInVMConfig(VirtualMachine vm, string portGroup, string VmAdapterName)
         {
             List<VirtualDeviceConfigSpec> updates = new List<VirtualDeviceConfigSpec>();
             VirtualMachineConfigInfo vmConfigInfo = vm.Config;
@@ -586,22 +586,21 @@ namespace DrTest.DrAction.DrTestActionSampleVM
                 {
                     VirtualDeviceConfigSpec nicSpec = new VirtualDeviceConfigSpec();
                     nicSpec.Operation = VirtualDeviceConfigSpecOperation.edit;
-                    VirtualEthernetCardNetworkBackingInfo oldbi = (VirtualEthernetCardNetworkBackingInfo)vds[i].Backing;
-                    VirtualEthernetCardNetworkBackingInfo bi = new VirtualEthernetCardNetworkBackingInfo();
-                    bi.DeviceName = portGroup;
-                    vds[i].Backing = bi;
-                    nicSpec.Device = vds[i];
-                    updates.Add(nicSpec);
+         
+                VirtualEthernetCardNetworkBackingInfo bi = new VirtualEthernetCardNetworkBackingInfo();
+                    if (vds[i].DeviceInfo.Label.ToUpper() == VmAdapterName.ToUpper())
+                    {
+                        bi.DeviceName = portGroup;
+                        vds[i].Backing = bi;
+                        nicSpec.Device = vds[i];
+                        updates.Add(nicSpec);
+                    }
                 }
             }
+            if (updates.Count == 0) throw new Exception($"No such Adapter '{VmAdapterName}', on VM '{vm.Name}'");
 
-            VirtualDeviceConfigSpec[] ret = new VirtualDeviceConfigSpec[updates.Count];
-            int x = 0;
-            foreach (var test in updates)
-            {
-                ret[x] = test;
-                x++;
-            }
+            VirtualDeviceConfigSpec[] ret = new VirtualDeviceConfigSpec[1];
+            ret[0] = updates[0];
             return ret;
         }
 

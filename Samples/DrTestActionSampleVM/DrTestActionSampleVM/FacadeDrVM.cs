@@ -734,13 +734,14 @@ namespace DrTest.DrAction.DrTestActionSampleVM
                                                                       SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
                                                                       SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME,
                                                                       SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_VM_ADAPTER_NAME,
                                                                       SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME);
 
 
           
                 var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
                 vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
-                vm.ChangeVMNicPortGroup(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME]);
+                vm.ChangeVMNicPortGroup(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_ADAPTER_NAME]);
                 vm.Logout();
                 return nOut.SetActionResultStatusOK(string.Format(Msg.VM_NIC_CHANGE_SUCCESS, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_PORT_GROUP_NAME]));
             }
