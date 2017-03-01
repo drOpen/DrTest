@@ -322,6 +322,15 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed update custom action with key &apos;{0}&apos; and value &apos;{1}&apos; on VM &apos;{2}&apos;. Error: &apos;{3}&apos;..
+        /// </summary>
+        internal static string VM_FAILED_CHANGE_CUSTOM_ACTION {
+            get {
+                return ResourceManager.GetString("VM_FAILED_CHANGE_CUSTOM_ACTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed when creating resource poll &apos;{0}&apos;  in existing resource pool &apos;{1}&apos;.  Error: &apos;{2}&apos;..
         /// </summary>
         internal static string VM_FILED_CREAT_RESOURCE_POOL {
@@ -426,6 +435,15 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         internal static string VM_START_PROCESS_SUCCES {
             get {
                 return ResourceManager.GetString("VM_START_PROCESS_SUCCES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully update custom action with key &apos;{0}&apos; and value &apos;{1}&apos; on VM &apos;{2}&apos; ..
+        /// </summary>
+        internal static string VM_SUCCESS_CHANGE_CUSTOM_ACTION {
+            get {
+                return ResourceManager.GetString("VM_SUCCESS_CHANGE_CUSTOM_ACTION", resourceCulture);
             }
         }
         

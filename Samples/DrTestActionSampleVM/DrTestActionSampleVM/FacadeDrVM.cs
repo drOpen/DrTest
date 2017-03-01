@@ -413,6 +413,53 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
 
 
+        /// <summary>
+        /// Change Custom Action 
+        /// </summary>
+        /// <param name="nIn">Action node contains the mandatory attributes:
+        /// <list type="bullet">
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD</value></description></item> 
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_CUSTOM_ACTION_KEY</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_VM_CUSTOM_ACTION_VALUE</value></description></item>
+        /// <item><description><value>SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME</value></description></item>
+        /// </list> 
+        /// </param>
+        /// <returns></returns>
+        public DDNode ChangeSomeCustomAction(DDNode nIn)
+        {
+            var nOut = DrTestActionExt.GetStubActionResultNode();
+
+            try
+            {
+                nIn.Attributes.ContainsAttributesOtherwiseThrow(SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_VM_CUSTOM_ACTION_KEY,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_VM_CUSTOM_ACTION_VALUE,
+                                                                      SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME);
+
+                var vm = new WrapperDrVM(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_SERVER_NAME]);
+                vm.LogIn(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_USER_PWD]);
+                vm.ChangeSomeCustomActions(nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_HOST_NAME], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_CUSTOM_ACTION_KEY], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_CUSTOM_ACTION_VALUE]);
+                vm.Logout();
+                return nOut.SetActionResultStatusOK(string.Format(Msg.VM_SUCCESS_CHANGE_CUSTOM_ACTION, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_CUSTOM_ACTION_KEY], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_CUSTOM_ACTION_VALUE], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME] ));
+            }
+            catch (Exception e)
+            {
+
+                return nOut.SetActionResultStatusFailed(string.Format(Msg.VM_FAILED_CHANGE_CUSTOM_ACTION, nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_CUSTOM_ACTION_KEY], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_VM_CUSTOM_ACTION_VALUE], nIn.Attributes[SchemaDrTestActionVM.ATTRIBUTE_NAME_VM_NAME], e.Message));
+            }
+
+            finally
+            {
+                nOut.SetActionResultNodeEndTime();
+            }
+        }
+
+
 
         /// <summary>
         /// Function to download file from vm using vm tool

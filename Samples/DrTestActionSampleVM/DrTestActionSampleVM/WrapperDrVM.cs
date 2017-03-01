@@ -518,6 +518,38 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             _switch.RemoveVirtualSwitch(switchName);
         }
 
+
+
+        /// <summary>
+        /// Function Add / Change CustomAction
+        /// </summary>
+        /// <param name="vmName">Vmname</param>
+        /// <param name="hostName">Hoxt Name</param>
+        /// <param name="optionValueKey">Option Key</param>
+        /// <param name="optionValueValue">Option Value</param>
+        internal virtual void ChangeSomeCustomActions(string vmName, string hostName, string optionValueKey, string optionValueValue)
+        {
+            var vm = GetVirtualMachine(vmName);
+            if (vm == null) throw new VMDoesntExistExeption(vmName);
+            var host = GetHostSystem(hostName);
+            if (host == null) throw new HostDoesntExistExeption(hostName);
+            if (!CheckerDoesHostIncludeVM(vm, host)) throw new HostDoesNotContainVM(vmName, hostName);
+            VirtualMachineConfigSpec vmConfigSpec = new VirtualMachineConfigSpec();
+            vmConfigSpec.ExtraConfig = vm.Config.ExtraConfig;
+
+            OptionValue NewOne = new OptionValue()
+            {
+                Key = optionValueKey,
+                Value = optionValueValue
+            };
+            vmConfigSpec.ExtraConfig = new OptionValue[1];
+            vmConfigSpec.ExtraConfig[0] = NewOne;
+
+
+            vm.ReconfigVM(vmConfigSpec);
+        }
+
+
         /// <summary>
         /// Function which will reconfig VM network adapter to named Port Group
         /// </summary>

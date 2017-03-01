@@ -62,6 +62,11 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         public const string ATTRIBUTE_VM_DOWNLOAD_FILE_SOURCE = "DonwloadSourceFilePath";
         public const string ATTRIBUTE_HOST_DOWNLOAD_FILE_PATH = "DonwloadDestinationFilePath";
 
+        public const string ATTRIBUTE_VM_CUSTOM_ACTION_KEY = "CustomActionKey";
+        public const string ATTRIBUTE_VM_CUSTOM_ACTION_VALUE = "CustomActionValue";
+
+
+
 
         public const string ATTRIBUTE_RESOURCE_POOL_SOURCE = "ResorcePoolSource";
         public const string ATTRIBUTE_RESOURCE_POOL_NAME = "ResorcePoolName";

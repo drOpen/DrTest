@@ -204,6 +204,9 @@
   <data name="VM_DOWNLOAD_FILE_SUCCESS" xml:space="preserve">
     <value>Successfully download file with path '{0}' from VM '{1}'.</value>
   </data>
+  <data name="VM_FAILED_CHANGE_CUSTOM_ACTION" xml:space="preserve">
+    <value>Failed update custom action with key '{0}' and value '{1}' on VM '{2}'. Error: '{3}'.</value>
+  </data>
   <data name="VM_FILED_CREAT_RESOURCE_POOL" xml:space="preserve">
     <value>Failed when creating resource poll '{0}'  in existing resource pool '{1}'.  Error: '{2}'.</value>
   </data>
@@ -239,6 +242,9 @@
   </data>
   <data name="VM_START_PROCESS_SUCCES" xml:space="preserve">
     <value>Successfully Started Application with Application Path '{0} on 'Virtual Machine '{1}'.</value>
+  </data>
+  <data name="VM_SUCCESS_CHANGE_CUSTOM_ACTION" xml:space="preserve">
+    <value>Successfully update custom action with key '{0}' and value '{1}' on VM '{2}' .</value>
   </data>
   <data name="VM_SUCCESS_CHANGE_POWER_STATUS" xml:space="preserve">
     <value>Successfully '{0}' the virtual machine '{1}'.</value>
