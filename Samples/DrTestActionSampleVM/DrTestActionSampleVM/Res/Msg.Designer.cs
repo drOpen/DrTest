@@ -61,6 +61,150 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot find Application &apos;{0}&apos; on VM &apos;{1}&apos; with retryes &apos;{2}&apos; and timeout &apos;{3}&apos;..
+        /// </summary>
+        internal static string APPLICATION_DO_NOT_FOUND_ON_VM {
+            get {
+                return ResourceManager.GetString("APPLICATION_DO_NOT_FOUND_ON_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find Application path &apos;{0}&apos; on VM &apos;{1}&apos;..
+        /// </summary>
+        internal static string APPLICATION_PATH_DO_NOT_FOUND_ON_VM {
+            get {
+                return ResourceManager.GetString("APPLICATION_PATH_DO_NOT_FOUND_ON_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot connect to agent on VM &apos;{0}&apos;. Try to do it with retryes &apos;{1}&apos; and timeout &apos;{2}&apos;..
+        /// </summary>
+        internal static string CANNOT_CONNECT_TO_AGENT {
+            get {
+                return ResourceManager.GetString("CANNOT_CONNECT_TO_AGENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to create port group &apos;{0}&apos; on host &apos;{1}&apos; on switch &apos;{2}&apos;. Error: &apos;{3}&apos;..
+        /// </summary>
+        internal static string CREATE_PORT_GROUP_FAILED {
+            get {
+                return ResourceManager.GetString("CREATE_PORT_GROUP_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully create port group &apos;{0}&apos; on host &apos;{1}&apos; on switch &apos;{2}&apos;..
+        /// </summary>
+        internal static string CREATE_PORT_GROUP_SUCCESS {
+            get {
+                return ResourceManager.GetString("CREATE_PORT_GROUP_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to create switch &apos;{0}&apos; on host &apos;{1}&apos;. Error: &apos;{2}&apos;..
+        /// </summary>
+        internal static string CREATE_VIRTUAL_SWITCH_FAILED {
+            get {
+                return ResourceManager.GetString("CREATE_VIRTUAL_SWITCH_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully create switch &apos;{0}&apos; on host &apos;{1}&apos;..
+        /// </summary>
+        internal static string CREATE_VIRTUAL_SWITCH_SUCCESS {
+            get {
+                return ResourceManager.GetString("CREATE_VIRTUAL_SWITCH_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The host &apos;{0}&apos; could not be found..
+        /// </summary>
+        internal static string HOST_DOESNT_EXIST {
+            get {
+                return ResourceManager.GetString("HOST_DOESNT_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to remove port group &apos;{0}&apos;  on host &apos;{1}&apos; on switch &apos;{2}&apos;. Error: &apos;{3}&apos;..
+        /// </summary>
+        internal static string REMOVE_PORT_GROUP_FAILED {
+            get {
+                return ResourceManager.GetString("REMOVE_PORT_GROUP_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully remove switch &apos;{0}&apos; on host &apos;{1}&apos; on switch &apos;{2}&apos;..
+        /// </summary>
+        internal static string REMOVE_PORT_GROUP_SUCCESS {
+            get {
+                return ResourceManager.GetString("REMOVE_PORT_GROUP_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to remove switch &apos;{0}&apos; on host &apos;{1}&apos;. Error: &apos;{2}&apos;..
+        /// </summary>
+        internal static string REMOVE_VIRTUAL_SWITCH_FAILED {
+            get {
+                return ResourceManager.GetString("REMOVE_VIRTUAL_SWITCH_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully remove switch &apos;{0}&apos; on host &apos;{1}&apos;..
+        /// </summary>
+        internal static string REMOVE_VIRTUAL_SWITCH_SUCCESS {
+            get {
+                return ResourceManager.GetString("REMOVE_VIRTUAL_SWITCH_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resource poll &apos;{0}&apos; could not be found..
+        /// </summary>
+        internal static string RESOURCE_POOL_DOESNT_EXIST {
+            get {
+                return ResourceManager.GetString("RESOURCE_POOL_DOESNT_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resource pool &apos;{0}&apos; and host &apos;{1}&apos; have different parent..
+        /// </summary>
+        internal static string RESOUREC_POOL_DOES_NOT_CONTAIN_VM {
+            get {
+                return ResourceManager.GetString("RESOUREC_POOL_DOES_NOT_CONTAIN_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clonning VM &apos;{0}&apos; does not have Snapshot with name &apos;{1}&apos;..
+        /// </summary>
+        internal static string SNAPSHOT_DOES_NOT_EXIST {
+            get {
+                return ResourceManager.GetString("SNAPSHOT_DOES_NOT_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clonning VM &apos;{0}&apos; have two or more Snapshots with name &apos;{1}&apos;..
+        /// </summary>
+        internal static string SNAPSHOT_HAVE_MORE_THEN_ONE {
+            get {
+                return ResourceManager.GetString("SNAPSHOT_HAVE_MORE_THEN_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot &apos;{0}&apos; the virtual machine &apos;{1}&apos;..
         /// </summary>
         internal static string VM_CANNOT_CHANGE_POWER_STATUS {
@@ -70,11 +214,146 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed Check Application &apos;{0} on &apos;Virtual Machine &apos;{1}&apos;.  Error: &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_CHECK_PROCESS_FAILED {
+            get {
+                return ResourceManager.GetString("VM_CHECK_PROCESS_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully Check Application &apos;{0} on &apos;Virtual Machine &apos;{1}&apos;. Its Running..
+        /// </summary>
+        internal static string VM_CHECK_PROCESS_SUCCESS {
+            get {
+                return ResourceManager.GetString("VM_CHECK_PROCESS_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clonning Virtual Mashine &apos;{0}&apos; does not have Current Snapshot..
+        /// </summary>
+        internal static string VM_CLONE_CURRENTSNAPSHOT {
+            get {
+                return ResourceManager.GetString("VM_CLONE_CURRENTSNAPSHOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clonning VM &apos;{0}&apos; does not exist on Host &apos;{1}&apos;..
+        /// </summary>
+        internal static string VM_CLONE_INCLUDEHOST {
+            get {
+                return ResourceManager.GetString("VM_CLONE_INCLUDEHOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to Clone Virtual Machine &apos;{0}&apos; with new name &apos;{1}&apos;. Error: &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_CLONE_VM_FAILED {
+            get {
+                return ResourceManager.GetString("VM_CLONE_VM_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully Clone Virtual Machine &apos;{0}&apos; with new name &apos;{1}&apos;..
+        /// </summary>
+        internal static string VM_CLONE_VM_SUCCES {
+            get {
+                return ResourceManager.GetString("VM_CLONE_VM_SUCCES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to copy file &apos;{0}&apos; to destination &apos;{1}&apos; on VM &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_COPY_FILE_FAILED {
+            get {
+                return ResourceManager.GetString("VM_COPY_FILE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully copy file &apos;{0}&apos; to destination &apos;{1}&apos; on VM &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_COPY_FILE_SUCCES {
+            get {
+                return ResourceManager.GetString("VM_COPY_FILE_SUCCES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resource pool &apos;{0}&apos; does not contain vm &apos;{1}&apos;.
+        /// </summary>
+        internal static string VM_DOES_NOT_CONTAIN_VM {
+            get {
+                return ResourceManager.GetString("VM_DOES_NOT_CONTAIN_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The virtual machine &apos;{0}&apos; could not be found..
         /// </summary>
         internal static string VM_DOESNT_EXIST {
             get {
                 return ResourceManager.GetString("VM_DOESNT_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to download file with path &apos;{0}&apos; from VM &apos;{1}&apos;. Error: &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_DOWNLOAD_FILE_FAIL {
+            get {
+                return ResourceManager.GetString("VM_DOWNLOAD_FILE_FAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully download file with path &apos;{0}&apos; from VM &apos;{1}&apos;..
+        /// </summary>
+        internal static string VM_DOWNLOAD_FILE_SUCCESS {
+            get {
+                return ResourceManager.GetString("VM_DOWNLOAD_FILE_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed update custom action with key &apos;{0}&apos; and value &apos;{1}&apos; on VM &apos;{2}&apos;. Error: &apos;{3}&apos;..
+        /// </summary>
+        internal static string VM_FAILED_CHANGE_CUSTOM_ACTION {
+            get {
+                return ResourceManager.GetString("VM_FAILED_CHANGE_CUSTOM_ACTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed when creating resource poll &apos;{0}&apos;  in existing resource pool &apos;{1}&apos;.  Error: &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_FILED_CREAT_RESOURCE_POOL {
+            get {
+                return ResourceManager.GetString("VM_FILED_CREAT_RESOURCE_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to change NicPortGroup on Virtual Machine &apos;{0}&apos; to  &apos;{1}&apos;..
+        /// </summary>
+        internal static string VM_NIC_CHANGE_FAILED {
+            get {
+                return ResourceManager.GetString("VM_NIC_CHANGE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully change NicPortGroup on Virtual Machine &apos;{0}&apos; to  &apos;{1}&apos;..
+        /// </summary>
+        internal static string VM_NIC_CHANGE_SUCCESS {
+            get {
+                return ResourceManager.GetString("VM_NIC_CHANGE_SUCCESS", resourceCulture);
             }
         }
         
@@ -124,11 +403,65 @@ namespace DrTest.DrAction.DrTestActionSampleVM.Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to remove Virtual Machine &apos;{0}&apos;. Error: &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_REMOVE_VM_FAILED {
+            get {
+                return ResourceManager.GetString("VM_REMOVE_VM_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully Clone Virtual Machine &apos;{0}&apos;..
+        /// </summary>
+        internal static string VM_REMOVE_VM_SUCCESS {
+            get {
+                return ResourceManager.GetString("VM_REMOVE_VM_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed Start Application with Application Path &apos;{0} on &apos;Virtual Machine &apos;{1}&apos;.  Error: &apos;{2}&apos;..
+        /// </summary>
+        internal static string VM_START_PROCESS_FAILED {
+            get {
+                return ResourceManager.GetString("VM_START_PROCESS_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully Started Application with Application Path &apos;{0} on &apos;Virtual Machine &apos;{1}&apos;..
+        /// </summary>
+        internal static string VM_START_PROCESS_SUCCES {
+            get {
+                return ResourceManager.GetString("VM_START_PROCESS_SUCCES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully update custom action with key &apos;{0}&apos; and value &apos;{1}&apos; on VM &apos;{2}&apos; ..
+        /// </summary>
+        internal static string VM_SUCCESS_CHANGE_CUSTOM_ACTION {
+            get {
+                return ResourceManager.GetString("VM_SUCCESS_CHANGE_CUSTOM_ACTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successfully &apos;{0}&apos; the virtual machine &apos;{1}&apos;..
         /// </summary>
         internal static string VM_SUCCESS_CHANGE_POWER_STATUS {
             get {
                 return ResourceManager.GetString("VM_SUCCESS_CHANGE_POWER_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully create resource pool &apos;{0}&apos; in existing resource pool &apos;{1}&apos;..
+        /// </summary>
+        internal static string VM_SUCCESS_CREAT_RESOURCE_POOL {
+            get {
+                return ResourceManager.GetString("VM_SUCCESS_CREAT_RESOURCE_POOL", resourceCulture);
             }
         }
     }
