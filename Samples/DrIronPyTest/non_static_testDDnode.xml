@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<DDNode Name="38e719a3-19ae-43a1-95b0-a853060f164a" IsRoot="True">
+   <DDAttributesCollection Count="4">
+    <Attribute Name="Module">
+      <DDValue Type="System.String" Size="18">DrAction.FSAction</DDValue>
+    </Attribute>
+    <Attribute Name="ClassName">
+      <DDValue Type="System.String" Size="14">FSActionFacade</DDValue>
+    </Attribute>
+    <Attribute Name="MethodName">
+      <DDValue Type="System.String" Size="21">CreateFiles_NonStatic</DDValue>
+    </Attribute>
+    <Attribute Name="Filename">
+      <DDValue Type="System.String" Size="3">abc</DDValue>
+    </Attribute>
+    <Attribute Name="Extension">
+      <DDValue Type="System.String" Size="3">txt</DDValue>
+    </Attribute>
+    <Attribute Name="Path">
+      <DDValue Type="System.String" Size="9">d:\temp\1</DDValue>
+    </Attribute>
+    <Attribute Name="Count">
+      <DDValue Type="System.Int32" Size="4">10</DDValue>
+    </Attribute>
+  </DDAttributesCollection>
+</DDNode>
