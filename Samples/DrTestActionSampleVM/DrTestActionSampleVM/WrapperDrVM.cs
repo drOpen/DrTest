@@ -34,6 +34,8 @@ using System.Text;
 using VMware.Vim;
 using DrTest.DrAction.DrTestActionSampleVM;
 using DrTest.DrAction.DrTestActionSampleVM.Res;
+using DrTest.DrAction.DrTestActionSampleVM.Res.Exceptions;
+using System.Threading;
 
 namespace DrTest.DrAction.DrTestActionSampleVM
 {
@@ -237,6 +239,17 @@ namespace DrTest.DrAction.DrTestActionSampleVM
 
 
         /// <summary>
+        /// returns HostSystem by name
+        /// </summary>
+        /// <param name="vmName"></param>
+        /// <returns></returns>
+        protected virtual HostSystem GetHostSystem(string vmName)
+        {
+            return FindEntityViewByName<HostSystem>(vmName);
+        }
+
+
+        /// <summary>
         /// returns virtual machine by name
         /// </summary>
         /// <param name="vmName"></param>
@@ -257,6 +270,339 @@ namespace DrTest.DrAction.DrTestActionSampleVM
             filter.Add("name", '^' + name + '$');
             return (T)vClient.FindEntityView(typeof(T), null, filter, null);
         }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <param name="snapshotName"></param>
+        /// <returns></returns>
+        private static ManagedObjectReference HelperSnapshotChecker(VirtualMachineSnapshotTree[] rootSnapshotList, string snapshotName, VirtualMachine vm)
+        {
+
+
+
+            ManagedObjectReference resultInfo = new ManagedObjectReference();
+            int count = 0;
+            if (rootSnapshotList != null)
+            {
+                VirtualMachineSnapshotTree snapshot = rootSnapshotList[0];
+                for (int i = 0; i < rootSnapshotList.Length; i++)
+                {
+                    snapshot = rootSnapshotList[i];
+                    String name = snapshot.Name;
+                    if (name == snapshotName)
+                    {
+                        resultInfo = snapshot.Snapshot;
+                        count++;
+                        if (count > 1) throw new VMSnapshotHaveMoreThenOneExeption(vm.Name, snapshotName);
+                    }
+                    if (rootSnapshotList[i].ChildSnapshotList != null)
+                    {
+                        var tempm = HelperSnapshotChecker(rootSnapshotList[i].ChildSnapshotList, snapshotName, vm);
+                        if (tempm.Value != null)
+                        {
+                            resultInfo = tempm;
+                            count++;
+                            if (count > 1) throw new VMSnapshotHaveMoreThenOneExeption(vm.Name, snapshotName);
+                        }
+                    }
+                }
+            }
+            return resultInfo;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <param name="host"></param>
+        /// <returns></returns>
+        private static bool HelperCheckerIncludeHost(VirtualMachine vm, HostSystem host)
+        {
+            foreach (var VMHost in host.Vm)
+            {
+                if (VMHost.ToString() == vm.MoRef.ToString())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vmName"></param>
+        /// <param name="newName"></param>
+        internal virtual void CloneVM(string vmName, string newName, string hostName, string snapshotName)
+        {
+            var vm = GetVirtualMachine(vmName);
+            if (vm == null) throw new VMDoesntExistExeption(vmName);
+            ManagedObjectReference location = new ManagedObjectReference();
+            location.Type = vm.Parent.Type;
+            location.Value = vm.Parent.Value;
+
+            var host = GetHostSystem(hostName);
+            if (host == null) throw new HostDoesntExistExeption(hostName);
+
+
+            if (!HelperCheckerIncludeHost(vm, host)) throw new HostDoesnotcontainVM(vmName, hostName);
+            if (vm.Snapshot == null) throw new VMSnapshotDoesntExistExeption(snapshotName,vmName);
+            VirtualMachineSnapshotTree[] rootSnapshotList = vm.Snapshot.RootSnapshotList;
+
+            ManagedObjectReference snapshot = HelperSnapshotChecker(rootSnapshotList, snapshotName, vm);
+            if (snapshot.Value==null) throw new VMSnapshotDoesntExistExeption(vm.Name, snapshotName);
+
+            VirtualMachineRelocateSpec relocSpec = new VirtualMachineRelocateSpec();
+            relocSpec.DiskMoveType = VirtualMachineRelocateDiskMoveOptions.createNewChildDiskBacking.ToString();
+
+            VirtualMachineCloneSpec cloneSpec = new VirtualMachineCloneSpec();
+            cloneSpec.PowerOn = false;
+            cloneSpec.Template = false;
+            cloneSpec.Location = relocSpec;
+            cloneSpec.Snapshot = snapshot;
+        
+            cloneSpec.Config = new VirtualMachineConfigSpec();
+            cloneSpec.Config.Uuid = vm.Config.Uuid;
+
+            vm.CloneVM(location, newName, cloneSpec);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hostName"></param>
+        /// <param name="switchName"></param>
+        /// <param name="portNum"></param>
+        internal virtual void CreateVirtualSwitch(string hostName, string switchName, string portNum)
+        {
+            var host = GetHostSystem(hostName);
+            if (host == null) throw new HostDoesntExistExeption(hostName);
+            HostNetworkSystem networkSystem = (HostNetworkSystem)vClient.GetView(host.ConfigManager.NetworkSystem, null);
+            HostVirtualNicSpec virtNicSpec = networkSystem.NetworkConfig.Vnic[0].Spec;
+
+            ManagedObjectReference dcmor = new ManagedObjectReference(); ;
+            dcmor.Type = networkSystem.MoRef.Type;
+            dcmor.Value = networkSystem.MoRef.Value;
+
+            HostNetworkSystem _switch = new HostNetworkSystem(vClient, dcmor);
+            HostVirtualSwitchSpec spec = new HostVirtualSwitchSpec();
+            spec.NumPorts = Convert.ToInt32(portNum);
+            _switch.AddVirtualSwitch(switchName, spec);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hostName"></param>
+        /// <param name="switchName"></param>
+        /// <param name="portgrpName"></param>
+        internal virtual void CreatePortGrp(string hostName, string switchName, string portgrpName)
+        {
+            var host = GetHostSystem(hostName);
+            if (host == null) throw new HostDoesntExistExeption(hostName);
+            HostNetworkSystem networkSystem = (HostNetworkSystem)vClient.GetView(host.ConfigManager.NetworkSystem, null);
+            HostVirtualNicSpec virtNicSpec = networkSystem.NetworkConfig.Vnic[0].Spec;
+
+            ManagedObjectReference dcmor = new ManagedObjectReference(); ;
+            dcmor.Type = networkSystem.MoRef.Type;
+            dcmor.Value = networkSystem.MoRef.Value;
+
+            HostNetworkSystem _switch = new HostNetworkSystem(vClient, dcmor);
+
+            HostPortGroupSpec portgrp = new HostPortGroupSpec();
+            portgrp.Name = portgrpName;
+            portgrp.VswitchName = switchName;
+            portgrp.Policy = new HostNetworkPolicy();
+
+            _switch.AddPortGroup(portgrp);
+
+        }
+
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hostName"></param>
+        /// <param name="switchName"></param>
+        /// <param name="portgrpName"></param>
+        internal virtual void RemovePortGrp(string hostName, string switchName, string portgrpName)
+        {
+            var host = GetHostSystem(hostName);
+            if (host == null) throw new HostDoesntExistExeption(hostName);
+            HostNetworkSystem networkSystem = (HostNetworkSystem)vClient.GetView(host.ConfigManager.NetworkSystem, null);
+            HostVirtualNicSpec virtNicSpec = networkSystem.NetworkConfig.Vnic[0].Spec;
+
+            ManagedObjectReference dcmor = new ManagedObjectReference(); ;
+            dcmor.Type = networkSystem.MoRef.Type;
+            dcmor.Value = networkSystem.MoRef.Value;
+
+            HostNetworkSystem _switch = new HostNetworkSystem(vClient, dcmor);
+
+            HostPortGroupSpec portgrp = new HostPortGroupSpec();
+            portgrp.Name = portgrpName;
+            portgrp.VswitchName = switchName;
+            portgrp.Policy = new HostNetworkPolicy();
+
+            _switch.RemovePortGroup(portgrpName);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hostName"></param>
+        /// <param name="switchName"></param>
+        /// <param name="portNum"></param>
+        internal virtual void RemoveVirtualSwitch(string hostName, string switchName)
+        {
+            var host = GetHostSystem(hostName);
+            if (host == null) throw new HostDoesntExistExeption(hostName);
+            HostNetworkSystem networkSystem = (HostNetworkSystem)vClient.GetView(host.ConfigManager.NetworkSystem, null);
+            HostVirtualNicSpec virtNicSpec = networkSystem.NetworkConfig.Vnic[0].Spec;
+
+            ManagedObjectReference dcmor = new ManagedObjectReference(); ;
+            dcmor.Type = networkSystem.MoRef.Type;
+            dcmor.Value = networkSystem.MoRef.Value;
+
+            HostNetworkSystem _switch = new HostNetworkSystem(vClient, dcmor);
+            _switch.RemoveVirtualSwitch(switchName);
+
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vmName"></param>
+        /// <param name="portGroup"></param>
+        internal virtual void ChangeNicPortGroup(string vmName, string portGroup)
+        {
+
+            var vm = GetVirtualMachine(vmName);
+            if (vm == null) throw new VMDoesntExistExeption(vmName);
+            VirtualMachineConfigSpec vmConfigSpec = new VirtualMachineConfigSpec();
+            VirtualDeviceConfigSpec[] nicSpec = HelperGetNICDeviceConfigSpec(vm, portGroup);
+            vmConfigSpec.DeviceChange = nicSpec;
+            vm.ReconfigVM(vmConfigSpec);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <param name="pgname"></param>
+        /// <returns></returns>
+        private static VirtualDeviceConfigSpec[] HelperGetNICDeviceConfigSpec(VirtualMachine vm, String pgname)
+        {
+
+
+
+
+
+            List<VirtualDeviceConfigSpec> updates = new List<VirtualDeviceConfigSpec>();
+            VirtualMachineConfigInfo vmConfigInfo = vm.Config;
+            VirtualDevice[] vds = vm.Config.Hardware.Device;
+
+            for (int i = 0; i < vds.Length; i++)
+            {
+                if (vds[i] is VirtualEthernetCard)
+                {
+                    VirtualDeviceConfigSpec nicSpec = new VirtualDeviceConfigSpec();
+                    nicSpec.Operation = VirtualDeviceConfigSpecOperation.edit;
+                    VirtualEthernetCardNetworkBackingInfo oldbi = (VirtualEthernetCardNetworkBackingInfo)vds[i].Backing;
+                    VirtualEthernetCardNetworkBackingInfo bi = new VirtualEthernetCardNetworkBackingInfo();
+                    bi.DeviceName = pgname;
+                    vds[i].Backing = bi;
+                    nicSpec.Device = vds[i];
+                    updates.Add(nicSpec);
+                }
+            }
+
+            VirtualDeviceConfigSpec[] ret = new VirtualDeviceConfigSpec[updates.Count];
+            int x = 0;
+            foreach (var test in updates)
+            {
+                ret[x] = test;
+                x++;
+            }
+            return ret;
+
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vmName"></param>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <param name="application"></param>
+        /// <param name="retry"></param>
+        /// <param name="timeout"></param>
+        internal virtual void CheckVMState(string vmName, string login, string password, string application, string retry, string timeout)
+        {
+            var vm = GetVirtualMachine(vmName);
+            if (vm == null) throw new VMDoesntExistExeption(vmName);
+            int retrycount = Convert.ToInt32(retry);
+            for (int j = 0; j <= retrycount; j++)
+            {
+                vm = GetVirtualMachine(vmName);
+                if (vm == null) throw new VMDoesntExistExeption(vmName);
+                if (Convert.ToString(vm.Guest.ToolsStatus.Value) == "toolsOk") break;
+                    Thread.Sleep((Convert.ToInt32(timeout) * 1000));
+            }
+            if (Convert.ToString(vm.Guest.ToolsStatus.Value) == "toolsNotRunning") throw new CannotConnectToAgent(vmName, retry, timeout);
+            NamePasswordAuthentication auth = new NamePasswordAuthentication();
+            auth.Username = login;
+            auth.Password = password;
+            auth.InteractiveSession = false;
+         
+            long[] pids = new long[] { };
+            int count = 0;
+            for (int j = 0; j <= retrycount; j++)
+            {
+                    vm = GetVirtualMachine(vmName);
+                if (vm == null) throw new VMDoesntExistExeption(vmName);
+                var _gpm = new VMware.Vim.GuestProcessManager(vm.Client, new VMware.Vim.ManagedObjectReference("GuestProcessManager-guestOperationsProcessManager"));
+                var processInfo = _gpm.ListProcessesInGuest(vm.MoRef, auth, pids);
+                    foreach (var uno in processInfo)
+                    {
+                        if (uno.Name == application) count++;
+                    }
+                if (count == 3) break;
+                Thread.Sleep((Convert.ToInt32(timeout) * 1000));
+            }
+            if (count <= 1) throw new ApplicationDoNotFoundOnVM(application, vmName, retry, timeout);
+        }
+
+
+
+
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vmName"></param>
+        internal virtual void RemoveVM(string vmName)
+        {
+            var vm = GetVirtualMachine(vmName);
+            vm.Destroy();
+
+
+        }
+
 
         #endregion VM Action
 
