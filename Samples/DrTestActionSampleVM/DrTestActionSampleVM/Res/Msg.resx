@@ -117,11 +117,74 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="APPLICATION_DO_NOT_STATED" xml:space="preserve">
+    <value>Cannot find Application '{0}' on VM '{1}' with retryes '{2}' and timeout '{3}'.</value>
+  </data>
+  <data name="CANNOT_CONNECT_TO_AGENT" xml:space="preserve">
+    <value>Cannot connect to agent on VM '{0}'. Try to do it with retryes '{1}' and timeout '{2}'.</value>
+  </data>
+  <data name="CREATE_PORT_GROUP_FAILED" xml:space="preserve">
+    <value>Failed to create port group '{0}' on host '{1}' on switch '{2}'. Error: '{3}'.</value>
+  </data>
+  <data name="CREATE_PORT_GROUP_SUCCESS" xml:space="preserve">
+    <value>Successfully create port group '{0}' on host '{1}' on switch '{2}'.</value>
+  </data>
+  <data name="CREATE_VIRTUAL_SWITCH_FAILED" xml:space="preserve">
+    <value>Failed to create switch '{0}' on host '{1}'. Error: '{2}'.</value>
+  </data>
+  <data name="CREATE_VIRTUAL_SWITCH_SUCCESS" xml:space="preserve">
+    <value>Successfully create switch '{0}' on host '{1}'.</value>
+  </data>
+  <data name="HOST_DOESNT_EXIST" xml:space="preserve">
+    <value>The host '{0}' could not be found.</value>
+  </data>
+  <data name="REMOVE_PORT_GROUP_FAILED" xml:space="preserve">
+    <value>Failed to remove port group '{0}'  on host '{1}' on switch '{2}'. Error: '{3}'.</value>
+  </data>
+  <data name="REMOVE_PORT_GROUP_SUCCESS" xml:space="preserve">
+    <value>Successfully remove switch '{0}' on host '{1}' on switch '{2}'.</value>
+  </data>
+  <data name="REMOVE_VIRTUAL_SWITCH_FAILED" xml:space="preserve">
+    <value>Failed to remove switch '{0}' on host '{1}'. Error: '{2}'.</value>
+  </data>
+  <data name="REMOVE_VIRTUAL_SWITCH_SUCCESS" xml:space="preserve">
+    <value>Successfully remove switch '{0}' on host '{1}'.</value>
+  </data>
+  <data name="SNAPSHOT_DOES_NOT_EXIST" xml:space="preserve">
+    <value>Clonning VM '{0}' does not have Snapshot with name '{1}'.</value>
+  </data>
+  <data name="SNAPSHOT_HAVE_MORE_THEN_ONE" xml:space="preserve">
+    <value>Clonning VM '{0}' have two or more Snapshots with name '{1}'.</value>
+  </data>
   <data name="VM_CANNOT_CHANGE_POWER_STATUS" xml:space="preserve">
     <value>Cannot '{0}' the virtual machine '{1}'.</value>
   </data>
+  <data name="VM_CHECK_PROCESS_FAILED" xml:space="preserve">
+    <value>Failed Check Application '{0} on 'Virtual Machine '{1}'.  Error: '{2}'.</value>
+  </data>
+  <data name="VM_CHECK_PROCESS_SUCCESS" xml:space="preserve">
+    <value>Successfully Check Application '{0} on 'Virtual Machine '{1}'. Its Running.</value>
+  </data>
+  <data name="VM_CLONE_CURRENTSNAPSHOT" xml:space="preserve">
+    <value>Clonning Virtual Mashine '{0}' does not have Current Snapshot.</value>
+  </data>
+  <data name="VM_CLONE_INCLUDEHOST" xml:space="preserve">
+    <value>Clonning VM '{0}' does not exist on Host '{1}'.</value>
+  </data>
+  <data name="VM_CLONE_VM_FAILED" xml:space="preserve">
+    <value>Failed to Clone Virtual Machine '{0}' with new name '{1}'. Error: '{2}'.</value>
+  </data>
+  <data name="VM_CLONE_VM_SUCCES" xml:space="preserve">
+    <value>Successfully Clone Virtual Machine '{0}' with new name '{1}'.</value>
+  </data>
   <data name="VM_DOESNT_EXIST" xml:space="preserve">
     <value>The virtual machine '{0}' could not be found.</value>
+  </data>
+  <data name="VM_NIC_CHANGE_FAILED" xml:space="preserve">
+    <value>Failed to change NicPortGroup on Virtual Machine '{0}' to  '{1}'.</value>
+  </data>
+  <data name="VM_NIC_CHANGE_SUCCESS" xml:space="preserve">
+    <value>Successfully change NicPortGroup on Virtual Machine '{0}' to  '{1}'.</value>
   </data>
   <data name="VM_POWER_STATUS_OFF" xml:space="preserve">
     <value>power off</value>
@@ -137,6 +200,12 @@
   </data>
   <data name="VM_POWER_UNKNOW_ACTION" xml:space="preserve">
     <value>The unknown vm power action '{0}' is forbidden.</value>
+  </data>
+  <data name="VM_REMOVE_VM_FAILED" xml:space="preserve">
+    <value>Failed to remove Virtual Machine '{0}'. Error: '{2}'.</value>
+  </data>
+  <data name="VM_REMOVE_VM_SUCCESS" xml:space="preserve">
+    <value>Successfully Clone Virtual Machine '{0}'.</value>
   </data>
   <data name="VM_SUCCESS_CHANGE_POWER_STATUS" xml:space="preserve">
     <value>Successfully '{0}' the virtual machine '{1}'.</value>
