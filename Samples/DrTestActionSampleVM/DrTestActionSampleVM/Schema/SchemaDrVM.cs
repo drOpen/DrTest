@@ -38,6 +38,21 @@ namespace DrTest.DrAction.DrTestActionSampleVM
         public const string ATTRIBUTE_NAME_USER_NAME = "UserName";
         public const string ATTRIBUTE_NAME_USER_PWD = "Pwd";
         public const string ATTRIBUTE_NAME_VM_NAME = "VMName";
+        public const string ATTRIBUTE_NEW_NAME_VM_NAME = "NewVMName";
+        public const string ATTRIBUTE_SWITCH_NAME = "SwitchName";
+        public const string ATTRIBUTE_HOST_NAME = "HostName";
+        public const string ATTRIBUTE_SWITCH_PORT_NUM = "8";
+        public const string ATTRIBUTE_PORT_GROUP_NAME = "PortGrpName";
+        public const string ATTRIBUTE_VM_SNAPSHOT_NAME = "ShapshotName";
+
+
+
+        public const string ATTRIBUTE_VM_LOGIN_NAME = "Login";
+        public const string ATTRIBUTE_VM_LOGIN_PWD = "Password";
+        public const string ATTRIBUTE_VM_APPLICATION = "Application";
+        public const string ATTRIBUTE_VM_APPLICATION_RETRY = "3";
+        public const string ATTRIBUTE_VM_APPLICATION_TIMEOUT = "2000";
+
 
     }
 }
