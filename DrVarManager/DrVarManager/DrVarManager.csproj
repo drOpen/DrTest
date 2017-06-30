@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EAA917EC-5856-4878-8A16-2029A31B6B2B}</ProjectGuid>
+    <ProjectGuid>{0AA3D474-3C05-4DC0-9A2E-84895E9E8308}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DrTest.DrAction.DrTestActionSampleVM</RootNamespace>
-    <AssemblyName>DrTestActionSampleVM</AssemblyName>
+    <RootNamespace>DrVarManager</RootNamespace>
+    <AssemblyName>DrVarManager</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,53 +33,19 @@
     <Reference Include="DrData">
       <HintPath>..\..\..\..\DrCommon\DrData\DrData\bin\Debug\DrData.dll</HintPath>
     </Reference>
+    <Reference Include="DrDataEx">
+      <HintPath>..\..\..\..\DrCommon\DrData\DrDataEx\bin\Debug\DrDataEx.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VimService25">
-      <HintPath>..\..\..\..\..\bin\vim\VimService25.dll</HintPath>
-    </Reference>
-    <Reference Include="VimService25.XmlSerializers">
-      <HintPath>..\..\..\..\..\bin\vim\VimService25.XmlSerializers.dll</HintPath>
-    </Reference>
-    <Reference Include="VimService40">
-      <HintPath>..\..\..\..\..\bin\vim\VimService40.dll</HintPath>
-    </Reference>
-    <Reference Include="VMware.Vim">
-      <HintPath>..\..\..\..\..\bin\vim\VMware.Vim.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DrVMExt.cs" />
-    <Compile Include="Exceptions\Advanced.cs" />
-    <Compile Include="Exceptions\VM.cs" />
-    <Compile Include="Res\Msg.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Msg.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Schema\SchemaDrVM.cs" />
-    <Compile Include="WrapperDrVM.cs" />
-    <Compile Include="FacadeDrVM.cs" />
+    <Compile Include="DVManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Res\Msg.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Msg.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="License.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\DrTestExt\DrTestExt\DrTestExt.csproj">
-      <Project>{6f977da5-a3f8-41e3-9197-a35bb502c39f}</Project>
-      <Name>DrTestExt</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
