@@ -18,7 +18,7 @@ namespace DrOpen.DrTestHelper
         /// <summary>
         /// Test logger
         /// </summary>
-        DrTestLog log;
+        protected DrTestLog log;
         /// <summary>
         /// Outgoing node with results
         /// </summary>

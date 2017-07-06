@@ -1,4 +1,4 @@
-﻿License.txt -- License file for 'DrTestEx' general purpose parser of arguments 1.0.0, August 28, 2016
+﻿License.txt -- License file for 'DrTestEx' extension for DrTest 1.0.0, August 28, 2016
  
 Copyright (c) 2013-2016 Kudryashov Andrey aka Dr
  
