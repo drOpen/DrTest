@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{638BB1D7-1D53-4B52-8D1B-21B9D201E4C7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{849FDA09-9982-4819-AA33-D1D8D4A2AA27}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DrTestHelperSample</RootNamespace>
-    <AssemblyName>DrTestHelperSample</AssemblyName>
+    <RootNamespace>DrOpen.DrTest.DrTAHelper</RootNamespace>
+    <AssemblyName>DrTestHelper</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,31 +38,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DrTestSample.cs" />
-    <Compile Include="DrTestSampleSchema.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="TAException.cs" />
+    <Compile Include="TAHelper.cs" />
+    <Compile Include="TALog.cs" />
+    <Compile Include="TASchema.cs" />
+    <Compile Include="ITAHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DrCommon\DrData\DrDataEx\DrDataEx.csproj">
-      <Project>{cb8174c6-6ca6-4cef-b84c-27c5e726466d}</Project>
-      <Name>DrDataEx</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\DrCommon\DrData\DrDataSx\DrDataSx.csproj">
-      <Project>{cef8cdd2-404d-415f-aecf-4b92ceb3a23d}</Project>
-      <Name>DrDataSx</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\DrCommon\DrData\DrData\DrData.csproj">
+    <ProjectReference Include="..\..\..\..\DrCommon\DrData\DrData\DrData.csproj">
       <Project>{c984c775-1807-4157-ba4b-5d5fccce577b}</Project>
       <Name>DrData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\DrCommon\DrLog\DrLogClient\DrLogClient.csproj">
+    <ProjectReference Include="..\..\..\..\DrCommon\DrLog\DrLogClient\DrLogClient.csproj">
       <Project>{85a2ba01-cb54-4fc0-bc6c-92700fd9979c}</Project>
       <Name>DrLogClient</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DrTestHelper\DrTestHelper.csproj">
-      <Project>{849fda09-9982-4819-aa33-d1d8d4a2aa27}</Project>
-      <Name>DrTestHelper</Name>
+    <ProjectReference Include="..\..\..\..\DrCommon\DrData\DrDataEx\DrDataEx.csproj">
+      <Project>{cb8174c6-6ca6-4cef-b84c-27c5e726466d}</Project>
+      <Name>DrDataEx</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

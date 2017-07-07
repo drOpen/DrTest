@@ -1,5 +1,5 @@
 ﻿/*
-  DrTestLogger.cs -- client logger for DrTestHelper, July 02, 2017
+  DrTestLogger.cs -- client logger for DrTAHelper, July 02, 2017
  
   Copyright (c) 2013-2017 Kudryashov Andrey aka Dr
  
@@ -28,19 +28,17 @@ using System;
 using DrOpen.DrCommon.DrLog.DrLogClient;
 using DrOpen.DrCommon.DrData;
 
-namespace DrOpen.DrTestHelper
+namespace DrOpen.DrTest.DrTAHelper
 {
-    public class DrTestLog : Logger
+    public class TALog : Logger
     {
 
-        public DrTestLog(DDNode messages)
+        public TALog(DDNode messages)
         {
-            logger = new Logger();
-            messages.Type.ValidateExpectedNodeType(DrTestSchema.DrTestTypeMessages);
+            messages.Type.ValidateExpectedNodeType(TASchema.DrTestTypeMessages);
             this.messages = messages;
         }
 
-        Logger logger;
         DDNode messages;
         public override void Write(DrCommon.DrData.DDNode msg)
         {

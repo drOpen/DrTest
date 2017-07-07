@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{849FDA09-9982-4819-AA33-D1D8D4A2AA27}</ProjectGuid>
+    <ProjectGuid>{E20FF95F-219A-4EA3-B063-ECE28DE03986}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DrOpen.DrTestHelper</RootNamespace>
-    <AssemblyName>DrTestHelper</AssemblyName>
+    <RootNamespace>DrOpen.DrTest.DrTAProcess</RootNamespace>
+    <AssemblyName>DrTAProcess</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -38,25 +38,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DrTestExceptions.cs" />
-    <Compile Include="DrTestHelper.cs" />
-    <Compile Include="DrTestLog.cs" />
-    <Compile Include="DrTestSchema.cs" />
-    <Compile Include="IDrTestHelper.cs" />
+    <Compile Include="TAProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DrCommon\DrData\DrDataEx\DrDataEx.csproj">
+    <ProjectReference Include="..\..\..\..\DrCommon\DrData\DrDataEx\DrDataEx.csproj">
       <Project>{cb8174c6-6ca6-4cef-b84c-27c5e726466d}</Project>
       <Name>DrDataEx</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\DrCommon\DrData\DrData\DrData.csproj">
+    <ProjectReference Include="..\..\..\..\DrCommon\DrData\DrData\DrData.csproj">
       <Project>{c984c775-1807-4157-ba4b-5d5fccce577b}</Project>
       <Name>DrData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\DrCommon\DrLog\DrLogClient\DrLogClient.csproj">
+    <ProjectReference Include="..\..\..\..\DrCommon\DrLog\DrLogClient\DrLogClient.csproj">
       <Project>{85a2ba01-cb54-4fc0-bc6c-92700fd9979c}</Project>
       <Name>DrLogClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DrTAHelper\DrTestHelper\DrTAHelper.csproj">
+      <Project>{849fda09-9982-4819-aa33-d1d8d4a2aa27}</Project>
+      <Name>DrTAHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

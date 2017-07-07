@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{638BB1D7-1D53-4B52-8D1B-21B9D201E4C7}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DrTAHelperSample</RootNamespace>
+    <AssemblyName>DrTestHelperSample</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TASample.cs" />
+    <Compile Include="TASampleSchema.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\DrCommon\DrData\DrDataEx\DrDataEx.csproj">
+      <Project>{cb8174c6-6ca6-4cef-b84c-27c5e726466d}</Project>
+      <Name>DrDataEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\DrCommon\DrData\DrDataSx\DrDataSx.csproj">
+      <Project>{cef8cdd2-404d-415f-aecf-4b92ceb3a23d}</Project>
+      <Name>DrDataSx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\DrCommon\DrData\DrData\DrData.csproj">
+      <Project>{c984c775-1807-4157-ba4b-5d5fccce577b}</Project>
+      <Name>DrData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\DrCommon\DrLog\DrLogClient\DrLogClient.csproj">
+      <Project>{85a2ba01-cb54-4fc0-bc6c-92700fd9979c}</Project>
+      <Name>DrLogClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DrTestHelper\DrTAHelper.csproj">
+      <Project>{849fda09-9982-4819-aa33-d1d8d4a2aa27}</Project>
+      <Name>DrTAHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

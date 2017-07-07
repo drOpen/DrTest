@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace DrOpen.DrTestHelper
+namespace DrOpen.DrTest.DrTAHelper
 {
-    public static class DrTestSchema
+    public static class TASchema
     {
         public const string DrTestMessages = "TestMessages";
         public const string DrTestTypeMessages = "DrTest.Messages";

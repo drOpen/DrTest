@@ -1,12 +1,12 @@
 ﻿using DrOpen.DrCommon.DrData;
 using DrOpen.DrCommon.DrDataSx;
-using DrOpen.DrTestHelper;
+using DrOpen.DrTest.DrTAHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DrTestHelperSample
+namespace DrTAHelperSample
 {
     class Program
     {
@@ -14,7 +14,7 @@ namespace DrTestHelperSample
         {
             System.Threading.Thread.CurrentThread.Name = "Main";
 
-            var tSample = new DrTestSample();
+            var tSample = new TASample();
             tSample.CheckFile(getTestFileNode());
 
             tSample.CheckFiles(getTestFilesNode());
@@ -24,17 +24,20 @@ namespace DrTestHelperSample
 
         private static DDNode getTestFileNode()
         {
-            string x = @"<n n='TestFile'>
+            return DDNodeSxe.Deserialize
+                    (
+                        @"<n n='TestFile'>
                             <a n='File' t='System.String'>c:\text.txt</a>
                             <a n='Exists' t='System.Boolean'>false</a>
-                         </n>";
-
-            return DDNodeSxe.Deserialize(x);
+                         </n>"
+                    );
         }
 
         private static DDNode getTestFilesNode()
         {
-            string x = @"<n n='TestFiles'>
+            return DDNodeSxe.Deserialize
+                    (
+                        @"<n n='TestFiles'>
                             <n n='TestFile1'>
                                 <a n='File' t='System.String'>c:\text.txt</a>
                                 <a n='Exists' t='System.Boolean'>false</a>
@@ -47,8 +50,9 @@ namespace DrTestHelperSample
                                 <a n='File' t='System.String'>c:\doesntexistfile.txt</a>
                                 <a n='Exists' t='System.Boolean'>true</a>
                             </n>
-                         </n>";
-            return DDNodeSxe.Deserialize(x);
+                         </n>"
+                    );
+
         }
     }
 }

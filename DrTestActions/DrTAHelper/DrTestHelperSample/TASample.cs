@@ -1,15 +1,15 @@
 ﻿using DrOpen.DrCommon.DrData;
 using DrOpen.DrCommon.DrLog.DrLogClient;
-using DrOpen.DrTestHelper;
+using DrOpen.DrTest.DrTAHelper;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace DrTestHelperSample
+namespace DrTAHelperSample
 {
-    public class DrTestSample : DrTestHelper
+    public class TASample : TAHelper
     {
 
         public DDNode CheckFiles(DDNode n)
@@ -33,10 +33,10 @@ namespace DrTestHelperSample
 
         private bool checkFile(DDNode n)
         {
-            n.Attributes.ContainsAttributesOtherwiseThrow(DrTestSampleSchema.AttrFile);
+            n.Attributes.ContainsAttributesOtherwiseThrow(TASampleSchema.AttrFile);
 
-            var fileName = n.Attributes[DrTestSampleSchema.AttrFile];
-            var exists = n.Attributes.GetValue(DrTestSampleSchema.AttrExists, true);
+            var fileName = n.Attributes[TASampleSchema.AttrFile];
+            var exists = n.Attributes.GetValue(TASampleSchema.AttrExists, true);
 
             log.WriteTrace("Does file '{0}' exist?. Expected '{1}'.", fileName, exists);
             var result = File.Exists(fileName);

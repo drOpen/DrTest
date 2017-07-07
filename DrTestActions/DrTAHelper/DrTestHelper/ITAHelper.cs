@@ -31,9 +31,9 @@ using System.Collections.Generic;
 using DrOpen.DrCommon.DrData;
 using DrOpen.DrCommon.DrLog.DrLogClient;
 
-namespace DrOpen.DrTestHelper
+namespace DrOpen.DrTest.DrTAHelper
 {
-    public interface IDrTestHelper
+    public interface ITAHelper
     {
 
         #region output
