@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DrOpen.DrCommon.DrLog.DrLogClient;
 
 namespace DrOpen.DrTest.DrTAHelper
 {
@@ -9,11 +10,11 @@ namespace DrOpen.DrTest.DrTAHelper
     {
         public TAHelper()
         {
-
             this.OutResult = GetStubResultNode();
             this.outVariables = this.OutResult[TASchema.DrTestMessages];
             this.outMessages = this.OutResult[TASchema.DrTestMessages];
-            this.log = new TALog(this.outMessages);
+            this.log = LoggerST<TALog>.GetInstance();
+            this.log.SetNodeOfMessages(this.outMessages);
         }
         /// <summary>
         /// Test logger

@@ -32,8 +32,7 @@ namespace DrOpen.DrTest.DrTAHelper
 {
     public class TALog : Logger
     {
-
-        public TALog(DDNode messages)
+        public void SetNodeOfMessages(DDNode messages)
         {
             messages.Type.ValidateExpectedNodeType(TASchema.DrTestTypeMessages);
             this.messages = messages;
