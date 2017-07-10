@@ -22,12 +22,11 @@ namespace DrTAHelperSample
             }
             if (iFail > 0) SetTestFailed("There are '{0}' failed files.", iFail.ToString());
             return this.OutResult;
-
         }
 
         public DDNode CheckFile(DDNode n)
         {
-            if (checkFile(n) == false) SetTestFailed("There is failed file.");
+            if (checkFile(n) == false) SetTestFailed("File '{0}' is filed.", n.Attributes[TASampleSchema.AttrFile]);
             return this.OutResult;
         }
 
@@ -36,13 +35,13 @@ namespace DrTAHelperSample
             n.Attributes.ContainsAttributesOtherwiseThrow(TASampleSchema.AttrFile);
 
             var fileName = n.Attributes[TASampleSchema.AttrFile];
-            var exists = n.Attributes.GetValue(TASampleSchema.AttrExists, true);
+            var exp = n.Attributes.GetValue(TASampleSchema.AttrExpected, true);
 
-            log.WriteTrace("Does file '{0}' exist?. Expected '{1}'.", fileName, exists);
+            log.WriteTrace("Does file '{0}' exist?. Expected '{1}'.", fileName, exp);
             var result = File.Exists(fileName);
-            log.Write((result == exists ? LogLevel.INF : LogLevel.ERR), "File '{0}' {1}. Expected '{2}'.", fileName,  (result ? "exists" : "doesn't exist")  , exists);
+            log.Write((result == exp ? LogLevel.INF : LogLevel.ERR), "File '{0}' {1}. Expected '{2}'.", fileName,  (result ? "exists" : "doesn't exist")  , exp);
 
-            return (result == exists);
+            return (result == exp);
         }
 
     }

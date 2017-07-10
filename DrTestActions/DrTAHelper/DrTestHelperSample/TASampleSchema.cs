@@ -7,8 +7,8 @@ namespace DrTAHelperSample
 {
     public static class TASampleSchema
     {
-        public static string AttrFile = "File";
-        public static string AttrExists = "Exists";
+        public const string AttrFile = "File";
+        public const string AttrExpected = "Expected";
 
     }
 }

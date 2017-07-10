@@ -28,7 +28,7 @@ namespace DrTAHelperSample
                     (
                         @"<n n='TestFile'>
                             <a n='File' t='System.String'>c:\text.txt</a>
-                            <a n='Exists' t='System.Boolean'>false</a>
+                            <a n='Expected' t='System.Boolean'>false</a>
                          </n>"
                     );
         }
@@ -40,15 +40,15 @@ namespace DrTAHelperSample
                         @"<n n='TestFiles'>
                             <n n='TestFile1'>
                                 <a n='File' t='System.String'>c:\text.txt</a>
-                                <a n='Exists' t='System.Boolean'>false</a>
+                                <a n='Expected' t='System.Boolean'>false</a>
                             </n>
                             <n n='TestFile2'>
                                 <a n='File' t='System.String'>c:\pagefile.sys</a>
-                                <a n='Exists' t='System.Boolean'>true</a>
+                                <a n='Expected' t='System.Boolean'>true</a>
                             </n>
                             <n n='TestFile3'>
                                 <a n='File' t='System.String'>c:\doesntexistfile.txt</a>
-                                <a n='Exists' t='System.Boolean'>true</a>
+                                <a n='Expected' t='System.Boolean'>false</a>
                             </n>
                          </n>"
                     );

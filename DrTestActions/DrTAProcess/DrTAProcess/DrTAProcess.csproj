@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="TAProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TAProcessSchema.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\DrCommon\DrData\DrDataEx\DrDataEx.csproj">
