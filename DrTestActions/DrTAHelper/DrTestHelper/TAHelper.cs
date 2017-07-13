@@ -10,9 +10,9 @@ namespace DrOpen.DrTest.DrTAHelper
     {
         public TAHelper()
         {
-            this.OutResult = GetStubResultNode();
-            this.outVariables = this.OutResult[TASchema.DrTestMessages];
-            this.outMessages = this.OutResult[TASchema.DrTestMessages];
+            this.OutPut = GetStubResultNode();
+            this.outVariables = this.OutPut[TASchema.DrTestVariables];
+            this.outMessages = this.OutPut[TASchema.DrTestMessages];
             this.log = LoggerST<TALog>.GetInstance();
             this.log.SetNodeOfMessages(this.outMessages);
         }
@@ -23,7 +23,7 @@ namespace DrOpen.DrTest.DrTAHelper
         /// <summary>
         /// Outgoing node with results
         /// </summary>
-        public DDNode OutResult { get; private set; }
+        public DDNode OutPut { get; private set; }
         /// <summary>
         /// test variables
         /// </summary>
@@ -36,7 +36,7 @@ namespace DrOpen.DrTest.DrTAHelper
         /// retruns new structure outgoing node with results
         /// </summary>
         /// <returns></returns>
-        private DDNode GetStubResultNode()
+        protected virtual DDNode GetStubResultNode()
         {
             var n = new DDNode(TASchema.DrTestResult, new DDType(TASchema.DrTestTypeResult));
             this.outMessages = n.Add(TASchema.DrTestMessages, new DDType(TASchema.DrTestTypeMessages));

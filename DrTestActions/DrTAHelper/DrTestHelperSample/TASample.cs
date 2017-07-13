@@ -12,7 +12,7 @@ namespace DrTAHelperSample
     public class TASample : TAHelper
     {
 
-        public DDNode CheckFiles(DDNode n)
+        public void CheckFiles(DDNode n)
         {
             int iFail = 0;
 
@@ -21,13 +21,11 @@ namespace DrTAHelperSample
                 if (checkFile(nFile.Value) == false) iFail ++;
             }
             if (iFail > 0) SetTestFailed("There are '{0}' failed files.", iFail.ToString());
-            return this.OutResult;
         }
 
-        public DDNode CheckFile(DDNode n)
+        public void CheckFile(DDNode n)
         {
             if (checkFile(n) == false) SetTestFailed("File '{0}' is filed.", n.Attributes[TASampleSchema.AttrFile]);
-            return this.OutResult;
         }
 
         private bool checkFile(DDNode n)

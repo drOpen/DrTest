@@ -37,7 +37,7 @@ namespace DrOpen.DrTest.DrTAHelper
     {
 
         #region output
-        DDNode OutResult { get; }
+        DDNode OutPut { get; }
         #endregion output
 
         #region SetTestFailed
