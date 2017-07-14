@@ -62,6 +62,10 @@
       <Project>{85a2ba01-cb54-4fc0-bc6c-92700fd9979c}</Project>
       <Name>DrLogClient</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DrTAProcess\DrTAProcess\DrTAProcess.csproj">
+      <Project>{e20ff95f-219a-4ea3-b063-ece28de03986}</Project>
+      <Name>DrTAProcess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DrTestHelper\DrTAHelper.csproj">
       <Project>{849fda09-9982-4819-aa33-d1d8d4a2aa27}</Project>
       <Name>DrTAHelper</Name>

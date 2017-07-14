@@ -35,14 +35,9 @@ namespace DrOpen.DrTest.DrTAHelper
 {
     public interface ITAHelper
     {
-
-        #region output
+        /// <summary>
+        /// Output node 
+        /// </summary>
         DDNode OutPut { get; }
-        #endregion output
-
-        #region SetTestFailed
-        void SetTestFailed(string reason, params string[] args);
-        void SetTestFailed(Exception e, string reason, params string[] args);
-        #endregion SetTestFailed
     }
 }

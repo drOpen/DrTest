@@ -20,12 +20,12 @@ namespace DrTAHelperSample
             {
                 if (checkFile(nFile.Value) == false) iFail ++;
             }
-            if (iFail > 0) SetTestFailed("There are '{0}' failed files.", iFail.ToString());
+            if (iFail > 0) throw new DrTAFailedException("There are '{0}' failed files.", iFail.ToString());
         }
 
         public void CheckFile(DDNode n)
         {
-            if (checkFile(n) == false) SetTestFailed("File '{0}' is filed.", n.Attributes[TASampleSchema.AttrFile]);
+            if (checkFile(n) == false) throw new DrTAFailedException ("File '{0}' is filed.", n.Attributes[TASampleSchema.AttrFile]);
         }
 
         private bool checkFile(DDNode n)

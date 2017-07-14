@@ -1,8 +1,36 @@
-﻿using DrOpen.DrCommon.DrData;
+﻿/*
+  TAHelper.cs -- helper for DrTest, July 2, 2017
+  
+  Copyright (c) 2013-2017 Kudryashov Andrey aka Dr
+ 
+  This software is provided 'as-is', without any express or implied
+  warranty. In no event will the authors be held liable for any damages
+  arising from the use of this software.
+
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
+
+      1. The origin of this software must not be misrepresented; you must not
+      claim that you wrote the original software. If you use this software
+      in a product, an acknowledgment in the product documentation would be
+      appreciated but is not required.
+
+      2. Altered source versions must be plainly marked as such, and must not be
+      misrepresented as being the original software.
+
+      3. This notice may not be removed or altered from any source distribution.
+
+      Kudryashov Andrey <kudryashov.andrey at gmail.com>
+
+ */
+
+using DrOpen.DrCommon.DrData;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using DrOpen.DrCommon.DrLog.DrLogClient;
+using System.Text.RegularExpressions;
 
 namespace DrOpen.DrTest.DrTAHelper
 {
@@ -43,27 +71,19 @@ namespace DrOpen.DrTest.DrTAHelper
             this.outVariables = n.Add(TASchema.DrTestVariables, new DDType(TASchema.DrTestTypeVariables));
             return n;
         }
+        /// <summary>
+        /// Validates expected result as regular expression. If it not match throw <typeparamref name="DrTAExpectedException"/> exception
+        /// </summary>
+        /// <param name="result">test result</param>
+        /// <param name="expected">expected result as regular expression</param>
+        protected virtual void IsExpectedOtherwiseThrowException(string result, string expected)
+        {
 
-        #region SetTestFailed
-        /// <summary>
-        /// Sets test status failed. Throws exception DrTAFailedException
-        /// </summary>
-        /// <param name="reason">The reason for the unsuccessful test</param>
-        /// <param name="args">arguments</param>
-        public void SetTestFailed(string reason, params string[] args)
-        {
-            throw new DrTAFailedException(String.Format(reason, args));
+            Regex reg = new Regex(expected, RegexOptions.IgnoreCase);
+            var res =  reg.IsMatch(result);
+            log.WriteTrace("The result '{0}' is matched expected value '{1}'.", result, expected);
+            if (res == false) throw new DrTAExpectedException(result, expected);
         }
-        /// <summary>
-        /// Sets test status failed. Throws exception DrTAFailedException
-        /// </summary>
-        /// <param name="e">Inner exception for reason</param>
-        /// <param name="reason">The reason for the unsuccessful test</param>
-        /// <param name="args">arguments</param>
-        public void SetTestFailed(Exception e, string reason, params string[] args)
-        {
-            throw new DrTAFailedException(String.Format(reason, args), e);
-        }
-        #endregion SetTestFailed
+
     }
 }
