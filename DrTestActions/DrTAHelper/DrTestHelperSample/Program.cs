@@ -13,9 +13,9 @@ namespace DrTAHelperSample
     {
         static void Main(string[] args)
         {
+            var p = new TAProcess();
             try
             {
-                var p = new TAProcess();
                 p.CreateProcess(getTestStartProcess());
             }
             catch (Exception e)

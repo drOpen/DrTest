@@ -89,6 +89,7 @@ namespace DrOpen.DrTest.DrTAProcess
                     p.StartInfo.StandardOutputEncoding = GetEncodingByName(n.Attributes.GetValue(TAProcessSchema.AttrStandardOutputEncoding, TAProcessSchema.DefaultStandardOutputEncoding));
                     initializeStdOut();
                 }
+
                 if (p.StartInfo.RedirectStandardError)
                 {
                     p.ErrorDataReceived += new DataReceivedEventHandler(StdErrHandler); // subscribe to events from std_err
@@ -98,6 +99,8 @@ namespace DrOpen.DrTest.DrTAProcess
                 logProcessStartInfo(p.StartInfo, expectedExitCode);
 
                 p.Start();
+                if (p.StartInfo.RedirectStandardOutput) p.BeginOutputReadLine();
+                if (p.StartInfo.RedirectStandardError) p.BeginErrorReadLine();
                 int iWait = 0;
                 while (p.HasExited == false)
                 {
@@ -149,14 +152,14 @@ namespace DrOpen.DrTest.DrTAProcess
 
         private void StdOutHandler(object sendingProcess, DataReceivedEventArgs outLine)
         {
-            if ((outLine == null) && (String.IsNullOrEmpty(outLine.Data.Trim()))) return;
+            if ((outLine == null) || (String.IsNullOrEmpty(outLine.Data))) return;
             this.stdOut.WriteInfo(outLine.Data.Trim());
         }
 
         private void StdErrHandler(object sendingProcess, DataReceivedEventArgs outLine)
         {
-            if ((outLine == null) && (String.IsNullOrEmpty(outLine.Data.Trim()))) return;
-            this.stdErr.WriteInfo(outLine.Data.Trim());
+            if ((outLine == null) || (String.IsNullOrEmpty(outLine.Data))) return;
+            this.stdErr.WriteError(outLine.Data.Trim());
         }
 
 
