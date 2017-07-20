@@ -35,8 +35,8 @@ namespace DrOpen.DrTest.DrTAHelper
         public const string DrTestTypeMessages = "DrTest.Messages";
         public const string DrTestVariables = "TestVariables";
         public const string DrTestTypeVariables = "DrTest.Variables";
-        public const string DrTestResult = "TestResult";
-        public const string DrTestTypeResult = "DrTest.Result";
+        public const string DrTestOutPut = "OutPut";
+        public const string DrTestTypeOutPut = "DrTest.OutPut";
 
     }
 }

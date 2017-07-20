@@ -66,7 +66,7 @@ namespace DrOpen.DrTest.DrTAHelper
         /// <returns></returns>
         protected virtual DDNode GetStubResultNode()
         {
-            var n = new DDNode(TASchema.DrTestResult, new DDType(TASchema.DrTestTypeResult));
+            var n = new DDNode(TASchema.DrTestOutPut, new DDType(TASchema.DrTestTypeOutPut));
             this.outMessages = n.Add(TASchema.DrTestMessages, new DDType(TASchema.DrTestTypeMessages));
             this.outVariables = n.Add(TASchema.DrTestVariables, new DDType(TASchema.DrTestTypeVariables));
             return n;

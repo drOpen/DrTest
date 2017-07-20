@@ -96,6 +96,12 @@ namespace DrOpen.DrTest.DrTAProcess
                     p.StartInfo.StandardErrorEncoding = GetEncodingByName(n.Attributes.GetValue(TAProcessSchema.AttrStandardErrorEncoding, TAProcessSchema.DefaultStandardErrorEncoding));
                     initializeStdErr();
                 }
+
+                p.StartInfo.Verb = n.Attributes.GetValue(TAProcessSchema.AttrVerb, TAProcessSchema.DefaultVerb);
+                p.StartInfo.UserName = n.Attributes.GetValue(TAProcessSchema.AttrUserName, TAProcessSchema.DefaultUserName);
+                p.StartInfo.Password = n.Attributes.GetValue(TAProcessSchema.AttrPassword, TAProcessSchema.DefaultPassword).ToSecureString();
+                p.StartInfo.Domain = n.Attributes.GetValue(TAProcessSchema.AttrDomain, TAProcessSchema.DefaultDomain);
+
                 logProcessStartInfo(p.StartInfo, expectedExitCode);
 
                 p.Start();
@@ -126,15 +132,15 @@ namespace DrOpen.DrTest.DrTAProcess
 
         }
 
-        private void logProcessStartInfo(ProcessStartInfo p, string expectedExitCode)
+        private void logProcessStartInfo(ProcessStartInfo pi, string expectedExitCode)
         {
-            log.WriteInfo("Starting '{0}' with arguments '{1}'. Expected exit code '{2}'.", p.FileName, p.Arguments, expectedExitCode);
-            log.WriteTrace("Working directory '{0}'", p.WorkingDirectory);
-            log.WriteTrace("Load user profile '{0}'", p.LoadUserProfile);
-            log.WriteTrace("Use shell execute '{0}'", p.UseShellExecute);
-            log.WriteTrace("Redirect std_out '{0}' with encoding '{1}'", p.RedirectStandardOutput, p.StandardOutputEncoding);
-            log.WriteTrace("Redirect std_err '{0}' with encoding '{1}'", p.RedirectStandardError, p.StandardErrorEncoding);
-            log.WriteTrace("Expected exit code", expectedExitCode);
+            log.WriteInfo("Starting '{0}' with arguments '{1}' and working directory '{2}'. Expected exit code '{3}'.", pi.FileName, pi.Arguments, pi.WorkingDirectory, expectedExitCode);
+            log.WriteTrace("Load user profile '{0}'", pi.LoadUserProfile);
+            log.WriteTrace("Use shell execute '{0}'", pi.UseShellExecute);
+            log.WriteTrace("Redirect std_out '{0}' with encoding '{1}'", pi.RedirectStandardOutput, pi.StandardOutputEncoding);
+            log.WriteTrace("Redirect std_err '{0}' with encoding '{1}'", pi.RedirectStandardError, pi.StandardErrorEncoding);
+            log.WriteTrace("Verb, the action to take with the file that the process opens is '{0}'.", pi.Verb);
+            log.WriteTrace("The user name '{0}\\{1}' to use when starting the process.", pi.Domain, pi.UserName);
         }
 
         private Encoding GetEncodingByName(string name)

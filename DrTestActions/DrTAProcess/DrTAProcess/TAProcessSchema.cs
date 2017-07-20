@@ -50,18 +50,49 @@ namespace DrOpen.DrTest.DrTAProcess
         public const bool DefaultLoadUserProfile = true;
         public const string AttrUseShellExecute = "UseShellExecute";
         public const bool DefaultUseShellExecute = true;
-        
+
         public const string AttrRedirectStandardOutput = "RedirectStandardOutput";
         public const bool DefaultRedirectStandardOutput = false;
         public const string AttrRedirectStandardError = "RedirectStandardError";
         public const bool DefaultRedirectStandardError = false;
 
-        public const string AttrStandardOutputEncoding= "StandardOutputEncoding";
+        public const string AttrStandardOutputEncoding = "StandardOutputEncoding";
         public const string DefaultStandardOutputEncoding = "";
 
         public const string AttrStandardErrorEncoding = "StandardErrorEncoding";
         public const string DefaultStandardErrorEncoding = "";
-
+        /// <summary>
+        /// The action to take with the file that the process opens. The default is an empty string (""), which signifies no action.
+        /// </summary>
+        public const string AttrVerb = "Verb";
+        /// <summary>
+        /// The action to take with the file that the process opens. The default is an empty string (""), which signifies no action.
+        /// </summary>
+        public const string DefaultVerb = "";
+        /// <summary>
+        /// The user name to use when starting the process.
+        /// </summary>
+        public const string AttrUserName = "";
+        /// <summary>
+        /// The default is an empty string ("")
+        /// </summary>
+        public const string DefaultUserName = "";
+        /// <summary>
+        ///
+        /// </summary>
+        public const string AttrPassword = "";
+        /// <summary>
+        /// The default is an empty string ("")
+        /// </summary>
+        public const string DefaultPassword = "";
+        /// <summary>
+        /// The Active Directory domain to use when starting the process. The domain property is primarily of interest to users within enterprise environments that use Active Directory.
+        /// </summary>
+        public const string AttrDomain = "";
+        /// <summary>
+        /// The default is an empty string ("")
+        /// </summary>
+        public const string DefaultDomain = "";
 
         public const string DrTestStdOut = "StdOut";
         public const string DrTestStdErr = "StdErr";
