@@ -35,6 +35,9 @@ using DrOpen.DrCommon.DrLog.DrLogClient;
 
 namespace DrOpen.DrTest.DrTAProcess
 {
+    /// <summary>
+    /// Provides access to local rocesses and enables you to start and stop local system processes.
+    /// </summary>
     public class TAProcess : TAHelper
     {
 
@@ -44,19 +47,26 @@ namespace DrOpen.DrTest.DrTAProcess
         private DDNode stdOutMessages;
         private DDNode stdErrMessages;
 
-
+        /// <summary>
+        /// Starts a process resource by specifying the name of a document or application file and associates the resource with a new Process component.
+        /// </summary>
+        /// <param name="n">Specifies a set of values that are used when you start a process.</param>
         public void CreateProcess(DDNode n)
         {
             createProcess(n);
         }
-
+        /// <summary>
+        /// Create message queue for standart output
+        /// </summary>
         private void initializeStdOut()
         {
             this.stdOutMessages = base.OutPut.Add(TAProcessSchema.DrTestStdOut, new DDType(TASchema.DrTestTypeMessages));
             this.stdOut = LoggerST<TALog>.GetInstance(TAProcessSchema.DrTestStdOut);
             this.stdOut.SetNodeOfMessages(this.stdOutMessages);
         }
-
+        /// <summary>
+        /// Create message queue for error output
+        /// </summary>
         private void initializeStdErr()
         {
             this.stdErrMessages = base.OutPut.Add(TAProcessSchema.DrTestStdErr, new DDType(TASchema.DrTestTypeMessages));
@@ -64,6 +74,10 @@ namespace DrOpen.DrTest.DrTAProcess
             this.stdErr.SetNodeOfMessages(this.stdErrMessages);
         }
 
+        /// <summary>
+        /// Starts a process resource by specifying the name of a document or application file and associates the resource with a new Process component.
+        /// </summary>
+        /// <param name="n">Specifies a set of values that are used when you start a process.</param>
         private void createProcess(DDNode n)
         {
 
@@ -97,10 +111,10 @@ namespace DrOpen.DrTest.DrTAProcess
                     initializeStdErr();
                 }
 
-                p.StartInfo.Verb = n.Attributes.GetValue(TAProcessSchema.AttrVerb, TAProcessSchema.DefaultVerb);
-                p.StartInfo.UserName = n.Attributes.GetValue(TAProcessSchema.AttrUserName, TAProcessSchema.DefaultUserName);
-                p.StartInfo.Password = n.Attributes.GetValue(TAProcessSchema.AttrPassword, TAProcessSchema.DefaultPassword).ToSecureString();
-                p.StartInfo.Domain = n.Attributes.GetValue(TAProcessSchema.AttrDomain, TAProcessSchema.DefaultDomain);
+                if (n.Attributes.Contains(TAProcessSchema.AttrVerb))  p.StartInfo.Verb = n.Attributes[TAProcessSchema.AttrVerb];
+                if (n.Attributes.Contains(TAProcessSchema.AttrUserName)) p.StartInfo.UserName = n.Attributes[TAProcessSchema.AttrUserName];
+                if (n.Attributes.Contains(TAProcessSchema.AttrPassword)) p.StartInfo.Password = n.Attributes[TAProcessSchema.AttrPassword].ToSecureString();
+                if (n.Attributes.Contains(TAProcessSchema.AttrDomain)) p.StartInfo.Domain = n.Attributes[TAProcessSchema.AttrDomain];
 
                 logProcessStartInfo(p.StartInfo, expectedExitCode);
 
@@ -123,7 +137,7 @@ namespace DrOpen.DrTest.DrTAProcess
             }
             catch (Exception e)
             {
-                throw new DrTAFailedException(e, "The process '{0}' didn't start successfully.", p.StartInfo.FileName);
+                throw new DrTAFailedException(e, "The process '{0}' has not started successfully.", p.StartInfo.FileName);
             }
             finally
             {
@@ -131,7 +145,11 @@ namespace DrOpen.DrTest.DrTAProcess
             }
 
         }
-
+        /// <summary>
+        /// Logs values that are used when you start a process
+        /// </summary>
+        /// <param name="pi">Specifies a set of values that are used when you start a process.</param>
+        /// <param name="expectedExitCode">expected process exit code to log</param>
         private void logProcessStartInfo(ProcessStartInfo pi, string expectedExitCode)
         {
             log.WriteInfo("Starting '{0}' with arguments '{1}' and working directory '{2}'. Expected exit code '{3}'.", pi.FileName, pi.Arguments, pi.WorkingDirectory, expectedExitCode);
@@ -142,7 +160,11 @@ namespace DrOpen.DrTest.DrTAProcess
             log.WriteTrace("Verb, the action to take with the file that the process opens is '{0}'.", pi.Verb);
             log.WriteTrace("The user name '{0}\\{1}' to use when starting the process.", pi.Domain, pi.UserName);
         }
-
+        /// <summary>
+        /// Returns encoding by name
+        /// </summary>
+        /// <param name="name">encoding name</param>
+        /// <returns></returns>
         private Encoding GetEncodingByName(string name)
         {
             try
@@ -155,13 +177,21 @@ namespace DrOpen.DrTest.DrTAProcess
                 return Encoding.Default;
             }
         }
-
+        /// <summary>
+        /// Standart output reciever
+        /// </summary>
+        /// <param name="sendingProcess"></param>
+        /// <param name="outLine"></param>
         private void StdOutHandler(object sendingProcess, DataReceivedEventArgs outLine)
         {
             if ((outLine == null) || (String.IsNullOrEmpty(outLine.Data))) return;
             this.stdOut.WriteInfo(outLine.Data.Trim());
         }
-
+        /// <summary>
+        /// Error output reciever
+        /// </summary>
+        /// <param name="sendingProcess"></param>
+        /// <param name="outLine"></param>
         private void StdErrHandler(object sendingProcess, DataReceivedEventArgs outLine)
         {
             if ((outLine == null) || (String.IsNullOrEmpty(outLine.Data))) return;

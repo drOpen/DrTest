@@ -35,66 +35,109 @@ namespace DrOpen.DrTest.DrTAProcess
     public static class TAProcessSchema
     {
         public const string AttrFileName = "FileName";
+        /// <summary>
+        /// Sets the set of command-line arguments to use when starting the application.
+        /// </summary>
         public const string AttrArguments = "Arguments";
+        /// <summary>
+        /// Default value set of command-line arguments to use when starting the application.
+        /// </summary>
         public const string DefaultArguments = "";
+        /// <summary>
+        /// Expected exit process code as regex.
+        /// </summary>
         public const string AttrExpectedExitCode = "ExpectedExitCode";
+        /// <summary>
+        /// Default expected exit code
+        /// </summary>
         public const string DefaultExpectedExitCode = "0";
-
+        /// <summary>
+        /// Waits the specified number of seconds for the associated process to exit. If this time is exhausted process will be terminated and appropriated exception will throw. Specify 0 for infinitely
+        /// </summary>
         public const string AttrTimeOut = "TimeOut";
+        /// <summary>
+        /// Default time wait period, 0 is infinitely
+        /// </summary>
         public const int DefaultTimeOut = 0;
-
+        /// <summary>
+        /// When the UseShellExecute property is false,  sets the working directory for the process to be started. When UseShellExecute is true, sets the directory that contains the process to be started.
+        /// </summary>
         public const string AttrWorkingDirectory = "WorkingDirectory";
+        /// <summary>
+        /// Default empty working directory
+        /// </summary>
         public const string DefaultWorkingDirectory = "";
-
+        /// <summary>
+        /// Sets a value that indicates whether the Windows user profile is to be loaded from the registry.
+        /// </summary>
         public const string AttrLoadUserProfile = "LoadUserProfile";
+        /// <summary>
+        /// Default load user profile is true
+        /// </summary>
         public const bool DefaultLoadUserProfile = true;
+        /// <summary>
+        /// Sets a value indicating whether to use the operating system shell to start the process.
+        /// </summary>
         public const string AttrUseShellExecute = "UseShellExecute";
+        /// <summary>
+        /// Default shell execute is true
+        /// </summary>
         public const bool DefaultUseShellExecute = true;
-
+        /// <summary>
+        /// Sets a value that indicates whether the standart output of an application is written to the Process::StandardOutput stream.
+        /// </summary>
         public const string AttrRedirectStandardOutput = "RedirectStandardOutput";
+        /// <summary>
+        /// Default is false
+        /// </summary>
         public const bool DefaultRedirectStandardOutput = false;
+        /// <summary>
+        /// sets a value that indicates whether the error output of an application is written to the Process::StandardError stream.
+        /// </summary>
         public const string AttrRedirectStandardError = "RedirectStandardError";
+        /// <summary>
+        /// Default is false
+        /// </summary>
         public const bool DefaultRedirectStandardError = false;
-
+        /// <summary>
+        /// sets the preferred encoding for standart output.
+        /// </summary>
         public const string AttrStandardOutputEncoding = "StandardOutputEncoding";
+        /// <summary>
+        /// Default encoding is ""
+        /// </summary>
         public const string DefaultStandardOutputEncoding = "";
-
+        /// <summary>
+        /// Sets the preferred encoding for error output.
+        /// </summary>
         public const string AttrStandardErrorEncoding = "StandardErrorEncoding";
+        /// <summary>
+        /// Default encoding is ""
+        /// </summary>
         public const string DefaultStandardErrorEncoding = "";
         /// <summary>
         /// The action to take with the file that the process opens. The default is an empty string (""), which signifies no action.
         /// </summary>
         public const string AttrVerb = "Verb";
         /// <summary>
-        /// The action to take with the file that the process opens. The default is an empty string (""), which signifies no action.
-        /// </summary>
-        public const string DefaultVerb = "";
-        /// <summary>
         /// The user name to use when starting the process.
         /// </summary>
         public const string AttrUserName = "";
         /// <summary>
-        /// The default is an empty string ("")
-        /// </summary>
-        public const string DefaultUserName = "";
-        /// <summary>
-        ///
+        /// user password
         /// </summary>
         public const string AttrPassword = "";
-        /// <summary>
-        /// The default is an empty string ("")
-        /// </summary>
-        public const string DefaultPassword = "";
         /// <summary>
         /// The Active Directory domain to use when starting the process. The domain property is primarily of interest to users within enterprise environments that use Active Directory.
         /// </summary>
         public const string AttrDomain = "";
         /// <summary>
-        /// The default is an empty string ("")
+        /// Message queue of standart output
         /// </summary>
-        public const string DefaultDomain = "";
-
         public const string DrTestStdOut = "StdOut";
+        /// <summary>
+        /// Message queue of error output
+        /// </summary>
         public const string DrTestStdErr = "StdErr";
 
     }
