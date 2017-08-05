@@ -286,5 +286,23 @@ namespace DrOpen.DrTest.DrTASrv
         }
         #endregion WaitState
 
+        #region ValidateServiceConfigurationAndState
+
+        public void ValidateServiceConfigurationAndState(DDNode n)
+        {
+            n.Attributes.ContainsAttributesOtherwiseThrow(TASrvSchema.AttrServiceName);
+            var server = n.GetAttributeValue(TASrvSchema.AttrServerName, TASrvSchema.DefaultServerName).GetValueAsString();
+            var service = n.Attributes[TASrvSchema.AttrServiceName];
+
+            var srvMgr = GetSrvManagerWrapped(server, DrSrvHelper.SC_MANAGER.SC_GENERIC_READ);
+            srvMgr.OpenService(service, DrSrvHelper.SERVICE_ACCESS.SERVICE_QUERY_CONFIG | DrSrvHelper.SERVICE_ACCESS.SERVICE_QUERY_STATUS);
+            DrSrvHelper.SERVICE_STATUS state;
+            log.WriteTrace("Getting service '{0}' state.", service);
+            if ( ! srvMgr.GetServiceCurrentStatus(out state)) throw new DrTAFailedException(srvMgr.LastError, "Cannot get service '{0}' state.", service);
+
+        }
+
+        #endregion ValidateServiceConfigurationAndState
+
     }
 }

@@ -40,8 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TASrv.cs" />
-    <Compile Include="TASrvComparision.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TASrvComparision.cs" />
     <Compile Include="TASrvSchema.cs" />
   </ItemGroup>
   <ItemGroup>

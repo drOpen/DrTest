@@ -30,6 +30,7 @@ using DrOpen.DrCommon.DrSrv;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace DrOpen.DrTest.DrTASrv
 {
@@ -50,9 +51,7 @@ namespace DrOpen.DrTest.DrTASrv
         public bool Match(DDNode n)
         {
             
-
-            //this.Config.binaryPathName
-   //         if (n.Attributes.Contains(TASrvSchema.AttrPropBinaryPathName)) RegularEx. 
+            if (n.Attributes.Contains(TASrvSchema.AttrPropBinaryPathName)) Regex.Match(this.Config.binaryPathName, n.Attributes[TASrvSchema.AttrPropBinaryPathName].GetValueAsString());
 
             return false;
         }

@@ -78,12 +78,28 @@ namespace DrOpen.DrTest.DrTAHelper
         /// <param name="expected">expected result as regular expression</param>
         protected virtual void IsExpectedOtherwiseThrowException(string result, string expected)
         {
-
             Regex reg = new Regex(expected, RegexOptions.IgnoreCase);
             var res =  reg.IsMatch(result);
             log.WriteTrace("The result '{0}' is matched expected value '{1}'.", result, expected);
             if (res == false) throw new DrTAExpectedException(result, expected);
         }
 
+        /// <summary>
+        /// Validates expected result as regular expression and log result
+        /// </summary>
+        /// <param name="result">test result</param>
+        /// <param name="expected">expected result as regular expression</param>
+        protected virtual bool IsExpected(string result, string expected)
+        {
+            Regex reg = new Regex(expected, RegexOptions.IgnoreCase);
+            var res = reg.IsMatch(result);
+
+            if (res)
+                log.WriteInfo("", result, expected);
+            else
+                log.WriteError("", result, expected);
+
+            return res;
+        }
     }
 }
