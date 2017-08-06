@@ -303,13 +303,16 @@ namespace DrOpen.DrTest.DrTASrv
             if (!srvMgr.GetServiceConfig(out config)) throw new DrTAFailedException(srvMgr.LastError, "Cannot query service '{0}' config.", service);
             string description;
             if (!srvMgr.GetServiceDescription(out description)) throw new DrTAFailedException(srvMgr.LastError, "Cannot get service '{0}' description.", service);
-                        
+            bool delayedAutostart;
+            if (!srvMgr.GetServiceDelayAutostartInfo(out delayedAutostart)) throw new DrTAFailedException(srvMgr.LastError, "Cannot get service '{0}' delayed aut start info.", service);
+
             #region Validate config and state
             var iFail = 0;
             var iSuccess = 0;
 
             var c = new System.Collections.Generic.Dictionary<string, object> 
             {
+                    {TASrvSchema.AttrPropDelayedAutoStart, delayedAutostart},
                     {TASrvSchema.AttrPropDescription, description},
                     {TASrvSchema.AttrPropDependencies, (new DDValue(config.dependencies)).ToString() }, // convert string Array to null-separated names
                     {TASrvSchema.AttrPropBinaryPathName, config.binaryPathName},

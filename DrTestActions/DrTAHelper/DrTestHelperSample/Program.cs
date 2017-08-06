@@ -71,6 +71,7 @@ namespace DrTAHelperSample
                             <a n='ServiceState' t='System.String'>^SERVICE_RUNNING$</a>
                             <a n='WaitHint' t='System.String'>^0$</a>
                             <a n='Win32ExitCode' t='System.String'>^0$</a>
+                            <a n='DelayedAutoStart' t='System.String'>^false$</a>
                          </n>"
                    );
         }

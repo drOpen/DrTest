@@ -57,6 +57,8 @@ namespace DrOpen.DrTest.DrTASrv
         public const string AttrPropTagID = "TagID";
         public const string AttrPropDependencies = "Dependencies";
         public const string AttrPropDescription = "Description";
+        public const string AttrPropDelayedAutoStart = "DelayedAutoStart";
+        
         /// <summary>
         /// The current state of the service. This member can be one of the following values.
         /// </summary>
