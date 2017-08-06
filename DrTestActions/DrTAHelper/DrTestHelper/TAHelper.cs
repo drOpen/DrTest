@@ -95,9 +95,9 @@ namespace DrOpen.DrTest.DrTAHelper
             var res = reg.IsMatch(result);
 
             if (res)
-                log.WriteInfo("", result, expected);
+                log.WriteInfo("The result '{0}' is matched by pattern '{1}'.", result, expected);
             else
-                log.WriteError("", result, expected);
+                log.WriteError("The result '{0}' is not matched by pattern '{1}'.", result, expected);
 
             return res;
         }

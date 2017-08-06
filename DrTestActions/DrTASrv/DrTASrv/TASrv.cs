@@ -103,7 +103,7 @@ namespace DrOpen.DrTest.DrTASrv
         }
         void DoBeforeThrowWin32Error(object sender, DrSrvEventArgBeforeThrowWin32Error e)
         {
-            log.WriteError (e.Win32Exception, "");
+            log.WriteError(e.Win32Exception, "");
         }
         #endregion subscription
 
@@ -179,7 +179,7 @@ namespace DrOpen.DrTest.DrTASrv
             var server = n.GetAttributeValue(TASrvSchema.AttrServerName, TASrvSchema.DefaultServerName).GetValueAsString();
             var srvMgr = GetSrvManagerWrapped(server, DrSrvHelper.SC_MANAGER.SC_MANAGER_ALL_ACCESS);
             var timeOut = n.GetAttributeValue(TASrvSchema.AttrTimeOut, TASrvSchema.DefaultTimeOut);
-            
+
             int iFail = 0;
             int iTotal = 0;
             var sleepBetweenAction = n.GetAttributeValue(TASrvSchema.AttrSleepBetweenServiceAction, TASrvSchema.DefaultSleepBetweenServiceAction);
@@ -198,7 +198,7 @@ namespace DrOpen.DrTest.DrTASrv
                 if (!this.start(srvMgr, service[0], timeOut)) throw new DrTAHelper.DrTAFailedException(srvMgr.LastError, "Cannot start service '{0}'", service);
             }
         }
-        
+
         private bool start(DrSrvMgr srvMgr, string service, int timeOut)
         {
             log.WriteInfo("Start service '{0}'. Time wait period is '{1}'", service, timeOut);
@@ -279,7 +279,7 @@ namespace DrOpen.DrTest.DrTASrv
             if (!this.waitState(srvMgr, service, state, timeOut)) throw new DrTAHelper.DrTAFailedException(srvMgr.LastError, "I tired wait service '{0}' state {1}.", service, state.ToString());
         }
 
-        private bool waitState(DrSrvMgr srvMgr,string service, DrSrvHelper.SERVICE_CURRENT_STATE state, int timeOut)
+        private bool waitState(DrSrvMgr srvMgr, string service, DrSrvHelper.SERVICE_CURRENT_STATE state, int timeOut)
         {
             log.WriteInfo("Waits service '{0}' expected '{1}' state. The timeout period is '{2}'.", service, state, timeOut);
             return srvMgr.ServiceWaitStatus(service, state, timeOut);
@@ -298,11 +298,69 @@ namespace DrOpen.DrTest.DrTASrv
             srvMgr.OpenService(service, DrSrvHelper.SERVICE_ACCESS.SERVICE_QUERY_CONFIG | DrSrvHelper.SERVICE_ACCESS.SERVICE_QUERY_STATUS);
             DrSrvHelper.SERVICE_STATUS state;
             log.WriteTrace("Getting service '{0}' state.", service);
-            if ( ! srvMgr.GetServiceCurrentStatus(out state)) throw new DrTAFailedException(srvMgr.LastError, "Cannot get service '{0}' state.", service);
+            if (!srvMgr.GetServiceCurrentStatus(out state)) throw new DrTAFailedException(srvMgr.LastError, "Cannot get service '{0}' state.", service);
+            DrSrvHelper.QUERY_SERVICE_CONFIG config;
+            if (!srvMgr.GetServiceConfig(out config)) throw new DrTAFailedException(srvMgr.LastError, "Cannot query service '{0}' config.", service);
+            string description;
+            if (!srvMgr.GetServiceDescription(out description)) throw new DrTAFailedException(srvMgr.LastError, "Cannot get service '{0}' description.", service);
+                        
+            #region Validate config and state
+            var iFail = 0;
+            var iSuccess = 0;
+
+            var c = new System.Collections.Generic.Dictionary<string, object> 
+            {
+                    {TASrvSchema.AttrPropDescription, description},
+                    {TASrvSchema.AttrPropDependencies, (new DDValue(config.dependencies)).ToString() }, // convert string Array to null-separated names
+                    {TASrvSchema.AttrPropBinaryPathName, config.binaryPathName},
+                    {TASrvSchema.AttrPropDisplayName, config.displayName},
+                    {TASrvSchema.AttrPropErrorControl, config.errorControl},
+                    {TASrvSchema.AttrPropLoadOrderGroup, config.loadOrderGroup},
+                    {TASrvSchema.AttrPropServiceType, config.serviceType},
+                    {TASrvSchema.AttrPropStartName, config.startName},
+                    {TASrvSchema.AttrPropStartType, config.startType},
+                    {TASrvSchema.AttrPropTagID, config.tagID},
+                    {TASrvSchema.AttrPropCheckPoint, state.checkPoint},
+                    {TASrvSchema.AttrPropControlsAccepted, state.controlsAccepted},
+                    {TASrvSchema.AttrPropServiceSpecificExitCode, state.serviceSpecificExitCode},
+                    {TASrvSchema.AttrPropServiceState, state.serviceState},
+                    {TASrvSchema.AttrPropWaitHint, state.waitHint},
+                    {TASrvSchema.AttrPropWin32ExitCode, state.win32ExitCode}
+            };
+
+            foreach (var i in c)
+            {
+                var res = checkExpectedResult(n.Attributes, i.Key, i.Value.ToString());
+                if (res == CHECK_EXPECTED_RESULT.SUCCESS) iSuccess++;
+                else if (res == CHECK_EXPECTED_RESULT.FAILED) iFail++;
+            }
+
+            if (iFail > 0) throw new DrTAFailedException("The service '{0}' has '{1}' unexpected properies from '{2}'.", service, iFail.ToString(), c.Count.ToString());
+            else if (iSuccess > 0) log.WriteInfo("The service '{0}' has '{1}' expected properies from '{2}'.", service, iSuccess.ToString(), c.Count.ToString());
+            else log.WriteInfo("Skipped '{0}' properties validation of the service '{1}'.", c.Count.ToString(), service);
+            
+            #endregion Validate config and state
 
         }
-
+        private enum CHECK_EXPECTED_RESULT
+        {
+            SKIPPED,
+            FAILED,
+            SUCCESS
+        }
+        private CHECK_EXPECTED_RESULT checkExpectedResult(DDAttributesCollection a, string attrName, string value)
+        {
+            if (a.Contains(attrName))
+            {
+                var p = a[attrName].GetValueAsString();
+                log.WriteTrace("Starting match service property '{0}' value '{1}' by pattern '{2}'.", attrName, value, p);
+                return (base.IsExpected(value, p) ? CHECK_EXPECTED_RESULT.SUCCESS : CHECK_EXPECTED_RESULT.FAILED);
+            }
+            return CHECK_EXPECTED_RESULT.SKIPPED;
+        }
         #endregion ValidateServiceConfigurationAndState
-
     }
+
+
+
 }
