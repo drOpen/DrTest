@@ -32,6 +32,9 @@ namespace DrOpen.DrTest.DrTASrv
     public class TASrvSchema
     {
 
+        public const string TypeSrvValidate = "TASrv.ValidateServiceConfigurationAndState";
+        public const string TypeListOfSrvValidate = "TASrv.ListOfValidateServiceConfigurationAndState";
+
         public const string AttrServerName = "ServerName";
         public const string DefaultServerName = "";
 

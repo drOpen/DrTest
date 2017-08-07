@@ -288,8 +288,35 @@ namespace DrOpen.DrTest.DrTASrv
 
         #region ValidateServiceConfigurationAndState
 
+        public void ListOfValidateServiceConfigurationAndState(DDNode n)
+        {
+            n.Type.ValidateExpectedNodeType(TASrvSchema.TypeListOfSrvValidate);
+            if (n.Type == TASrvSchema.TypeListOfSrvValidate)
+            {
+                int iSrvValidationFail = 0;
+                int iSrvValidationOK = 0;
+                foreach (var cNode in n)
+                {
+                    try
+                    {
+                        ValidateServiceConfigurationAndState(cNode.Value);
+                        iSrvValidationOK++;
+                    }
+                    catch
+                    {
+                        iSrvValidationFail++;
+                    }
+                }
+                if (iSrvValidationFail > 0) throw new DrTAFailedException("There are '{0}' fails service from '{1}'.", iSrvValidationFail.ToString(), (iSrvValidationFail + iSrvValidationOK).ToString());
+                log.WriteInfo("'{0}' services were successfully validated.", iSrvValidationOK.ToString());
+            }
+        }
+
         public void ValidateServiceConfigurationAndState(DDNode n)
         {
+
+            n.Type.ValidateExpectedNodeType(TASrvSchema.TypeSrvValidate);
+
             n.Attributes.ContainsAttributesOtherwiseThrow(TASrvSchema.AttrServiceName);
             var server = n.GetAttributeValue(TASrvSchema.AttrServerName, TASrvSchema.DefaultServerName).GetValueAsString();
             var service = n.Attributes[TASrvSchema.AttrServiceName];
@@ -341,7 +368,7 @@ namespace DrOpen.DrTest.DrTASrv
             if (iFail > 0) throw new DrTAFailedException("The service '{0}' has '{1}' unexpected properies from '{2}'.", service, iFail.ToString(), c.Count.ToString());
             else if (iSuccess > 0) log.WriteInfo("The service '{0}' has '{1}' expected properies from '{2}'.", service, iSuccess.ToString(), c.Count.ToString());
             else log.WriteInfo("Skipped '{0}' properties validation of the service '{1}'.", c.Count.ToString(), service);
-            
+
             #endregion Validate config and state
 
         }

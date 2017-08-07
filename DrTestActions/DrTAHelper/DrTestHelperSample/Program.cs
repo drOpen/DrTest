@@ -19,7 +19,7 @@ namespace DrTAHelperSample
             var srv = new TASrv();
             try
             {
-                srv.ValidateServiceConfigurationAndState(getTestService());
+                srv.ListOfValidateServiceConfigurationAndState(getTestService());
             }
             catch (Exception e)
             {
@@ -52,27 +52,52 @@ namespace DrTAHelperSample
         {
             return DDNodeSxe.Deserialize
                    (
-                       @"<n n='CheckSpooler'>
-                            <a n='ServiceName' t='System.String'>Spooler</a>
-                            <a n='ServerName' t='System.String'></a>
-                            <a n='BinaryPathName' t='System.String'>^C:\\Windows\\System32\\spoolsv.exe$</a>
-                            <a n='Description' t='System.String'>^This service spools print jobs and handles interaction with the printer.  If you turn off this service, you won’t be able to print or see your printers.$</a>
-                            <a n='DisplayName' t='System.String'>Print Spooler</a>
-                            <a n='ErrorControl' t='System.String'>^SERVICE_ERROR_NORMAL$</a>
-                            <a n='LoadOrderGroup' t='System.String'>^SpoolerGroup$</a>
-                            <a n='ServiceType' t='System.String'>^272$</a>
-                            <a n='StartName' t='System.String'>^LocalSystem$</a>
-                            <a n='StartType' t='System.String'>^SERVICE_AUTO_START$</a>
-                            <a n='TagID' t='System.String'>^0$</a>
-                            <a n='Dependencies' t='System.String'>^RPCSS\0http$</a>
-                            <a n='CheckPoint' t='System.String'>^0$</a>
-                            <a n='ControlsAccepted' t='System.String'>1217</a>
-                            <a n='ServiceSpecificExitCode' t='System.String'>^0$</a>
-                            <a n='ServiceState' t='System.String'>^SERVICE_RUNNING$</a>
-                            <a n='WaitHint' t='System.String'>^0$</a>
-                            <a n='Win32ExitCode' t='System.String'>^0$</a>
-                            <a n='DelayedAutoStart' t='System.String'>^false$</a>
-                         </n>"
+                       @"
+                        <n n='CheckServices' t='TASrv.ListOfValidateServiceConfigurationAndState'>
+                            <n n='CheckSpooler' t='TASrv.ValidateServiceConfigurationAndState'>
+                                <a n='ServiceName' t='System.String'>Spooler</a>
+                                <a n='ServerName' t='System.String'></a>
+                                <a n='BinaryPathName' t='System.String'>^C:\\Windows\\System32\\spoolsv.exe$</a>
+                                <a n='Description' t='System.String'>^This service spools print jobs and handles interaction with the printer.  If you turn off this service, you won’t be able to print or see your printers.$</a>
+                                <a n='DisplayName' t='System.String'>Print Spooler</a>
+                                <a n='ErrorControl' t='System.String'>^SERVICE_ERROR_NORMAL$</a>
+                                <a n='LoadOrderGroup' t='System.String'>^SpoolerGroup$</a>
+                                <a n='ServiceType' t='System.String'>^272$</a>
+                                <a n='StartName' t='System.String'>^LocalSystem$</a>
+                                <a n='StartType' t='System.String'>^SERVICE_AUTO_START$</a>
+                                <a n='TagID' t='System.String'>^0$</a>
+                                <a n='Dependencies' t='System.String'>^RPCSS\0http$</a>
+                                <a n='CheckPoint' t='System.String'>^0$</a>
+                                <a n='ControlsAccepted' t='System.String'>1217</a>
+                                <a n='ServiceSpecificExitCode' t='System.String'>^0$</a>
+                                <a n='ServiceState' t='System.String'>^SERVICE_RUNNING$</a>
+                                <a n='WaitHint' t='System.String'>^0$</a>
+                                <a n='Win32ExitCode' t='System.String'>^0$</a>
+                                <a n='DelayedAutoStart' t='System.String'>^false$</a>
+                            </n>
+                            <n n='CheckSpoolerAgain' t='TASrv.ValidateServiceConfigurationAndState'>
+                                <a n='ServiceName' t='System.String'>Spooler</a>
+                                <a n='ServerName' t='System.String'></a>
+                                <a n='BinaryPathName' t='System.String'>^C:\\Windows\\System32\\spoolsv.exe$</a>
+                                <a n='Description' t='System.String'>^This service spools print jobs and handles interaction with the printer.  If you turn off this service, you won’t be able to print or see your printers.$</a>
+                                <a n='DisplayName' t='System.String'>Print Spooler</a>
+                                <a n='ErrorControl' t='System.String'>^SERVICE_ERROR_NORMAL$</a>
+                                <a n='LoadOrderGroup' t='System.String'>^SpoolerGroup$</a>
+                                <a n='ServiceType' t='System.String'>^272$</a>
+                                <a n='StartName' t='System.String'>^LocalSystem$</a>
+                                <a n='StartType' t='System.String'>^SERVICE_AUTO_START$</a>
+                                <a n='TagID' t='System.String'>^0$</a>
+                                <a n='Dependencies' t='System.String'>^RPCSS\0http$</a>
+                                <a n='CheckPoint' t='System.String'>^0$</a>
+                                <a n='ControlsAccepted' t='System.String'>1217</a>
+                                <a n='ServiceSpecificExitCode' t='System.String'>^0$</a>
+                                <a n='ServiceState' t='System.String'>^SERVICE_RUNNING$</a>
+                                <a n='WaitHint' t='System.String'>^0$</a>
+                                <a n='Win32ExitCode' t='System.String'>^0$</a>
+                                <a n='DelayedAutoStart' t='System.String'>^false$</a>
+                            </n>
+                        </n>
+                      "
                    );
         }
 
