@@ -288,28 +288,27 @@ namespace DrOpen.DrTest.DrTASrv
 
         #region ValidateServiceConfigurationAndState
 
-        public void ListOfValidateServiceConfigurationAndState(DDNode n)
+        public void ValidateServiceConfigurationAndStateCollection(DDNode n)
         {
-            n.Type.ValidateExpectedNodeType(TASrvSchema.TypeListOfSrvValidate);
-            if (n.Type == TASrvSchema.TypeListOfSrvValidate)
+            n.Type.ValidateExpectedNodeType(TASrvSchema.TypeSrvValidateCollection);
+            int iSrvValidationFail = 0;
+            int iSrvValidationOK = 0;
+            foreach (var cNode in n)
             {
-                int iSrvValidationFail = 0;
-                int iSrvValidationOK = 0;
-                foreach (var cNode in n)
+                try
                 {
-                    try
-                    {
-                        ValidateServiceConfigurationAndState(cNode.Value);
-                        iSrvValidationOK++;
-                    }
-                    catch
-                    {
-                        iSrvValidationFail++;
-                    }
+                    cNode.Value.Merge(n, DDNode.DDNODE_MERGE_OPTION.ATTRIBUTES, ResolveConflict.SKIP); // Inherits attributes from parent
+                    ValidateServiceConfigurationAndState(cNode.Value);
+                    iSrvValidationOK++;
                 }
-                if (iSrvValidationFail > 0) throw new DrTAFailedException("There are '{0}' fails service from '{1}'.", iSrvValidationFail.ToString(), (iSrvValidationFail + iSrvValidationOK).ToString());
-                log.WriteInfo("'{0}' services were successfully validated.", iSrvValidationOK.ToString());
+                catch (Exception e)
+                {
+                    log.WriteError(e, "Cannot analyze service. Test key is '{0}', see innerexception for details.", cNode.Key);
+                    iSrvValidationFail++;
+                }
             }
+            if (iSrvValidationFail > 0) throw new DrTAFailedException("There are '{0}' fails service from '{1}'.", iSrvValidationFail.ToString(), (iSrvValidationFail + iSrvValidationOK).ToString());
+            log.WriteInfo("'{0}' services were successfully validated.", iSrvValidationOK.ToString());
         }
 
         public void ValidateServiceConfigurationAndState(DDNode n)

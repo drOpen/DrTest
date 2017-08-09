@@ -33,7 +33,7 @@ namespace DrOpen.DrTest.DrTASrv
     {
 
         public const string TypeSrvValidate = "TASrv.ValidateServiceConfigurationAndState";
-        public const string TypeListOfSrvValidate = "TASrv.ListOfValidateServiceConfigurationAndState";
+        public const string TypeSrvValidateCollection = "TASrv.ValidateServiceConfigurationAndStateCollection";
 
         public const string AttrServerName = "ServerName";
         public const string DefaultServerName = "";
