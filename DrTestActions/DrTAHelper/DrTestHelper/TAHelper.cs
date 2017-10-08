@@ -55,11 +55,15 @@ namespace DrOpen.DrTest.DrTAHelper
         /// <summary>
         /// test variables
         /// </summary>
-        private DDNode outVariables;
+        protected DDNode outVariables;
         /// <summary>
         /// test log messages
         /// </summary>
-        private DDNode outMessages;
+        protected DDNode outMessages;
+        /// <summary>
+        /// status of test for legacy support
+        /// </summary>
+        protected DDNode legacyStatus;
         /// <summary>
         /// retruns new structure outgoing node with results
         /// </summary>
@@ -69,6 +73,7 @@ namespace DrOpen.DrTest.DrTAHelper
             var n = new DDNode(TASchema.DrTestOutPut, new DDType(TASchema.DrTestTypeOutPut));
             this.outMessages = n.Add(TASchema.DrTestMessages, new DDType(TASchema.DrTestTypeMessages));
             this.outVariables = n.Add(TASchema.DrTestVariables, new DDType(TASchema.DrTestTypeVariables));
+            this.legacyStatus = n.Add(TASchema.DrTestLegacyStatus, new DDType(TASchema.DrTestTypeLegacyStatus));
             return n;
         }
         /// <summary>

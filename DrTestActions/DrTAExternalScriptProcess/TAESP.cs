@@ -1,6 +1,6 @@
 ﻿/*
-  TASchema.cs -- stored schema for formating of the 'DrTest', July 2, 2017
- 
+  TAESP.cs -- DrTestAction - executor for external script process, October 7, 2017
+  
   Copyright (c) 2013-2017 Kudryashov Andrey aka Dr
  
   This software is provided 'as-is', without any express or implied
@@ -27,20 +27,10 @@
 
 using System;
 
-namespace DrOpen.DrTest.DrTAHelper
-{
-    public static class TASchema
-    {
-        public const string DrTestMessages = "TestMessages";
-        public const string DrTestTypeMessages = "DrTest.Messages";
-        public const string DrTestVariables = "TestVariables";
-        public const string DrTestTypeVariables = "DrTest.Variables";
-        public const string DrTestLegacyStatus = "TestLegacyStatus";
-        public const string DrTestTypeLegacyStatus = "DrTest.LegacyStatus";
-        public const string DrTestOutPut = "OutPut";
-        public const string DrTestTypeOutPut = "DrTest.OutPut";
 
-        public const string DrTestLegacyStatusAttributeStatus = "Status";
-        public const string DrTestLegacyStatusAttributeMessage = "Message";
+namespace DrOpen.DrTest.DrTAExternalScriptProcess
+{
+    public class TAESP : DrTAProcess.TAProcess
+    {
     }
 }
