@@ -36,13 +36,7 @@ using DrOpen.DrTest.DrTAHelper;
 namespace DrOpen.DrTest.DrTAComProvider
 {
 
-    public enum TEST_STATUS: int
-    {
-        OK = 1,
-        FAILED = 2 ,
-        SKIPPED = 4 ,
-        DISABLED = 8
-    }
+
 
     /// <summary>
     /// interface of synchronization model via COM for external tests
@@ -55,7 +49,7 @@ namespace DrOpen.DrTest.DrTAComProvider
         [DispId(2)]
         void Save([In, MarshalAs(UnmanagedType.BStr)]  string path);
         [DispId(3)]
-        void SetStatus(TEST_STATUS status, [In, MarshalAs(UnmanagedType.BStr)]  string message);
+        void SetStatus(TASchema.TEST_STATUS status, [In, MarshalAs(UnmanagedType.BStr), Optional]  string message);
     }
 
     /// <summary>
@@ -83,8 +77,8 @@ namespace DrOpen.DrTest.DrTAComProvider
         public TAComProvider()
         {
             this.tNode = base.GetStubResultNode();
-            base.legacyStatus.Attributes.Add (TASchema.DrTestLegacyStatusAttributeStatus, false );
-            base.legacyStatus.Attributes.Add(TASchema.DrTestLegacyStatusAttributeMessage, "reason");
+            base.legacyStatus.Attributes.Add(TASchema.DrTestLegacyStatusAttributeStatus, (int)TASchema.TEST_STATUS.SKIPPED);
+            base.legacyStatus.Attributes.Add(TASchema.DrTestLegacyStatusAttributeMessage, String.Empty);
         }
 
         ~TAComProvider()
@@ -126,9 +120,10 @@ namespace DrOpen.DrTest.DrTAComProvider
         }
         #endregion Load/Save
         #region SetStatus
-        public void SetStatus(TEST_STATUS status, string message)
+        public void SetStatus(TASchema.TEST_STATUS status, string message)
         {
-
+            base.legacyStatus.Attributes.Add(TASchema.DrTestLegacyStatusAttributeStatus, (int)status, ResolveConflict.OVERWRITE);
+            base.legacyStatus.Attributes.Add(TASchema.DrTestLegacyStatusAttributeMessage, message, ResolveConflict.OVERWRITE);
 
         }
         #endregion SetStatus

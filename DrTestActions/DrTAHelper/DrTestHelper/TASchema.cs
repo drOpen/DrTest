@@ -29,8 +29,21 @@ using System;
 
 namespace DrOpen.DrTest.DrTAHelper
 {
+
     public static class TASchema
     {
+        /// <summary>
+        /// status of test
+        /// </summary>
+        public enum TEST_STATUS : int
+        {
+            OK = 1,
+            FAILED = 2,
+            SKIPPED = 4,
+            DISABLED = 8
+        }
+
+
         public const string DrTestMessages = "TestMessages";
         public const string DrTestTypeMessages = "DrTest.Messages";
         public const string DrTestVariables = "TestVariables";

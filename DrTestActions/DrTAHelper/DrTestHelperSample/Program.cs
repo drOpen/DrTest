@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using DrOpen.DrTest.DrTAProcess;
 using DrOpen.DrTest.DrTASrv;
+using DrOpen.DrTest.DrTAExternalScriptProcess;
 
 namespace DrTAHelperSample
 {
@@ -14,6 +15,10 @@ namespace DrTAHelperSample
     {
         static void Main(string[] args)
         {
+
+
+            var script = new TAESP();
+            script.CreateProcess(getTestScript());
 
 
             var srv = new TASrv();
@@ -47,6 +52,20 @@ namespace DrTAHelperSample
 
         }
 
+
+        private static DDNode getTestScript()
+        {
+            return DDNodeSxe.Deserialize
+                   (
+                       @"<n n='StartSampleVbs'>
+                            <a n='FileName' t='System.String'>wscript.exe</a>
+                            <a n='TimeOut' t='System.Int32'>10</a>
+                            <a n='UseShellExecute' t='System.Boolean'>true</a>
+                            <a n='RedirectStandardOutput' t='System.Boolean'>false</a>
+                            <a n='RedirectStandardError' t='System.Boolean'>false</a>
+                         </n>"
+                   );
+        }
 
         private static DDNode getTestService()
         {
