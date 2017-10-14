@@ -303,7 +303,7 @@ namespace DrOpen.DrTest.DrTASrv
                 }
                 catch (Exception e)
                 {
-                    log.WriteError(e, "Cannot analyze service. Test key is '{0}', see innerexception for details.", cNode.Key);
+                    log.WriteError(e, "Cannot analyze service. Test key is '{0}', see inner exception for details.", cNode.Key);
                     iSrvValidationFail++;
                 }
             }
