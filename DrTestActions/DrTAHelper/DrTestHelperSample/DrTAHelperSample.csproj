@@ -66,6 +66,14 @@
       <Project>{0621fcf7-91e5-4bd6-8ec3-a2166832147d}</Project>
       <Name>DrSrv</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DrTAComProvider\DrTAComProvider.csproj">
+      <Project>{70d34c7d-c51a-4165-a054-e4449c6ce495}</Project>
+      <Name>DrTAComProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DrTAExternalScriptProcess\DrTAExternalScriptProcess.csproj">
+      <Project>{677d03ab-3e64-4847-9c69-947983de8d2d}</Project>
+      <Name>DrTAExternalScriptProcess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DrTAProcess\DrTAProcess\DrTAProcess.csproj">
       <Project>{e20ff95f-219a-4ea3-b063-ece28de03986}</Project>
       <Name>DrTAProcess</Name>

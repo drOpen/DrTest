@@ -49,7 +49,7 @@ namespace DrOpen.DrTest.DrTAComProvider
         [DispId(2)]
         void Save([In, MarshalAs(UnmanagedType.BStr)]  string path);
         [DispId(3)]
-        void SetStatus(TASchema.TEST_STATUS status, [In, MarshalAs(UnmanagedType.BStr), Optional]  string message);
+        void SetStatus(TASchema.TEST_STATUS status, [In, MarshalAs(UnmanagedType.BStr), Optional, DefaultParameterValue("")]  string message);
     }
 
     /// <summary>

@@ -59,6 +59,7 @@ namespace DrTAHelperSample
                    (
                        @"<n n='StartSampleVbs'>
                             <a n='FileName' t='System.String'>wscript.exe</a>
+                            <a n='FileName' t='System.String'>wscript.exe</a>
                             <a n='TimeOut' t='System.Int32'>10</a>
                             <a n='UseShellExecute' t='System.Boolean'>true</a>
                             <a n='RedirectStandardOutput' t='System.Boolean'>false</a>
