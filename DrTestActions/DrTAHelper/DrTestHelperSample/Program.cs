@@ -17,8 +17,8 @@ namespace DrTAHelperSample
         {
 
 
-            var script = new TAESP();
-            script.CreateProcess(getTestScript());
+            //var script = new TAESP();
+            //script.CreateProcess(getTestScript());
 
 
             var srv = new TASrv();
