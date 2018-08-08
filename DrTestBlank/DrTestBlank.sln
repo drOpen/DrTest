@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrTestBlank", "DrTestBlank\DrTestBlank.csproj", "{96EC9578-3CFF-4057-B907-37864C8C6CFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DrData", "DrData", "{8FCA7B74-4420-4C1F-8F4D-2BB384BE988E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrData", "..\..\DrCommon\DrData\DrData\DrData.csproj", "{C984C775-1807-4157-BA4B-5D5FCCCE577B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrDataEx", "..\..\DrCommon\DrData\DrDataEx\DrDataEx.csproj", "{CB8174C6-6CA6-4CEF-B84C-27C5E726466D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrDataSx", "..\..\DrCommon\DrData\DrDataSx\DrDataSx.csproj", "{CEF8CDD2-404D-415F-AECF-4B92CEB3A23D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DrLog", "DrLog", "{2F875342-7104-49E5-973D-1884F110C245}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DrTAHelper", "DrTAHelper", "{120CA4B1-4AC7-4C49-B4A5-35D8234B509D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrLogClient", "..\..\DrCommon\DrLog\DrLogClient\DrLogClient.csproj", "{85A2BA01-CB54-4FC0-BC6C-92700FD9979C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrTAHelper", "..\DrTestActions\DrTAHelper\DrTestHelper\DrTAHelper.csproj", "{849FDA09-9982-4819-AA33-D1D8D4A2AA27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96EC9578-3CFF-4057-B907-37864C8C6CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96EC9578-3CFF-4057-B907-37864C8C6CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96EC9578-3CFF-4057-B907-37864C8C6CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96EC9578-3CFF-4057-B907-37864C8C6CFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C984C775-1807-4157-BA4B-5D5FCCCE577B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C984C775-1807-4157-BA4B-5D5FCCCE577B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C984C775-1807-4157-BA4B-5D5FCCCE577B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C984C775-1807-4157-BA4B-5D5FCCCE577B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB8174C6-6CA6-4CEF-B84C-27C5E726466D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB8174C6-6CA6-4CEF-B84C-27C5E726466D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB8174C6-6CA6-4CEF-B84C-27C5E726466D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB8174C6-6CA6-4CEF-B84C-27C5E726466D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEF8CDD2-404D-415F-AECF-4B92CEB3A23D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEF8CDD2-404D-415F-AECF-4B92CEB3A23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEF8CDD2-404D-415F-AECF-4B92CEB3A23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEF8CDD2-404D-415F-AECF-4B92CEB3A23D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85A2BA01-CB54-4FC0-BC6C-92700FD9979C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85A2BA01-CB54-4FC0-BC6C-92700FD9979C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85A2BA01-CB54-4FC0-BC6C-92700FD9979C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85A2BA01-CB54-4FC0-BC6C-92700FD9979C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{849FDA09-9982-4819-AA33-D1D8D4A2AA27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{849FDA09-9982-4819-AA33-D1D8D4A2AA27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{849FDA09-9982-4819-AA33-D1D8D4A2AA27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{849FDA09-9982-4819-AA33-D1D8D4A2AA27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C984C775-1807-4157-BA4B-5D5FCCCE577B} = {8FCA7B74-4420-4C1F-8F4D-2BB384BE988E}
+		{CB8174C6-6CA6-4CEF-B84C-27C5E726466D} = {8FCA7B74-4420-4C1F-8F4D-2BB384BE988E}
+		{CEF8CDD2-404D-415F-AECF-4B92CEB3A23D} = {8FCA7B74-4420-4C1F-8F4D-2BB384BE988E}
+		{85A2BA01-CB54-4FC0-BC6C-92700FD9979C} = {2F875342-7104-49E5-973D-1884F110C245}
+		{849FDA09-9982-4819-AA33-D1D8D4A2AA27} = {120CA4B1-4AC7-4C49-B4A5-35D8234B509D}
+	EndGlobalSection
+EndGlobal
