@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using DrOpen.DrTest.DrTAProcess;
 using DrOpen.DrTest.DrTASrv;
-using DrOpen.DrTest.DrTAExternalScriptProcess;
 
 namespace DrTAHelperSample
 {
