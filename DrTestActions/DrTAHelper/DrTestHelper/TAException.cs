@@ -20,7 +20,7 @@ namespace DrOpen.DrTest.DrTAHelper
         /// </summary>
         /// <param name="reason">A message that describes the error.</param>
         /// <param name="args">messages arguments</param>
-        public DrTAFailedException(string reason, params string[] args)
+        public DrTAFailedException(string reason, params object[] args)
             : base(String.Format(reason, args)) { }
         /// <summary>
         ///  DrTest failed exception
@@ -28,7 +28,7 @@ namespace DrOpen.DrTest.DrTAHelper
         /// <param name="innerException">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
         /// <param name="reason">A message that describes the error.</param>
         /// <param name="args">messages arguments</param>
-        public DrTAFailedException(Exception innerException, string reason, params string[] args)
+        public DrTAFailedException(Exception innerException, string reason, params object[] args)
             : base(String.Format(reason, args), innerException) { }
     }
 
@@ -47,7 +47,7 @@ namespace DrOpen.DrTest.DrTAHelper
         /// </summary>
         /// <param name="reason">A message that describes the error.</param>
         /// <param name="args">messages arguments</param>
-        public DrTATimeOutException(int timeOut, string reason, params string[] args)
+        public DrTATimeOutException(int timeOut, string reason, params object[] args)
             : base(reason, args)
         {
             this.TimeOut = timeOut;
