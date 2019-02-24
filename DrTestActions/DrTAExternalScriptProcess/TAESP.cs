@@ -37,7 +37,6 @@ namespace DrOpen.DrTest.DrTAExternalScriptProcess
 {
     public class TAESP : DrTAProcess.TAProcess
     {
-
         public void Execute(DDNode n)
         {
             var sharedNodePath = Path.GetTempFileName(); //path to shared node 

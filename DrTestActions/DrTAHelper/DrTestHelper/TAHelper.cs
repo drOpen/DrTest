@@ -83,7 +83,7 @@ namespace DrOpen.DrTest.DrTAHelper
         /// <param name="expected">expected result as regular expression</param>
         protected virtual void IsExpectedOtherwiseThrowException(string result, string expected)
         {
-            if (IsExpected(result, expected) == false)) throw new DrTAExpectedException(result, expected);
+            if (IsExpected(result, expected) == false) throw new DrTAExpectedException(result, expected);
         }
 
         /// <summary>
