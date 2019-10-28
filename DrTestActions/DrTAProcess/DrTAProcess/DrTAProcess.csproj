@@ -43,22 +43,25 @@
     <Compile Include="TAProcessSchema.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\DrCommon\DrData\DrDataEx\DrDataEx.csproj">
-      <Project>{cb8174c6-6ca6-4cef-b84c-27c5e726466d}</Project>
-      <Name>DrDataEx</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\DrCommon\DrData\DrData\DrData.csproj">
-      <Project>{c984c775-1807-4157-ba4b-5d5fccce577b}</Project>
-      <Name>DrData</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\DrCommon\DrLog\DrLogClient\DrLogClient.csproj">
       <Project>{85a2ba01-cb54-4fc0-bc6c-92700fd9979c}</Project>
       <Name>DrLogClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\DrData\c#\DrDataEx\DrDataEx.csproj">
+      <Project>{cb8174c6-6ca6-4cef-b84c-27c5e726466d}</Project>
+      <Name>DrDataEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\DrData\c#\DrDataObject\DrDataObject.csproj">
+      <Project>{c984c775-1807-4157-ba4b-5d5fccce577b}</Project>
+      <Name>DrDataObject</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DrTAHelper\DrTestHelper\DrTAHelper.csproj">
       <Project>{849fda09-9982-4819-aa33-d1d8d4a2aa27}</Project>
       <Name>DrTAHelper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

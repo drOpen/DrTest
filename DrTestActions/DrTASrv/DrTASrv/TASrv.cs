@@ -26,7 +26,7 @@
  */
 using System;
 using DrOpen.DrTest.DrTAHelper;
-using DrOpen.DrCommon.DrData;
+using DrOpen.DrData.DrDataObject;
 using DrOpen.DrCommon.DrLog.DrLogClient;
 using DrOpen.DrCommon.DrSrv;
 using System.Threading;

@@ -29,7 +29,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DrOpen.DrTest.DrTAHelper;
-using DrOpen.DrCommon.DrData;
+using DrOpen.DrData.DrDataObject;
 using System.Diagnostics;
 using DrOpen.DrCommon.DrLog.DrLogClient;
 

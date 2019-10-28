@@ -28,7 +28,7 @@
 using System;
 using System.Text;
 using System.Collections.Generic;
-using DrOpen.DrCommon.DrData;
+using DrOpen.DrData.DrDataObject;
 using DrOpen.DrCommon.DrLog.DrLogClient;
 
 namespace DrOpen.DrTest.DrTAHelper

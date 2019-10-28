@@ -25,11 +25,11 @@
 
  */
 
-using DrOpen.DrCommon.DrData;
+using DrOpen.DrData.DrDataObject;
+using DrOpen.DrCommon.DrLog.DrLogClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using DrOpen.DrCommon.DrLog.DrLogClient;
 using System.Text.RegularExpressions;
 
 namespace DrOpen.DrTest.DrTAHelper

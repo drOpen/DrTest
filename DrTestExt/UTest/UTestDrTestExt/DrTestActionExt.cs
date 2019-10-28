@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DrOpen.DrCommon.DrData;
-using DrTestExt;
+using DrOpen.DrData.DrDataObject;
+using DrOpen.DrTest.DrTestExt;
 using System.Collections.Generic;
+using DrOpen.DrData.DrDataObject.Exceptions;
 
 namespace UTestDrTestExt
 {
@@ -28,9 +29,9 @@ namespace UTestDrTestExt
                 node.Attributes.ContainsAttributesOtherwiseThrow(sFirst, sSecond, sThird);
                 Assert.Fail("Cannot catch expected exception.");  // TBD *** 
             }
-            catch (DrTestExt.DrTestExceptions.ContainsAttributesException e)
+            catch (DDMissingSomeOfAttributesException e)
             {
-                Assert.IsTrue(e.NamesList == sThird, "The list of names '{0}' is incorrect. Expected list is '{1}'", e.NamesList, sThird);
+                Assert.IsTrue(e.Name == sThird, "The list of names '{0}' is incorrect. Expected list is '{1}'", e.Name, sThird);
                 Assert.IsTrue(CompareNameList(e.Names,sThird));
             }
         }

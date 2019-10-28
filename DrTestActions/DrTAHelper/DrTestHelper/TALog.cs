@@ -26,7 +26,7 @@
  */
 using System;
 using DrOpen.DrCommon.DrLog.DrLogClient;
-using DrOpen.DrCommon.DrData;
+using DrOpen.DrData.DrDataObject;
 
 namespace DrOpen.DrTest.DrTAHelper
 {
@@ -39,7 +39,7 @@ namespace DrOpen.DrTest.DrTAHelper
         }
 
         DDNode messages;
-        public override void Write(DrCommon.DrData.DDNode msg)
+        public override void Write(DDNode msg)
         {
             this.messages.Add(msg);
         }

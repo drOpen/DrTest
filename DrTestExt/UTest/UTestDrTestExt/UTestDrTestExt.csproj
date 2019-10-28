@@ -56,12 +56,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\DrCommon\DrData\DrData\DrData.csproj">
+    <ProjectReference Include="..\..\..\..\DrData\c#\DrDataObject\DrDataObject.csproj">
       <Project>{c984c775-1807-4157-ba4b-5d5fccce577b}</Project>
-      <Name>DrData</Name>
+      <Name>DrDataObject</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DrTestExt\DrTestExt.csproj">
-      <Project>{6f977da5-a3f8-41e3-9197-a35bb502c39f}</Project>
+      <Project>{cb8174c6-6ca6-4cef-b84c-27c5e726466d}</Project>
       <Name>DrTestExt</Name>
     </ProjectReference>
   </ItemGroup>

@@ -1,5 +1,5 @@
-﻿using DrOpen.DrCommon.DrData;
-using DrOpen.DrCommon.DrDataSx;
+﻿using DrOpen.DrData.DrDataObject;
+using DrOpen.DrData.DrDataSx;
 using DrOpen.DrTest.DrTAHelper;
 using System;
 using System.Collections.Generic;

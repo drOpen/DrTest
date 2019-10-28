@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DrTestExt.Schema
+namespace DrOpen.DrTest.DrTestExt
 {
     public static class SchemaDrTest
     {
